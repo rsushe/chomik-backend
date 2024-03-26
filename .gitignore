@@ -35,3 +35,5 @@ build/
 **/*-local.properties
 **/.mvn
 **/mvn*
+**/certs/*
+**/.DS_Store
