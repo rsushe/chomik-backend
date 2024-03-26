@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost/chomik-gateway
+  liquibase:
+    change-log: classpath:changelog/changelog.xml
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+rsa:
+  public-key: classpath:certs/public.pem
+  private-key: classpath:certs/private.pem
