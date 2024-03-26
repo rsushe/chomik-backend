@@ -37,3 +37,4 @@ build/
 **/.mvn
 >>>>>>> b1ad729 (write authorization):chomik-gateway/.gitignore
 **/.DS_Store
+**/certs/

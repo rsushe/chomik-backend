@@ -9,8 +9,8 @@ import java.lang.IllegalArgumentException
 
 @Service
 class AuthorizationUserDetailsService(private val userRepository: UserRepository) : UserDetailsService {
-    override fun loadUserByUsername(uuid: String): UserDetails =
-        userRepository.findById(uuid)
-            .map { AuthorizationUserDetails(it) }
-            .orElseThrow { IllegalArgumentException("User with id $uuid doesn't exists") }
+    override fun loadUserByUsername(name: String): UserDetails =
+        userRepository.findByName(name)
+            ?.let { AuthorizationUserDetails(it) }
+            ?: throw IllegalArgumentException("User with id $name doesn't exists")
 }

@@ -1,9 +1,8 @@
 package com.chomik.core.chomikgateway.controller
 
 import com.chomik.core.chomikgateway.domain.AuthorizationUserDetails
-import com.chomik.core.chomikgateway.domain.UserLoginRequest
-import com.chomik.core.chomikgateway.domain.UserRegisterRequest
-import com.chomik.core.chomikgateway.service.AuthorizationUserDetailsService
+import com.chomik.core.chomikgateway.controller.dto.UserLoginRequest
+import com.chomik.core.chomikgateway.controller.dto.UserRegisterRequest
 import com.chomik.core.chomikgateway.service.JwtService
 import com.chomik.core.chomikgateway.service.RegistrationService
 
@@ -18,7 +17,6 @@ class AuthorizationController(
     private val registrationService: RegistrationService,
     private val jwtService: JwtService,
     private val authenticationManager: AuthenticationManager,
-    private val authorizationUserDetailsService: AuthorizationUserDetailsService
 ) {
 
     @PostMapping("/v1/register/user")
@@ -32,9 +30,8 @@ class AuthorizationController(
     @PostMapping("/v1/login")
     fun login(@RequestBody userLoginRequest: UserLoginRequest): String {
         val authenticationToken = UsernamePasswordAuthenticationToken(userLoginRequest.name, userLoginRequest.password)
-        authenticationManager.authenticate(authenticationToken)
+        val userDetails = authenticationManager.authenticate(authenticationToken).principal as AuthorizationUserDetails
 
-        val user = authorizationUserDetailsService.loadUserByUsername(userLoginRequest.name) as AuthorizationUserDetails
-        return jwtService.generateToken(user)
+        return jwtService.generateToken(userDetails)
     }
 }

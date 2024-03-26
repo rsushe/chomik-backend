@@ -1,15 +1,15 @@
 package com.chomik.core.chomikgateway.service
 
 import com.chomik.core.chomikgateway.domain.User
-import com.chomik.core.chomikgateway.domain.UserRegisterRequest
+import com.chomik.core.chomikgateway.controller.dto.UserRegisterRequest
 import com.chomik.core.chomikgateway.domain.UserType
 import com.chomik.core.chomikgateway.repository.UserRepository
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
 
 @Service
-class RegistrationService(private val userRepository: UserRepository) {
+class RegistrationService(private val passwordEncoder: PasswordEncoder, private val userRepository: UserRepository) {
 
     @Transactional
     fun registerUser(userRegisterRequest: UserRegisterRequest) =
@@ -17,21 +17,17 @@ class RegistrationService(private val userRepository: UserRepository) {
 
     @Transactional
     fun registerSeller(userRegisterRequest: UserRegisterRequest) =
-        userRepository.save(buildUser(userRegisterRequest, UserType.SELLER, 5f, LocalDateTime.now()))
+        userRepository.save(buildUser(userRegisterRequest, UserType.SELLER))
 
     private fun buildUser(
         userRegisterRequest: UserRegisterRequest,
         userType: UserType,
-        rating: Float? = null,
-        sellsFrom: LocalDateTime? = null
     ) = User(
         name = userRegisterRequest.name,
-        password = userRegisterRequest.password,
+        password = passwordEncoder.encode(userRegisterRequest.password),
         email = userRegisterRequest.email,
         phoneNumber = userRegisterRequest.phoneNumber,
         deleted = false,
-        rating = rating,
-        sellsFrom = sellsFrom,
         userType = userType,
     )
 }

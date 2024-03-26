@@ -1,4 +1,4 @@
-package com.chomik.core.chomikgateway.domain
+package com.chomik.core.chomikgateway.controller.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
