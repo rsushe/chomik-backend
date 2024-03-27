@@ -9,7 +9,7 @@ data class Sneakers(
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    val id: String,
+    val id: String? = null,
 
     @Column(name = "model", nullable = false)
     val model: String,
@@ -26,5 +26,6 @@ data class Sneakers(
     val color: Color?,
 
     @Column(name = "condition", nullable = false)
-    val condition: String
+    @Enumerated(EnumType.STRING)
+    val condition: Condition
 )

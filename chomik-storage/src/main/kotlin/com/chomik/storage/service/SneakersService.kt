@@ -2,6 +2,7 @@ package com.chomik.storage.service
 
 import com.chomik.storage.domain.Sneakers
 import com.chomik.storage.repository.SneakersRepository
+import com.chomik.storage.service.dto.CreateSneakersRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -16,7 +17,15 @@ class SneakersService @Autowired constructor(private val sneakersRepository: Sne
         return sneakersRepository.findById(id).orElse(null)
     }
 
-    fun createSneakers(sneakers: Sneakers): Sneakers {
+    fun createSneakers(request: CreateSneakersRequest): Sneakers {
+        val sneakers = Sneakers(
+            model = request.model!!,
+            brand = request.brand!!,
+            size = request.size!!,
+            color = request.color,
+            condition = request.condition!!
+        )
+
         return sneakersRepository.save(sneakers)
     }
 

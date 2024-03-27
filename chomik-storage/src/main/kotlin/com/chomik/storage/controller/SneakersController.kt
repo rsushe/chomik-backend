@@ -2,6 +2,8 @@ package com.chomik.storage.controller
 
 import com.chomik.storage.domain.Sneakers
 import com.chomik.storage.service.SneakersService
+import com.chomik.storage.service.dto.CreateSneakersRequest
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -27,9 +29,9 @@ class SneakersController @Autowired constructor(private val sneakersService: Sne
         }
     }
 
-    @PostMapping
-    fun createSneakers(@RequestBody sneakers: Sneakers): ResponseEntity<Sneakers> {
-        val createdSneakers = sneakersService.createSneakers(sneakers)
+    @PostMapping()
+    fun createSneakers(@Valid @RequestBody request: CreateSneakersRequest): ResponseEntity<Sneakers> {
+        val createdSneakers = sneakersService.createSneakers(request)
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSneakers)
     }
 
