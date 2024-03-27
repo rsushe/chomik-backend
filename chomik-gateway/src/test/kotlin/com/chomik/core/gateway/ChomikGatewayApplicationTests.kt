@@ -1,4 +1,4 @@
-package com.chomik.core.chomikgateway
+package com.chomik.core.gateway
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
