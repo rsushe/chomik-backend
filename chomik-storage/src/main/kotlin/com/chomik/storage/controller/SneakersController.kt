@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/sneakers")
-class SneakersController @Autowired constructor(private val sneakersService: SneakersService) {
+class SneakersController(private val sneakersService: SneakersService) {
 
     @GetMapping
     fun getAllSneakers(): List<Sneakers> {

@@ -21,11 +21,7 @@ class AdvertController(private val advertService: AdvertService) {
     @GetMapping("/{id}")
     fun getAdvertById(@PathVariable id: String): ResponseEntity<Advert> {
         val advert = advertService.getAdvertById(id)
-        return if (advert != null) {
-            ResponseEntity.ok(advert)
-        } else {
-            ResponseEntity.notFound().build()
-        }
+        return advert?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build();
     }
 
     @GetMapping("/seller/{sellerId}")
