@@ -13,19 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class AuthorizationController(
+class AuthenticationController(
     private val registrationService: RegistrationService,
     private val jwtService: JwtService,
     private val authenticationManager: AuthenticationManager,
 ) {
 
-    @PostMapping("/v1/register/user")
+    @PostMapping("/v1/register")
     fun registerUser(@RequestBody userRegisterRequest: UserRegisterRequest) =
-        registrationService.registerUser(userRegisterRequest).id
-
-    @PostMapping("/v1/register/seller")
-    fun registerSeller(@RequestBody userRegisterRequest: UserRegisterRequest) =
-        registrationService.registerSeller(userRegisterRequest).id
+        registrationService.registerUser(userRegisterRequest)
 
     @PostMapping("/v1/login")
     fun login(@RequestBody userLoginRequest: UserLoginRequest): String {

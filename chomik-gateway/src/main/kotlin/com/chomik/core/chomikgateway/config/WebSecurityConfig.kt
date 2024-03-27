@@ -39,8 +39,9 @@ class WebSecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeRequests {
-                authorize("/v1/register/*", permitAll)
+                authorize("/v1/register", permitAll)
                 authorize("/v1/login", permitAll)
+                authorize("/error", permitAll)
                 authorize(anyRequest, authenticated)
             }
             headers { frameOptions { sameOrigin } }
@@ -48,8 +49,7 @@ class WebSecurityConfig(
             cors {
                 configurationSource = CorsConfigurationSource {
                     val configuration = CorsConfiguration().applyPermitDefaultValues()
-                    configuration.allowedOrigins =
-                        listOf("http://localhost:5173", "http://127.0.0.1:5173")
+                    configuration.allowedOrigins = listOf("http://localhost", "http://127.0.0.1")
                     configuration.addAllowedMethod(HttpMethod.PATCH)
                     configuration
                 }

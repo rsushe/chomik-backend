@@ -14,22 +14,22 @@ data class User(
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @Column(name = "id", nullable = false, unique = true)
+    @Column(name = "id")
     val id: String? = null,
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name")
     val name: String,
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     val password: String,
-    @Column(name = "email", nullable = true)
+    @Column(name = "email")
     val email: String?,
-    @Column(name = "phone_number", nullable = true)
+    @Column(name = "phone_number")
     val phoneNumber: String?,
-    @Column(name = "deleted", nullable = false)
+    @Column(name = "deleted")
     val deleted: Boolean,
     @Column(name = "rating")
     val rating: Float? = null,
     @Column(name = "registration_date")
     val registrationDate: Instant = Instant.now(),
-    @Column(name = "user_type", nullable = false)
+    @Column(name = "user_type")
     val userType: UserType,
 )
