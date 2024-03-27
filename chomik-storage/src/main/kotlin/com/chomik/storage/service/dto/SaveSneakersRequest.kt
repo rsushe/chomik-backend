@@ -5,7 +5,7 @@ import com.chomik.storage.domain.Color
 import com.chomik.storage.domain.Condition
 import jakarta.validation.constraints.*
 
-data class CreateSneakersRequest(
+data class SaveSneakersRequest(
     @field:NotBlank(message = "Model must not be blank")
     val model: String?,
 
