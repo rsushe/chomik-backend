@@ -25,7 +25,7 @@ class JwtService(
             .issuer("self")
             .issuedAt(now)
             .expiresAt(now.plus(1, ChronoUnit.DAYS))
-            .subject(authorizationUserDetails.username)
+            .subject(authorizationUserDetails.user.id)
             .claim("scope", scope)
             .build()
         return jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).tokenValue

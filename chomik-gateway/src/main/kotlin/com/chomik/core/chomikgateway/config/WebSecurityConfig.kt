@@ -13,6 +13,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.ProviderManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
@@ -31,6 +32,7 @@ import java.security.interfaces.RSAPublicKey
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(jsr250Enabled = true)
 class WebSecurityConfig(
     @Value("\${rsa.public-key}") private val rsaPublicKey: RSAPublicKey,
     @Value("\${rsa.private-key}") private val rsaPrivateKey: RSAPrivateKey,
