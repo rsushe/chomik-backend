@@ -15,7 +15,6 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
-.mvn
 *.iws
 *.iml
 *.ipr
@@ -32,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+/.mvn/
+**/*-local.properties
+**/.mvn
+**/mvn*
