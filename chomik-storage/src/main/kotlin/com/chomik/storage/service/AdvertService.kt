@@ -24,11 +24,11 @@ class AdvertService @Autowired constructor(private val advertRepository: AdvertR
 
     fun createAdvert(request: SaveAdvertRequest): Advert {
         val advert = Advert(
-            sneakerId = request.sneakerId!!,
-            sellerId = request.sellerId!!,
-            status = request.status!!,
-            price = request.price!!,
-            active = request.active!!
+            sneakerId = request.sneakerId,
+            sellerId = request.sellerId,
+            status = request.status,
+            price = request.price,
+            active = request.active
         )
 
         return advertRepository.save(advert)
@@ -39,11 +39,11 @@ class AdvertService @Autowired constructor(private val advertRepository: AdvertR
         if (existingAdvert.isEmpty) return null
         val updatedAdvert = Advert(
             id = id,
-            sneakerId = updateRequest.sneakerId!!,
-            sellerId = updateRequest.sellerId!!,
-            status = updateRequest.status!!,
-            price = updateRequest.price!!,
-            active = updateRequest.active!!
+            sneakerId = updateRequest.sneakerId,
+            sellerId = updateRequest.sellerId,
+            status = updateRequest.status,
+            price = updateRequest.price,
+            active = updateRequest.active
         )
         return advertRepository.save(updatedAdvert)
     }

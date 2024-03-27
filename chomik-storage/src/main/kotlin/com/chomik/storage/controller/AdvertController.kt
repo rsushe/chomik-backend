@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/advert")
+@RequestMapping("/api/v1/advert")
 class AdvertController(private val advertService: AdvertService) {
 
     @GetMapping("/all")
@@ -30,7 +30,7 @@ class AdvertController(private val advertService: AdvertService) {
         return ResponseEntity.ok(adverts)
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     fun createAdvert(@Valid @RequestBody request: SaveAdvertRequest): ResponseEntity<Advert> {
         val createdAdvert = advertService.createAdvert(request)
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAdvert)
