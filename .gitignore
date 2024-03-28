@@ -14,7 +14,7 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+**/.idea
 *.iws
 *.iml
 *.ipr
@@ -34,4 +34,5 @@ build/
 /.mvn/
 **/*-local.properties
 **/.mvn
-**/mvn*
+**/.DS_Store
+**/certs/
