@@ -14,7 +14,7 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+**/.idea
 *.iws
 *.iml
 *.ipr
@@ -31,10 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
- HEAD:.gitignore
 /.mvn/
 **/*-local.properties
 **/.mvn
->>>>>>> b1ad729 (write authorization):chomik-gateway/.gitignore
 **/.DS_Store
 **/certs/
