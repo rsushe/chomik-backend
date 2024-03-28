@@ -31,7 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+ HEAD:.gitignore
 /.mvn/
 **/*-local.properties
 **/.mvn
-**/mvn*
+>>>>>>> b1ad729 (write authorization):chomik-gateway/.gitignore
+**/.DS_Store
+**/certs/
