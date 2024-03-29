@@ -1,6 +1,5 @@
 package com.chomik.orders.service
 
-import com.chomik.orders.domain.AdvertLock
 import com.chomik.orders.domain.Order
 import com.chomik.orders.domain.OrderStatus
 import com.chomik.orders.repository.OrderRepository
@@ -9,20 +8,10 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class OrderService(
-    private val orderRepository: OrderRepository,
-    private val sneakerCountService: SneakerCountService,
-    private val advertLockService: AdvertLockService,
-) {
+class OrderService(private val orderRepository: OrderRepository) {
 
     @Transactional
     fun createNewOrder(createOrderRequest: CreateOrderRequest): Order {
-        val availableSneakerCount = sneakerCountService.getSneakerCount(createOrderRequest.advertId)
-
-        if (createOrderRequest.sneakerCount > availableSneakerCount) {
-            throw IllegalArgumentException("Maximum available sneaker count to create order is $availableSneakerCount")
-        }
-
         val order = Order(
             buyerId = createOrderRequest.buyerId,
             advertId = createOrderRequest.advertId,
