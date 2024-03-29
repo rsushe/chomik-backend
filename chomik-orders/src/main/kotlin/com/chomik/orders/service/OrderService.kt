@@ -14,7 +14,8 @@ class OrderService (private val orderRepository: OrderRepository) {
         val order = Order(
             buyerId = createOrderRequest.buyerId,
             advertId = createOrderRequest.advertId,
-            status = OrderStatus.WAIT_PAYMENT
+            status = OrderStatus.WAIT_PAYMENT,
+            sneakerCount = createOrderRequest.sneakerCount
         )
         return orderRepository.save(order);
     }

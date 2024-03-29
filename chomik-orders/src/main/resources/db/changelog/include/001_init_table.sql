@@ -16,3 +16,6 @@ CREATE TABLE IF NOT EXISTS advert_lock (
          is_active BOOLEAN NOT NULL,
          locked_count INTEGER NOT NULL
 );
+
+--changeset maksgirya:order_count_field:3
+ALTER TABLE "order" ADD COLUMN sneaker_count INTEGER NOT NULL DEFAULT 1;
