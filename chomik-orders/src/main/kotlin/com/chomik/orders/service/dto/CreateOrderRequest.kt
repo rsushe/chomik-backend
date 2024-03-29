@@ -1,7 +1,5 @@
 package com.chomik.orders.service.dto
 
-
-import jakarta.persistence.Column
 import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/order")
 class OrderController(private val orderService: OrderService) {
 
-    @PostMapping("/create")
+    @PostMapping
     fun createNewOrder(@Valid @RequestBody createOrderRequest: CreateOrderRequest): ResponseEntity<Order> {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createNewOrder(createOrderRequest))
     }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface SneakerCountRepository: JpaRepository<SneakerCount, String> {
-    @Query("UPDATE SneakerCount SET count = :newCount WHERE sneakerId = :sneakerId")
-    fun updateCount(@Param("sneakerId") sneakerId: String, @Param("newCount") newCount: Int)
+    @Query("UPDATE SneakerCount SET count = :newCount WHERE advertId = :advertId")
+    fun updateCount(@Param("advertId") advertId: String, @Param("newCount") newCount: Int)
 }
