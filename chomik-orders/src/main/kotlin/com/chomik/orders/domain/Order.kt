@@ -1,5 +1,6 @@
 package com.chomik.orders.domain
 
+import com.chomik.orders.client.dto.OrderStatus
 import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
 
