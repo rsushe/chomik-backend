@@ -25,8 +25,7 @@ ALTER TABLE advert ADD CONSTRAINT sneakers_fk FOREIGN KEY (sneaker_id) REFERENCE
 CREATE UNIQUE INDEX IF NOT EXISTS sneakers_seller_unq ON advert(sneaker_id, seller_id);
 
 --changeset maksgirya:advert_count_field:3
-ALTER TABLE advert ADD COLUMN sneaker_count INTEGER;
-ALTER TABLE advert ALTER COLUMN sneaker_count SET NOT NULL;
+ALTER TABLE advert ADD COLUMN sneaker_count INTEGER NOT NULL DEFAULT 1;
 
 --changeset maksgirya:advert_description_field:3
 ALTER TABLE advert ADD COLUMN description TEXT;
