@@ -1,13 +1,12 @@
 --liquibase formatted sql
 
 --changeset maksgirya:order_create_table:1
-CREATE TABLE IF NOT EXISTS order (
+CREATE TABLE IF NOT EXISTS order_table (
         id VARCHAR PRIMARY KEY,
         buyer_id VARCHAR NOT NULL,
         advert_id VARCHAR NOT NULL,
         status VARCHAR NOT NULL
 );
-
 
 --changeset maksgirya:advert_lock_create_table:1
 CREATE TABLE IF NOT EXISTS advert_lock (
