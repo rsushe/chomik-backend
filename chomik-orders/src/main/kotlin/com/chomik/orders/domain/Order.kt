@@ -7,7 +7,7 @@ import jakarta.persistence.Table
 import org.hibernate.annotations.GenericGenerator
 
 @Entity
-@Table(name = "order_table")
+@Table(name = "\"order\"")
 data class Order(
     @Id
     @GeneratedValue(generator = "system-uuid")
