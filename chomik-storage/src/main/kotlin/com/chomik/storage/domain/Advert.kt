@@ -1,5 +1,6 @@
 package com.chomik.storage.domain
 
+import com.chomik.storage.client.dto.AdvertStatus
 import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
 

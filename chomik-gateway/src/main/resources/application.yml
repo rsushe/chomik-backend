@@ -1,15 +1,15 @@
+server:
+  port: 8080
+
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: ${GATEWAY_DB_URL}
-    username: ${GATEWAY_DB_USERNAME}
-    password: ${GATEWAY_DB_PASSWORD}
   liquibase:
     change-log: classpath:changelog/changelog.xml
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: true
+  profiles:
+    active: ${ENVIRONMENT}
 
 rsa:
   public-key: classpath:certs/public.pem

@@ -1,15 +1,13 @@
 package com.chomik.storage.service
 
+import com.chomik.storage.client.dto.SaveAdvertRequest
 import com.chomik.storage.domain.Advert
 import com.chomik.storage.repository.AdvertRepository
-import com.chomik.storage.service.dto.SaveAdvertRequest
 import com.chomik.storage.service.mapper.AdvertMapper
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-
 @Service
-class AdvertService @Autowired constructor(private val advertRepository: AdvertRepository, private val advertMapper: AdvertMapper)  {
+class AdvertService(private val advertRepository: AdvertRepository, private val advertMapper: AdvertMapper)  {
 
     fun getAllAdverts(): List<Advert> {
         return advertRepository.findAll()

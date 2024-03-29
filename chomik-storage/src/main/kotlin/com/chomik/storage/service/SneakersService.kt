@@ -1,14 +1,13 @@
 package com.chomik.storage.service
 
+import com.chomik.storage.client.dto.SaveSneakersRequest
 import com.chomik.storage.domain.Sneakers
 import com.chomik.storage.repository.SneakersRepository
-import com.chomik.storage.service.dto.SaveSneakersRequest
 import com.chomik.storage.service.mapper.SneakersMapper
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class SneakersService @Autowired constructor(private val sneakersRepository: SneakersRepository, private val  sneakersMapper: SneakersMapper) {
+class SneakersService(private val sneakersRepository: SneakersRepository, private val sneakersMapper: SneakersMapper) {
 
     fun getAllSneakers(): List<Sneakers> {
         return sneakersRepository.findAll()
