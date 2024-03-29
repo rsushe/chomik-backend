@@ -19,3 +19,6 @@ CREATE TABLE IF NOT EXISTS advert_lock (
 
 --changeset maksgirya:order_count_field:3
 ALTER TABLE "order" ADD COLUMN sneaker_count INTEGER NOT NULL DEFAULT 1;
+
+--changeset rsushe:add_advert_id_column:4
+ALTER TABLE advert_lock ADD COLUMN advert_id VARCHAR NOT NULL;
