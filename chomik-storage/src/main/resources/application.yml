@@ -1,0 +1,12 @@
+server:
+  port: 8082
+
+spring:
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  profiles:
+    active: ${ENVIRONMENT}

@@ -33,6 +33,7 @@ build/
 .vscode/
 /.mvn/
 **/*-local.properties
+**/*-local.yml
 **/.mvn
 **/.DS_Store
 **/certs/

@@ -1,7 +1,7 @@
 package com.chomik.storage.service.mapper
 
+import com.chomik.storage.client.dto.SaveSneakersRequest
 import com.chomik.storage.domain.Sneakers
-import com.chomik.storage.service.dto.SaveSneakersRequest
 
 import org.mapstruct.Mapper
 import org.springframework.stereotype.Component

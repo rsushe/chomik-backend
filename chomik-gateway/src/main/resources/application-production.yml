@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${GATEWAY_DB_URL}
+    username: ${GATEWAY_DB_USERNAME}
+    password: ${GATEWAY_DB_PASSWORD}

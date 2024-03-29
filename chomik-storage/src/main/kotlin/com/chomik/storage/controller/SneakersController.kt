@@ -1,14 +1,19 @@
 package com.chomik.storage.controller
 
+import com.chomik.storage.client.dto.SaveSneakersRequest
 import com.chomik.storage.domain.Sneakers
 import com.chomik.storage.service.SneakersService
-import com.chomik.storage.service.dto.SaveSneakersRequest
 import jakarta.validation.Valid
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
-
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1/sneakers")
@@ -29,14 +34,17 @@ class SneakersController(private val sneakersService: SneakersService) {
         }
     }
 
-    @PostMapping()
+    @PostMapping
     fun createSneakers(@Valid @RequestBody request: SaveSneakersRequest): ResponseEntity<Sneakers> {
         val createdSneakers = sneakersService.createSneakers(request)
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSneakers)
     }
 
     @PutMapping("/{id}")
-    fun updateSneakers(@PathVariable id: String, @Valid @RequestBody updatedSneakers: SaveSneakersRequest): ResponseEntity<Sneakers> {
+    fun updateSneakers(
+        @PathVariable id: String,
+        @Valid @RequestBody updatedSneakers: SaveSneakersRequest
+    ): ResponseEntity<Sneakers> {
         val updatedSneakersResult = sneakersService.updateSneakers(id, updatedSneakers)
         return if (updatedSneakersResult != null) {
             ResponseEntity.ok(updatedSneakersResult)

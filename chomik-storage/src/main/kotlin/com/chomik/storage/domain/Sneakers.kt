@@ -1,5 +1,8 @@
 package com.chomik.storage.domain
 
+import com.chomik.storage.client.dto.Brand
+import com.chomik.storage.client.dto.Color
+import com.chomik.storage.client.dto.Condition
 import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
 
