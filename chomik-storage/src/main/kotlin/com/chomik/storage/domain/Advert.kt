@@ -26,5 +26,11 @@ data class Advert(
     val price: Double,
 
     @Column(name = "active", nullable = false)
-    val active: Boolean
+    val active: Boolean,
+
+    @Column(name = "sneaker_count", nullable = false)
+    val sneakerCount: Int,
+
+    @Column(name = "description", nullable = true)
+    val description: String? = null
 )
