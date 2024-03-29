@@ -11,9 +11,9 @@ class SneakerCountService(private val sneakerCountRepository: SneakerCountReposi
     fun save(sneakerCount: SneakerCount): SneakerCount = sneakerCountRepository.save(sneakerCount)
 
     fun updateCount(sneakerCount: SneakerCount) =
-        sneakerCountRepository.updateCount(sneakerCount.sneakerId, sneakerCount.count)
+        sneakerCountRepository.updateCount(sneakerCount.advertId, sneakerCount.count)
 
-    fun getSneakerCount(sneakerId: String) = sneakerCountRepository.findById(sneakerId).getOrElse {
-        throw NoSuchElementException("Sneaker count with sneakerId $sneakerId doesn't exists")
+    fun getSneakerCount(advertId: String) = sneakerCountRepository.findById(advertId).getOrElse {
+        throw NoSuchElementException("Sneaker count with advertId $advertId doesn't exists")
     }.count
 }

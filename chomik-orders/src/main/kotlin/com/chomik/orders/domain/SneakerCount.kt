@@ -8,6 +8,6 @@ import jakarta.persistence.Table
 @Table(name = "sneaker_count")
 data class SneakerCount(
     @Id
-    val sneakerId: String,
+    val advertId: String,
     val count: Int
 )
