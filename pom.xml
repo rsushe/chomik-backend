@@ -11,6 +11,8 @@
         <module>chomik-gateway</module>
         <module>chomik-orders</module>
         <module>chomik-storage</module>
+
+        <module>chomik-orders-client</module>
         <module>chomik-storage-client</module>
     </modules>
 

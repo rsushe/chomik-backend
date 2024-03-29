@@ -1,4 +1,4 @@
-package com.chomik.orders.service.dto
+package com.chomik.orders.client.dto
 
 import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min

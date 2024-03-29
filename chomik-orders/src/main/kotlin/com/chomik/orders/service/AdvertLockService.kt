@@ -1,8 +1,8 @@
 package com.chomik.orders.service
 
+import com.chomik.orders.client.dto.CreateOrderRequest
 import com.chomik.orders.domain.AdvertLock
 import com.chomik.orders.repository.AdvertLockRepository
-import com.chomik.orders.service.dto.CreateOrderRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

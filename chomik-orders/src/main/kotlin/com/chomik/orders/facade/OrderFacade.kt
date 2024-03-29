@@ -1,10 +1,12 @@
 package com.chomik.orders.facade
 
+import com.chomik.orders.client.dto.CreateOrderRequest
+import com.chomik.orders.client.dto.OrderDto
 import com.chomik.orders.domain.Order
+import com.chomik.orders.extension.toDto
 import com.chomik.orders.service.AdvertLockService
 import com.chomik.orders.service.OrderService
 import com.chomik.orders.service.SneakerCountService
-import com.chomik.orders.service.dto.CreateOrderRequest
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,7 +17,7 @@ class OrderFacade(
     private val advertLockService: AdvertLockService,
 ) {
     @Transactional
-    fun createNewOrder(createOrderRequest: CreateOrderRequest): Order {
+    fun createNewOrder(createOrderRequest: CreateOrderRequest): OrderDto {
         val availableSneakerCount = sneakerCountService.getSneakerCount(createOrderRequest.advertId)
 
         if (createOrderRequest.sneakerCount > availableSneakerCount) {
@@ -29,6 +31,6 @@ class OrderFacade(
 
         advertLockService.save(createOrderRequest)
 
-        return orderService.createNewOrder(createOrderRequest)
+        return orderService.createNewOrder(createOrderRequest).toDto()
     }
 }
