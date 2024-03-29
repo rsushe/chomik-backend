@@ -2,6 +2,7 @@ package com.chomik.orders.domain
 
 import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
+import java.time.Instant
 
 @Entity
 @Table(name = "advert_lock")
@@ -13,7 +14,7 @@ data class AdvertLock(
 
     var userId: String,
 
-    var lockTime: String,
+    var lockTime: Instant = Instant.now(),
 
     @Column(name = "is_active")
     var active: Boolean,

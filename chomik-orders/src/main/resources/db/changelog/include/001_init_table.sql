@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS order (
 CREATE TABLE IF NOT EXISTS advert_lock (
          id VARCHAR PRIMARY KEY,
          user_id VARCHAR NOT NULL,
-         lock_time VARCHAR NOT NULL,
+         lock_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
          is_active BOOLEAN NOT NULL,
          locked_count INTEGER NOT NULL
 );
