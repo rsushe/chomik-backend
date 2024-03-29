@@ -3,7 +3,6 @@ package com.chomik.orders.service
 import com.chomik.orders.domain.SneakerCount
 import com.chomik.orders.repository.SneakerCountRepository
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 import java.util.NoSuchElementException
 import kotlin.jvm.optionals.getOrElse

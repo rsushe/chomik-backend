@@ -10,3 +10,12 @@ spring:
     show-sql: true
   profiles:
     active: ${ENVIRONMENT}
+
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+
+
+lock:
+  delta: 30
