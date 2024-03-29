@@ -3,12 +3,13 @@ package com.chomik.storage.service
 import com.chomik.storage.domain.Advert
 import com.chomik.storage.repository.AdvertRepository
 import com.chomik.storage.service.dto.SaveAdvertRequest
+import com.chomik.storage.service.mapper.AdvertMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 
 @Service
-class AdvertService @Autowired constructor(private val advertRepository: AdvertRepository)  {
+class AdvertService @Autowired constructor(private val advertRepository: AdvertRepository, private val advertMapper: AdvertMapper)  {
 
     fun getAllAdverts(): List<Advert> {
         return advertRepository.findAll()
@@ -23,13 +24,7 @@ class AdvertService @Autowired constructor(private val advertRepository: AdvertR
     }
 
     fun createAdvert(request: SaveAdvertRequest): Advert {
-        val advert = Advert(
-            sneakerId = request.sneakerId,
-            sellerId = request.sellerId,
-            status = request.status,
-            price = request.price,
-            active = request.active
-        )
+        val advert = advertMapper.toAdvert(request);
 
         return advertRepository.save(advert)
     }
@@ -37,14 +32,7 @@ class AdvertService @Autowired constructor(private val advertRepository: AdvertR
     fun updateAdvert(id: String, updateRequest: SaveAdvertRequest): Advert? {
         val existingAdvert = advertRepository.findById(id)
         if (existingAdvert.isEmpty) return null
-        val updatedAdvert = Advert(
-            id = id,
-            sneakerId = updateRequest.sneakerId,
-            sellerId = updateRequest.sellerId,
-            status = updateRequest.status,
-            price = updateRequest.price,
-            active = updateRequest.active
-        )
+        val updatedAdvert = advertMapper.toAdvert(updateRequest)
         return advertRepository.save(updatedAdvert)
     }
 

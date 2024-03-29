@@ -1,6 +1,8 @@
 package com.chomik.storage.service.dto
 
 import com.chomik.storage.domain.AdvertStatus
+import jakarta.validation.constraints.Max
+import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
@@ -21,5 +23,12 @@ data class SaveAdvertRequest(
     val price: Double,
 
     @field:NotNull(message = "Price must not be null")
-    val active: Boolean
+    val active: Boolean,
+
+    @field:NotNull(message = "sneakerCount must not be null")
+    @field:Max(value = 100, message = "sneakerCount must be less than 100")
+    @field:Min(value = 1, message = "sneakerCount must be more than 0")
+    val sneakerCount: Int,
+
+    val description: String?
 )
