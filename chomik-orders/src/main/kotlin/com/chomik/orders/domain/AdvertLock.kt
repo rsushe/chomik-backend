@@ -14,6 +14,8 @@ data class AdvertLock(
 
     var userId: String,
 
+    val advertId: String,
+
     var lockTime: Instant = Instant.now(),
 
     @Column(name = "is_active")
