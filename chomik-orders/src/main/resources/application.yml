@@ -29,8 +29,3 @@ spring:
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool
             threadCount: 2
-
-lock:
-  delta:
-
-

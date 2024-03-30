@@ -5,3 +5,10 @@ spring:
     username: ${ORDERS_DB_USERNAME}
     password: ${ORDERS_DB_PASSWORD}
 
+
+expired:
+  reservation:
+    job:
+      lock:
+        timeout: 900
+      cron: 0 0/5 * ? * * *
