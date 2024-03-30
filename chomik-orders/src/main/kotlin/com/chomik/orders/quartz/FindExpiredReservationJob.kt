@@ -2,6 +2,7 @@ package com.chomik.orders.quartz
 
 import com.chomik.orders.domain.SneakerCount
 import com.chomik.orders.service.AdvertLockService
+import com.chomik.orders.service.OrderService
 import com.chomik.orders.service.SneakerCountService
 import org.apache.commons.lang3.mutable.MutableInt
 import org.quartz.JobExecutionContext
@@ -13,9 +14,10 @@ import org.springframework.stereotype.Component
 @Component
 class FindExpiredReservationJob(
     private val advertLockService: AdvertLockService,
-    private val sneakerCountService: SneakerCountService
+    private val sneakerCountService: SneakerCountService,
+    private val orderService: OrderService,
 ) : QuartzJobBean() {
-    private val log: Logger = LoggerFactory.getLogger(AdvertLockService::class.java)
+    private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
     override fun executeInternal(context: JobExecutionContext) {
         log.info("Start FindExpiredReservationJob")

@@ -16,7 +16,6 @@
     <properties>
         <java.version>17</java.version>
         <kotlin.version>1.9.23</kotlin.version>
-        <c3p0.version>0.9.5.5</c3p0.version>
     </properties>
     <dependencies>
         <dependency>
