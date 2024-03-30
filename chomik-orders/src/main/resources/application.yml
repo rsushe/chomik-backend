@@ -33,7 +33,4 @@ spring:
 lock:
   delta:
 
-expired:
-  reservation:
-    job:
-      cron:
+

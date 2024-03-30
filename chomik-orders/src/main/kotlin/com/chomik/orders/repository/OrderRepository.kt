@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface OrderRepository : JpaRepository<Order, String> {
     @Modifying
-    @Query("UPDATE Order SET status = :status WHERE buyerId = :buyerId and advertId = :advertId")
-    fun cancelOrderByBuyerAndAdvert(buyerId: String, advertId: String, status: OrderStatus = OrderStatus.EXPIRED)
+    @Query("UPDATE Order SET status = :status WHERE id in :ids")
+    fun cancelOrderWhereIdIn(ids: List<String>, status: OrderStatus = OrderStatus.EXPIRED)
 }

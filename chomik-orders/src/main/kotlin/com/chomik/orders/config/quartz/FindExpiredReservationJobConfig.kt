@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class FindExpiredReservationJobConfig(
     @Value("\${expired.reservation.job.cron}") private val jobCron: String
-    ) {
+) {
     @Bean
     fun findExpiredReservationJobDetail(): JobDetail = JobBuilder
         .newJob(FindExpiredReservationJob::class.java)

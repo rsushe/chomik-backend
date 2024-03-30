@@ -8,6 +8,7 @@ import org.apache.commons.lang3.mutable.MutableInt
 import org.quartz.JobExecutionContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.quartz.QuartzJobBean
 import org.springframework.stereotype.Component
 
@@ -16,13 +17,14 @@ class FindExpiredReservationJob(
     private val advertLockService: AdvertLockService,
     private val sneakerCountService: SneakerCountService,
     private val orderService: OrderService,
+    @Value("\${expired.reservation.job.lock.timeout}") private val lockTimeoutInSeconds: Long,
 ) : QuartzJobBean() {
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
     override fun executeInternal(context: JobExecutionContext) {
         log.info("Start FindExpiredReservationJob")
 
-        val expiredLocks = advertLockService.deactivateExpiredAdvertLocks()
+        val expiredLocks = advertLockService.deactivateExpiredAdvertLocks(lockTimeoutInSeconds)
 
         val expiredCountsByAdvertId =
             expiredLocks.groupingBy { it.advertId }.aggregate { _, accumulator: MutableInt?, element, first ->
@@ -36,6 +38,9 @@ class FindExpiredReservationJob(
             }
 
         sneakerCountService.addCountBatch(expiredCountsByAdvertId.map { SneakerCount(it.key, it.value!!.value) })
+
+        orderService.cancelOrderWhereIdIn(expiredLocks.map { it.orderId })
+
         log.info("End FindExpiredReservationJob")
     }
 }

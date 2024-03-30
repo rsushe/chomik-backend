@@ -15,6 +15,5 @@ class OrderService(private val orderRepository: OrderRepository) {
         orderRepository.save(createOrderRequest.toOrder())
 
     @Transactional
-    fun cancelOrderByBuyerAndAdvert(buyerId: String, advertId: String) =
-        orderRepository.cancelOrderByBuyerAndAdvert(buyerId, advertId)
+    fun cancelOrderWhereIdIn(ids: List<String>) = orderRepository.cancelOrderWhereIdIn(ids)
 }

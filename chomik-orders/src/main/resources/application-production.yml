@@ -4,3 +4,4 @@ spring:
     url: ${ORDERS_DB_URL}
     username: ${ORDERS_DB_USERNAME}
     password: ${ORDERS_DB_PASSWORD}
+

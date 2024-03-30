@@ -12,7 +12,7 @@ data class AdvertLock(
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     var id: String? = null,
 
-    var userId: String,
+    var orderId: String,
 
     val advertId: String,
 
