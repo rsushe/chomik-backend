@@ -6,11 +6,14 @@ import org.quartz.JobBuilder
 import org.quartz.JobDetail
 import org.quartz.Trigger
 import org.quartz.TriggerBuilder
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class FindExpiredReservationJobConfig {
+class FindExpiredReservationJobConfig(
+    @Value("\${expired.reservation.job.cron}") private val jobCron: String
+    ) {
     @Bean
     fun findExpiredReservationJobDetail(): JobDetail = JobBuilder
         .newJob(FindExpiredReservationJob::class.java)
@@ -23,6 +26,6 @@ class FindExpiredReservationJobConfig {
     fun trigger(job: JobDetail): Trigger = TriggerBuilder.newTrigger()
         .forJob(findExpiredReservationJobDetail())
         .withIdentity("FindExpiredReservationJob", "PERMANENT")
-        .withSchedule(CronScheduleBuilder.cronSchedule("0/30 * * ? * * *"))
+        .withSchedule(CronScheduleBuilder.cronSchedule(jobCron))
         .build()
 }
