@@ -16,6 +16,7 @@ data class Order(
 
     var advertId: String,
 
+    @Enumerated(EnumType.STRING)
     var status: OrderStatus,
 
     @Column(name = "sneaker_count", nullable = false)

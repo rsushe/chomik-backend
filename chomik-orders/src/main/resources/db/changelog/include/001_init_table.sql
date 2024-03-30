@@ -22,3 +22,9 @@ ALTER TABLE "order" ADD COLUMN sneaker_count INTEGER NOT NULL DEFAULT 1;
 
 --changeset rsushe:add_advert_id_column:4
 ALTER TABLE advert_lock ADD COLUMN advert_id VARCHAR NOT NULL;
+
+--changeset rsushe:rename_user_id_column:5
+ALTER TABLE advert_lock RENAME COLUMN user_id to order_id;
+
+--changeset rsushe:add_order_id_fk:6
+ALTER TABLE advert_lock ADD CONSTRAINT order_id_fk FOREIGN KEY (order_id) REFERENCES "order" (id);

@@ -13,4 +13,7 @@ class OrderService(private val orderRepository: OrderRepository) {
     @Transactional
     fun createNewOrder(createOrderRequest: CreateOrderRequest): Order =
         orderRepository.save(createOrderRequest.toOrder())
+
+    @Transactional
+    fun cancelOrderWhereIdIn(ids: List<String>) = orderRepository.cancelOrderWhereIdIn(ids)
 }

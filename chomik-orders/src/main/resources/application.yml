@@ -8,5 +8,24 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 5
+        order_updates: true
+        generate_statistics: true
   profiles:
     active: ${ENVIRONMENT}
+
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    properties:
+      org:
+        quartz:
+          jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 2

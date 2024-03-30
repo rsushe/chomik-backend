@@ -2,7 +2,7 @@ package com.chomik.orders.facade
 
 import com.chomik.orders.client.dto.CreateOrderRequest
 import com.chomik.orders.client.dto.OrderDto
-import com.chomik.orders.domain.Order
+import com.chomik.orders.extension.toAdvertLock
 import com.chomik.orders.extension.toDto
 import com.chomik.orders.service.AdvertLockService
 import com.chomik.orders.service.OrderService
@@ -29,8 +29,10 @@ class OrderFacade(
             availableSneakerCount - createOrderRequest.sneakerCount
         )
 
-        advertLockService.save(createOrderRequest)
+        val order = orderService.createNewOrder(createOrderRequest)
 
-        return orderService.createNewOrder(createOrderRequest).toDto()
+        advertLockService.save(order.toAdvertLock())
+
+        return order.toDto()
     }
 }
