@@ -14,6 +14,9 @@ class SneakerCountService(private val sneakerCountRepository: SneakerCountReposi
 
     fun updateCount(advertId: String, count: Int) = sneakerCountRepository.updateCount(advertId, count)
 
+    fun addCountBatch(sneakerCounts: List<SneakerCount>): List<SneakerCount> =
+        sneakerCountRepository.saveAll(sneakerCounts)
+
     fun getSneakerCount(advertId: String) = sneakerCountRepository.findById(advertId).getOrElse {
         throw NoSuchElementException("Sneaker count with advertId $advertId doesn't exists")
     }.count
