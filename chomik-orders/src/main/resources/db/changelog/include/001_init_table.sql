@@ -30,4 +30,4 @@ ALTER TABLE advert_lock RENAME COLUMN user_id to order_id;
 ALTER TABLE advert_lock ADD CONSTRAINT order_id_fk FOREIGN KEY (order_id) REFERENCES "order" (id);
 
 --changeset rsushe:add_creation_time_column:7
-ALTER TABLE "order" add column creation_time timestamptz not null;
+ALTER TABLE "order" ADD COLUMN creation_time TIMESTAMP WITH TIME ZONE NOT NULL;
