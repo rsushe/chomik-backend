@@ -1,8 +1,15 @@
 package com.chomik.orders.domain
 
 import com.chomik.orders.client.dto.OrderStatus
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
+import jakarta.persistence.Table
 import org.hibernate.annotations.GenericGenerator
+import java.time.Instant
 
 @Entity
 @Table(name = "\"order\"")
@@ -21,4 +28,6 @@ data class Order(
 
     @Column(name = "sneaker_count", nullable = false)
     val sneakerCount: Int,
+
+    val creationTime: Instant = Instant.now(),
 )
