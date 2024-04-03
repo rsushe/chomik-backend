@@ -15,4 +15,7 @@ interface OrderRepository : JpaRepository<Order, String> {
         nativeQuery = true
     )
     fun cancelAllOrdersOlderThan(time: Instant): List<Order>
+
+    @Query("SELECT SUM(sneakerCount) FROM Order WHERE advertId = :advertId AND status = 'WAIT_PAYMENT'")
+    fun countWaitingPaymentOrdersOnAdvert(advertId: String): Int
 }

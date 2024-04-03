@@ -29,3 +29,8 @@ spring:
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool
             threadCount: 2
+
+
+chomik:
+  storage:
+    url: http://localhost:52

@@ -19,4 +19,7 @@ class OrderService(private val orderRepository: OrderRepository) {
         val thresholdTime = Instant.now().minusSeconds(orderExpirationInSeconds)
         return orderRepository.cancelAllOrdersOlderThan(thresholdTime)
     }
+
+    fun countWaitingPaymentOrders(advertId: String) : Int = orderRepository.countWaitingPaymentOrdersOnAdvert(advertId)
+
 }
