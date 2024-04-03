@@ -14,7 +14,7 @@ class ChomikTestConfiguration {
 
     @Bean
     @Primary
-    fun userDetailsService(): UserDetailsService? {
+    fun userDetailsService(): UserDetailsService {
         val user = User(
             name = "user",
             email = "user@company.com",
