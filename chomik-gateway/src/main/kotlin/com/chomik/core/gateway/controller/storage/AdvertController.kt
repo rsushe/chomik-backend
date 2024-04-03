@@ -1,7 +1,8 @@
-package com.chomik.core.gateway.controller
+package com.chomik.core.gateway.controller.storage
 
 import com.chomik.storage.client.dto.SaveAdvertRequest
-import com.chomik.storage.client.service.AdvertClient
+import com.chomik.storage.client.AdvertClient
+import com.chomik.storage.client.dto.AdvertDto
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
@@ -18,18 +19,18 @@ import org.springframework.web.bind.annotation.RestController
 class AdvertController(private val advertClient: AdvertClient) {
 
     @GetMapping
-    fun getAllAdverts(): ResponseEntity<String> = advertClient.getAllAdverts()
+    fun getAllAdverts(): ResponseEntity<List<AdvertDto>> = advertClient.getAllAdverts()
 
     @GetMapping("/{id}")
-    fun getAdvertById(@PathVariable id: String): ResponseEntity<String> = advertClient.getAdvertById(id)
+    fun getAdvertById(@PathVariable id: String): ResponseEntity<AdvertDto> = advertClient.getAdvertById(id)
 
     @GetMapping("/seller/{sellerId}")
-    fun getAdvertsBySellerId(@PathVariable sellerId: String): ResponseEntity<String> =
+    fun getAdvertsBySellerId(@PathVariable sellerId: String): ResponseEntity<AdvertDto> =
         advertClient.getAdvertsBySellerId(sellerId)
 
     @PostMapping
     @PreAuthorize("hasAuthority('SCOPE_seller')")
-    fun createAdvert(@Valid @RequestBody request: SaveAdvertRequest): ResponseEntity<String> =
+    fun createAdvert(@Valid @RequestBody request: SaveAdvertRequest): ResponseEntity<AdvertDto> =
         advertClient.createAdvert(request)
 
     @PutMapping("/{id}")
@@ -37,5 +38,5 @@ class AdvertController(private val advertClient: AdvertClient) {
     fun updateAdvert(
         @PathVariable id: String,
         @Valid @RequestBody updateRequest: SaveAdvertRequest
-    ): ResponseEntity<String> = advertClient.updateAdvert(id, updateRequest)
+    ): ResponseEntity<AdvertDto> = advertClient.updateAdvert(id, updateRequest)
 }

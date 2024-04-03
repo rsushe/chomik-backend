@@ -1,7 +1,8 @@
 package com.chomik.storage.controller
 
 import com.chomik.storage.client.dto.SaveSneakersRequest
-import com.chomik.storage.domain.Sneakers
+import com.chomik.storage.client.dto.SneakersDto
+import com.chomik.storage.extension.toDto
 import com.chomik.storage.service.SneakersService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -20,37 +21,29 @@ import org.springframework.web.bind.annotation.RestController
 class SneakersController(private val sneakersService: SneakersService) {
 
     @GetMapping
-    fun getAllSneakers(): List<Sneakers> {
-        return sneakersService.getAllSneakers()
+    fun getAllSneakers(): ResponseEntity<List<SneakersDto>> {
+        return ResponseEntity.ok(sneakersService.getAllSneakers().map { it.toDto() })
     }
 
     @GetMapping("/{id}")
-    fun getSneakersById(@PathVariable id: String): ResponseEntity<Sneakers> {
+    fun getSneakersById(@PathVariable id: String): ResponseEntity<SneakersDto> {
         val sneakers = sneakersService.getSneakersById(id)
-        return if (sneakers != null) {
-            ResponseEntity.ok(sneakers)
-        } else {
-            ResponseEntity.notFound().build()
-        }
+        return sneakers?.let { ResponseEntity.ok(it.toDto()) } ?: ResponseEntity.notFound().build()
     }
 
     @PostMapping
-    fun createSneakers(@Valid @RequestBody request: SaveSneakersRequest): ResponseEntity<Sneakers> {
+    fun createSneakers(@Valid @RequestBody request: SaveSneakersRequest): ResponseEntity<SneakersDto> {
         val createdSneakers = sneakersService.createSneakers(request)
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdSneakers)
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdSneakers.toDto())
     }
 
     @PutMapping("/{id}")
     fun updateSneakers(
         @PathVariable id: String,
         @Valid @RequestBody updatedSneakers: SaveSneakersRequest
-    ): ResponseEntity<Sneakers> {
+    ): ResponseEntity<SneakersDto> {
         val updatedSneakersResult = sneakersService.updateSneakers(id, updatedSneakers)
-        return if (updatedSneakersResult != null) {
-            ResponseEntity.ok(updatedSneakersResult)
-        } else {
-            ResponseEntity.notFound().build()
-        }
+        return updatedSneakersResult?.let { ResponseEntity.ok(it.toDto()) } ?: ResponseEntity.notFound().build()
     }
 
     @DeleteMapping("/{id}")
