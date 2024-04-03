@@ -6,7 +6,5 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-  profiles:
-    active: test
   datasource:
     url: jdbc:h2:mem:test
