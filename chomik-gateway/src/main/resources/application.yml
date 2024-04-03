@@ -14,3 +14,10 @@ spring:
 rsa:
   public-key: classpath:certs/public.pem
   private-key: classpath:certs/private.pem
+
+
+chomik:
+  storage:
+    url:
+  order:
+    url:
