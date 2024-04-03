@@ -9,6 +9,7 @@ import com.nimbusds.jose.proc.SecurityContext
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.ProviderManager
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoder
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 
@@ -31,6 +33,7 @@ import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
 
 @Configuration
+@Profile("!test")
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true)
 class WebSecurityConfig(
@@ -41,11 +44,12 @@ class WebSecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeRequests {
-                authorize("/api/v1/authentication/**", permitAll)
+                authorize("/api/v1/authentication/register", permitAll)
                 authorize("/error", permitAll)
                 authorize(anyRequest, authenticated)
             }
             headers { frameOptions { sameOrigin } }
+            httpBasic { LoginUrlAuthenticationEntryPoint("/api/v1/authentication/login") }
             oauth2ResourceServer { jwt { } }
             cors {
                 configurationSource = CorsConfigurationSource {

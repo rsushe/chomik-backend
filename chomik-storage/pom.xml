@@ -15,7 +15,7 @@
     <description>chomik-storage</description>
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.9.22</kotlin.version>
+        <kotlin.version>1.9.23</kotlin.version>
         <liquibase.version>4.24.0</liquibase.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
@@ -63,9 +63,16 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
 
