@@ -8,3 +8,10 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
   datasource:
     url: jdbc:h2:mem:test
+
+expired:
+  reservation:
+    job:
+      lock:
+        timeout: 60
+      cron: 0/30 * * ? * * *

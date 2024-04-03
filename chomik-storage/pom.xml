@@ -15,7 +15,7 @@
     <description>chomik-storage</description>
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.9.22</kotlin.version>
+        <kotlin.version>1.9.23</kotlin.version>
         <liquibase.version>4.24.0</liquibase.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
