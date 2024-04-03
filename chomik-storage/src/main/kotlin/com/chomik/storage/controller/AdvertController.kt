@@ -32,6 +32,12 @@ class AdvertController(private val advertService: AdvertService) {
         return advert?.let { ResponseEntity.ok(it.toDto()) } ?: ResponseEntity.notFound().build()
     }
 
+    @GetMapping("/{id}/sneakers/count")
+    fun getSneakersCountById(@PathVariable id: String): ResponseEntity<Int> {
+        val advert = advertService.getAdvertById(id)
+        return advert?.let { ResponseEntity.ok(it.sneakerCount) } ?: ResponseEntity.notFound().build()
+    }
+
     @GetMapping("/seller/{sellerId}")
     fun getAdvertsBySellerId(@PathVariable sellerId: String): ResponseEntity<List<AdvertDto>> {
         val adverts = advertService.getAdvertsBySellerId(sellerId).map { it.toDto() }

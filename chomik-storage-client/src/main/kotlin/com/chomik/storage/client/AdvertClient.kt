@@ -31,6 +31,12 @@ class AdvertClient(
         return restTemplate.getForEntity(uri.toUriString(), AdvertDto::class.java)
     }
 
+    fun getSneakersCountById(id: String): ResponseEntity<Int> {
+        val uri = createBuilder("${ADVERT_URL_PREFIX}/${id}/sneakers/count")
+
+        return restTemplate.getForEntity(uri.toUriString(), Int::class.java)
+    }
+
     fun getAdvertsBySellerId(id: String): ResponseEntity<AdvertDto> {
         val uri = createBuilder("${ADVERT_URL_PREFIX}/seller/${id}")
 
