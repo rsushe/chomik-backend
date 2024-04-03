@@ -6,6 +6,7 @@ import com.chomik.orders.extension.toOrder
 import com.chomik.orders.repository.OrderRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.Instant
 
 @Service
 class OrderService(private val orderRepository: OrderRepository) {
@@ -14,6 +15,8 @@ class OrderService(private val orderRepository: OrderRepository) {
     fun createNewOrder(createOrderRequest: CreateOrderRequest): Order =
         orderRepository.save(createOrderRequest.toOrder())
 
-    @Transactional
-    fun cancelOrderWhereIdIn(ids: List<String>) = orderRepository.cancelOrderWhereIdIn(ids)
+    fun cancelExpiredOrders(orderExpirationInSeconds: Long): List<Order> {
+        val thresholdTime = Instant.now().minusSeconds(orderExpirationInSeconds)
+        return orderRepository.cancelAllOrdersOlderThan(thresholdTime)
+    }
 }
