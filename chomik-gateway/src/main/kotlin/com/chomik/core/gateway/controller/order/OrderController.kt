@@ -1,4 +1,4 @@
-package com.chomik.core.gateway.controller
+package com.chomik.core.gateway.controller.order
 
 import com.chomik.orders.client.OrderClient
 import com.chomik.orders.client.dto.CreateOrderRequest
