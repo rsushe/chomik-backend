@@ -23,9 +23,9 @@ data class User(
     @Column(name = "email")
     val email: String?,
     @Column(name = "phone_number")
-    val phoneNumber: String?,
+    val phoneNumber: String? = null,
     @Column(name = "deleted")
-    val deleted: Boolean,
+    val deleted: Boolean = false,
     @Column(name = "rating")
     val rating: Float? = null,
     @Column(name = "registration_date")

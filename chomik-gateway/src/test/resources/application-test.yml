@@ -8,3 +8,9 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
   datasource:
     url: jdbc:h2:mem:test
+
+chomik:
+  storage:
+    url: http://localhost:52
+  order:
+    url: http://localhost:52
