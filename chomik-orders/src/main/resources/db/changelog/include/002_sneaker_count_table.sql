@@ -8,3 +8,6 @@ CREATE TABLE IF NOT EXISTS sneaker_count(
 
 --changeset rsushe:rename_sneaker_count_column:1
 ALTER TABLE sneaker_count RENAME COLUMN sneaker_id to advert_id;
+
+--changeset rsushe:drop_sneaker_count_table:2;
+DROP TABLE sneaker_count;
