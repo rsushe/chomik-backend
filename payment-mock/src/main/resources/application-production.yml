@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${PAYMENT_MOCK_DB_URL}
+    username: ${PAYMENT_MOCK_DB_USERNAME}
+    password: ${PAYMENT_MOCK_DB_PASSWORD}

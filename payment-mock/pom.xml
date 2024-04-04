@@ -8,11 +8,11 @@
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.chomik.payment.mock</groupId>
-	<artifactId>chomik-payment-mock</artifactId>
+	<groupId>com.payment.mock</groupId>
+	<artifactId>payment-mock</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>chomik-payment-mock</name>
-	<description>chomik-payment-mock</description>
+	<name>payment-mock</name>
+	<description>payment-mock</description>
 	<properties>
 		<java.version>17</java.version>
 		<kotlin.version>1.9.23</kotlin.version>
@@ -30,6 +30,7 @@
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-kotlin</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-reflect</artifactId>
@@ -37,6 +38,12 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>

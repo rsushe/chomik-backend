@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${PAYMENTS_DB_URL}
+    username: ${PAYMENTS_DB_USERNAME}
+    password: ${PAYMENTS_DB_PASSWORD}
