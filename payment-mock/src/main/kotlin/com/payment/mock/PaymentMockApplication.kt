@@ -1,11 +1,11 @@
-package com.chomik.payment.mock
+package com.payment.mock
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ChomikPaymentMockApplication
+class PaymentMockApplication
 
 fun main(args: Array<String>) {
-	runApplication<ChomikPaymentMockApplication>(*args)
+	runApplication<PaymentMockApplication>(*args)
 }

@@ -1,4 +1,4 @@
-package com.chomik.payment.mock.domain
+package com.payment.mock.domain
 
 enum class PaymentStatus {
     CREATED,
