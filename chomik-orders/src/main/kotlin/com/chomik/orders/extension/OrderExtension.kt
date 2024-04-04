@@ -3,7 +3,6 @@ package com.chomik.orders.extension
 import com.chomik.orders.client.dto.CreateOrderRequest
 import com.chomik.orders.client.dto.OrderDto
 import com.chomik.orders.client.dto.OrderStatus
-import com.chomik.orders.domain.AdvertLock
 import com.chomik.orders.domain.Order
 
 fun Order.toDto(): OrderDto = OrderDto(
@@ -12,13 +11,6 @@ fun Order.toDto(): OrderDto = OrderDto(
     advertId = this.advertId,
     status = this.status,
     sneakerCount = this.sneakerCount,
-)
-
-fun Order.toAdvertLock(isActive: Boolean = true): AdvertLock = AdvertLock(
-    orderId = this.id!!,
-    advertId = this.advertId,
-    active = isActive,
-    lockedCount = this.sneakerCount
 )
 
 fun CreateOrderRequest.toOrder(orderStatus: OrderStatus = OrderStatus.WAIT_PAYMENT) = Order(

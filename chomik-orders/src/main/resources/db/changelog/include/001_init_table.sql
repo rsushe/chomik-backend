@@ -31,3 +31,6 @@ ALTER TABLE advert_lock ADD CONSTRAINT order_id_fk FOREIGN KEY (order_id) REFERE
 
 --changeset rsushe:add_creation_time_column:7
 ALTER TABLE "order" ADD COLUMN creation_time TIMESTAMP WITH TIME ZONE NOT NULL;
+
+--chaangeset rsushe:drop_table_advert_lock:8
+DROP TABLE advert_lock;
