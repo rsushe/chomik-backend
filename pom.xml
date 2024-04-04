@@ -13,10 +13,11 @@
         <module>chomik-storage</module>
         <module>chomik-payment</module>
         <module>chomik-payment-mock</module>
+        <module>chomik-delivery</module>
 
         <module>chomik-orders-client</module>
         <module>chomik-storage-client</module>
-        <module>chomik-delivery</module>
+        <module>delivery-mock</module>
     </modules>
 
     <packaging>pom</packaging>
