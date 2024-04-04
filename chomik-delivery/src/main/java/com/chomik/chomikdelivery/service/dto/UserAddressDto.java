@@ -1,41 +1,30 @@
 package com.chomik.chomikdelivery.service.dto;
 
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
+
 public class UserAddressDto {
     private String id;
+    @NotNull
     private String userId;
+    @NotNull
     private String country;
+    @NotNull
     private String city;
+    @NotNull
     private String street;
+    @NotNull
     private String house;
+    @Min(0)
+    @Max(10000)
     private Integer floor;
     private String flat;
     private String extraInfo;
 
     public UserAddressDto() {
-    }
-
-    public UserAddressDto(String userId, String country, String city, String street, String house, Integer floor, String flat, String extraInfo) {
-        this.userId = userId;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.house = house;
-        this.floor = floor;
-        this.flat = flat;
-        this.extraInfo = extraInfo;
-    }
-
-    public UserAddressDto(String id, String userId, String country, String city, String street, String house, Integer floor, String flat, String extraInfo) {
-        this.id = id;
-        this.userId = userId;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.house = house;
-        this.floor = floor;
-        this.flat = flat;
-        this.extraInfo = extraInfo;
     }
 
     public String getId() {

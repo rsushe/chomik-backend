@@ -22,8 +22,8 @@ public class UserAddressService {
     private UserAddressMapper mapper;
 
 
-    public List<UserAddressDto> getAllUserAddresses() {
-        List<UserAddress> userAddresses = userAddressRepository.findAll();
+    public List<UserAddressDto> getAllUsersAddresses(String userId) {
+        List<UserAddress> userAddresses = userAddressRepository.findByUserId(userId);
         return userAddresses.stream()
                 .map(mapper::convertTo)
                 .collect(Collectors.toList());
