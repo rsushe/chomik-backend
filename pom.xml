@@ -15,6 +15,7 @@
 
         <module>chomik-orders-client</module>
         <module>chomik-storage-client</module>
+        <module>chomik-delivery</module>
     </modules>
 
     <packaging>pom</packaging>
