@@ -12,6 +12,7 @@
         <module>chomik-orders</module>
         <module>chomik-storage</module>
         <module>chomik-payment</module>
+        <module>chomik-payment-mock</module>
 
         <module>chomik-orders-client</module>
         <module>chomik-storage-client</module>
