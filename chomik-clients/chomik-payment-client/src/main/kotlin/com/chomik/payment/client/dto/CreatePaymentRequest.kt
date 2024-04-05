@@ -1,6 +1,7 @@
-package com.chomik.orders.client.dto
+package com.chomik.payment.client.dto
 
 data class CreatePaymentRequest(
     val orderId: String,
+    val addressId: String,
     val charge: Int
 )
