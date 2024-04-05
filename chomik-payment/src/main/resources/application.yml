@@ -10,3 +10,7 @@ spring:
     show-sql: true
   profiles:
     active: ${ENVIRONMENT}
+
+payment:
+  mock:
+    url:
