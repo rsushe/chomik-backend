@@ -14,11 +14,9 @@
         <module>chomik-payment</module>
         <module>chomik-delivery</module>
 
-        <module>chomik-orders-client</module>
-        <module>chomik-storage-client</module>
-
         <module>delivery-mock</module>
         <module>payment-mock</module>
+        <module>chomik-clients</module>
     </modules>
 
     <packaging>pom</packaging>

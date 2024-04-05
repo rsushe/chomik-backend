@@ -1,8 +1,6 @@
 package com.chomik.orders.config
 
-import com.chomik.orders.client.OrderClient
 import com.chomik.storage.client.AdvertClient
-import com.chomik.storage.client.SneakersClient
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
 import org.springframework.boot.context.properties.ConfigurationProperties
