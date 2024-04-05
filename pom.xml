@@ -16,7 +16,9 @@
 
         <module>delivery-mock</module>
         <module>payment-mock</module>
+
         <module>chomik-clients</module>
+        <module>mock-clients</module>
     </modules>
 
     <packaging>pom</packaging>

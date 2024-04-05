@@ -1,6 +1,6 @@
 package com.payment.mock.controller
 
-import com.payment.mock.controller.dto.ClientTransactionDto
+import com.payment.mock.client.dto.CreateTransactionDto
 import com.payment.mock.domain.Transaction
 import com.payment.mock.service.TransactionService
 
@@ -19,11 +19,11 @@ class TransactionController(
     @Value("\${balancer.url}") private val balancerUrl: String,
 ) {
     @PostMapping
-    fun createTransaction(@RequestBody charge: Int): ResponseEntity<ClientTransactionDto> {
+    fun createTransaction(@RequestBody charge: Int): ResponseEntity<CreateTransactionDto> {
         val transaction = transactionService.save(charge)
 
         return ResponseEntity.ok(
-            ClientTransactionDto(
+            CreateTransactionDto(
                 paymentUrl = "$balancerUrl/api/v1/transaction/${transaction.id}",
                 transactionId = transaction.id!!
             )
