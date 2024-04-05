@@ -2,7 +2,7 @@ package com.chomik.chomikdelivery.resource;
 
 
 import com.chomik.chomikdelivery.service.UserAddressService;
-import com.chomik.chomikdeliveryclient.dto.UserAddressDto;
+import com.chomik.delivery.client.dto.UserAddressDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

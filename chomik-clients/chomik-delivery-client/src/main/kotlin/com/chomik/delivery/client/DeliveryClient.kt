@@ -1,6 +1,6 @@
-package com.chomik.chomikdeliveryclient
+package com.chomik.delivery.client
 
-import com.chomik.chomikdeliveryclient.dto.UserAddressDto
+import com.chomik.delivery.client.dto.UserAddressDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
@@ -11,9 +11,9 @@ class DeliveryClient(
 ) {
 
     fun getUserAddress(userAddressId: String): ResponseEntity<UserAddressDto> {
-        val uri = createBuilder("api/v1/delivery/address")
+        val uri = createBuilder("api/v1/delivery/address/${userAddressId}")
 
-        return restTemplate.getForEntity(uri.toUriString(), UserAddressDto::class.java, userAddressId)
+        return restTemplate.getForEntity(uri.toUriString(), UserAddressDto::class.java)
     }
 
     private fun createBuilder(method: String): UriComponentsBuilder {

@@ -1,4 +1,4 @@
-package com.chomik.chomikdeliveryclient.dto
+package com.chomik.delivery.client.dto
 
 import jakarta.validation.constraints.NotNull
 
