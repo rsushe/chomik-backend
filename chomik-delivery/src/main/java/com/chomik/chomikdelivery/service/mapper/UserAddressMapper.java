@@ -2,7 +2,7 @@ package com.chomik.chomikdelivery.service.mapper;
 
 
 import com.chomik.chomikdelivery.domain.UserAddress;
-import com.chomik.chomikdelivery.service.dto.UserAddressDto;
+import com.chomik.delivery.client.dto.UserAddressDto;
 import org.mapstruct.Mapper;
 
 @Mapper
