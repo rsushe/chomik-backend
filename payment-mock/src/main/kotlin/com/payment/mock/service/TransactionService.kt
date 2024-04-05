@@ -1,6 +1,6 @@
 package com.payment.mock.service
 
-import com.payment.mock.domain.PaymentStatus
+import com.payment.mock.client.dto.TransactionStatus
 import com.payment.mock.domain.Transaction
 import com.payment.mock.repository.TransactionRepository
 import jakarta.persistence.EntityManager
@@ -14,7 +14,7 @@ class TransactionService(
     private val entityManager: EntityManager,
     private val transactionRepository: TransactionRepository,
 ) {
-    fun save(charge: Int) = transactionRepository.save(Transaction(charge = charge, status = PaymentStatus.CREATED))
+    fun save(charge: Int) = transactionRepository.save(Transaction(charge = charge, status = TransactionStatus.CREATED))
 
     @Transactional
     fun process(transactionId: String): Transaction {
@@ -22,7 +22,7 @@ class TransactionService(
             IllegalArgumentException("There is no transaction with id $transactionId")
         }
 
-        while (transaction.status == PaymentStatus.CREATED) {
+        while (transaction.status == TransactionStatus.CREATED) {
             Thread.sleep(SLEEP_TIME)
             entityManager.refresh(transaction)
         }
