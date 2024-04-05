@@ -21,6 +21,6 @@ class ExceptionHandler {
 
     @ExceptionHandler(RestClientResponseException::class)
     fun handleException(e: RestClientResponseException): ResponseEntity<String> {
-        return ResponseEntity.status(e.statusCode).body(e.responseBodyAsString)
+        return ResponseEntity.status(e.statusCode).body(e.message)
     }
 }
