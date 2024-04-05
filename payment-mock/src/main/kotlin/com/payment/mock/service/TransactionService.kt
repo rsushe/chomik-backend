@@ -5,7 +5,8 @@ import com.payment.mock.domain.Transaction
 import com.payment.mock.repository.TransactionRepository
 import jakarta.persistence.EntityManager
 import org.springframework.stereotype.Service
-import java.time.Duration
+
+private const val SLEEP_TIME = 5000L
 
 @Service
 class TransactionService(
@@ -22,7 +23,7 @@ class TransactionService(
         entityManager.clear()
 
         while (transaction.status == PaymentStatus.CREATED) {
-            Thread.sleep(Duration.ofSeconds(5))
+            Thread.sleep(SLEEP_TIME)
             transaction = transactionRepository.findById(transactionId).get()
             entityManager.clear()
         }
