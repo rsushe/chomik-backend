@@ -2,8 +2,8 @@ package com.chomik.chomikdelivery.service;
 
 import com.chomik.chomikdelivery.domain.UserAddress;
 import com.chomik.chomikdelivery.repository.UserAddressRepository;
-import com.chomik.chomikdelivery.service.dto.UserAddressDto;
 import com.chomik.chomikdelivery.service.mapper.UserAddressMapper;
+import com.chomik.chomikdeliveryclient.dto.UserAddressDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
