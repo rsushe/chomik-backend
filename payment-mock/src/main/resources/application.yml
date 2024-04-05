@@ -10,3 +10,6 @@ spring:
     show-sql: true
   profiles:
     active: ${ENVIRONMENT}
+
+balancer:
+  url:

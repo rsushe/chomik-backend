@@ -33,4 +33,4 @@ spring:
 
 chomik:
   storage:
-    url: http://localhost:52
+    url:
