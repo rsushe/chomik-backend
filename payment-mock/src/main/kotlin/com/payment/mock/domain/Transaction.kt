@@ -17,6 +17,7 @@ data class Transaction(
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     val id: String? = null,
     val charge: Int,
+    val callbackUrl: String,
     @Enumerated(EnumType.STRING)
     val status: TransactionStatus,
 )

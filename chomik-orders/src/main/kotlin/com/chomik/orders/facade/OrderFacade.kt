@@ -14,6 +14,8 @@ class OrderFacade(
     private val orderService: OrderService,
     private val advertClient: AdvertClient
 ) {
+    fun findById(orderId: String): Order = orderService.findById(orderId)
+
     @Transactional
     fun createNewOrder(createOrderRequest: CreateOrderRequest): Order {
         val availableSneakerCount = advertClient.getSneakersCountById(createOrderRequest.advertId).body
@@ -33,13 +35,24 @@ class OrderFacade(
     }
 
     @Transactional
-    fun updateOrderToPayment(orderId: String): Order {
+    fun updateOrderPaymentCreate(orderId: String): Order {
         val order = orderService.findById(orderId)
 
-        if (order.status != OrderStatus.WAIT_PAYMENT) {
+        if (order.status !in listOf(OrderStatus.WAIT_PAYMENT, OrderStatus.PAYMENT_IN_PROGRESS)) {
             throw IllegalArgumentException("Order status is invalid: ${order.status}")
         }
 
         return orderService.updateOrder(order, OrderStatus.PAYMENT_IN_PROGRESS)
+    }
+
+    @Transactional
+    fun updateOrderPaymentFinish(orderId: String): Order {
+        val order = orderService.findById(orderId)
+
+        if (order.status != OrderStatus.PAYMENT_IN_PROGRESS) {
+            throw IllegalArgumentException("Bank sent payment callback, but order not in PAYMENT_IN_PROGRESS state. Something very strange...")
+        }
+
+        return orderService.updateOrder(order, OrderStatus.IN_DELIVERY)
     }
 }

@@ -7,3 +7,6 @@ CREATE TABLE transaction
     charge INT     NOT NULL,
     status VARCHAR NOT NULL
 );
+
+--changeset rsushe:add_column_callback_url_to_transaction_table:2
+ALTER TABLE transaction ADD COLUMN callback_url VARCHAR NOT NULL;

@@ -14,3 +14,10 @@ spring:
 payment:
   mock:
     url:
+
+chomik:
+  order:
+    url:
+
+balancer:
+  host:
