@@ -22,7 +22,7 @@ class PaymentController(
     @PostMapping
     fun createPayment(@RequestBody createPaymentRequest: CreatePaymentRequest): ResponseEntity<CreatePaymentResponse> {
         deliveryClient.getUserAddress(createPaymentRequest.addressId)
-        orderClient.updateOrderToPayment(createPaymentRequest.orderId)
+        orderClient.updateOrderPaymentCreate(createPaymentRequest.orderId)
         return paymentClient.createPayment(createPaymentRequest)
     }
 }
