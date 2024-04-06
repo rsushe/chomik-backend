@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS user_address (
         extra_info VARCHAR
 );
 
--- --changeset maksgirya:shipment_create_table:1
--- CREATE TABLE IF NOT EXISTS shipment (
---        id VARCHAR PRIMARY KEY,
---        order_id VARCHAR NOT NULL,
---        user_from VARCHAR NOT NULL,
---        user_to VARCHAR NOT NULL,
---        track_link VARCHAR NOT NULL,
---        status VARCHAR NOT NULL
--- );
+--changeset maksgirya:shipment_create_table:2
+CREATE TABLE IF NOT EXISTS shipment (
+       id VARCHAR PRIMARY KEY,
+       order_id VARCHAR NOT NULL,
+       address_from VARCHAR NOT NULL,
+       address_to VARCHAR NOT NULL,
+       track_link VARCHAR,
+       status VARCHAR NOT NULL
+);
 
 
