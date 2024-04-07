@@ -1,14 +1,12 @@
 package com.fakecdek.delivery.service;
 
 
-import com.fakecdek.delivery.dto.AddressDto;
-import com.fakecdek.delivery.dto.ApplyForDeliveryRequest;
+import com.fakecdek.deliverymockclient.dto.AddressDto;
+import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryRequest;
 import com.fakecdek.delivery.dto.Country;
 import com.fakecdek.delivery.exception.InvalidCountryParameterException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 @Service

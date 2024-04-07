@@ -1,14 +1,14 @@
 package com.fakecdek.delivery.service;
 
 
-import com.fakecdek.delivery.dto.ApplyForDeliveryRequest;
-import com.fakecdek.delivery.dto.ApplyForDeliveryResponse;
-import com.fakecdek.delivery.dto.TrackLinkDto;
+import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryRequest;
+import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryResponse;
+import com.fakecdek.deliverymockclient.dto.TrackLinkDto;
 import com.fakecdek.delivery.exception.InvalidCountryParameterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.fakecdek.delivery.dto.ApplyForDeliveryResponse.ResponseStatus.TAKEN;
+import static com.fakecdek.deliverymockclient.dto.ApplyForDeliveryResponse.ResponseStatus.TAKEN;
 
 
 @Service

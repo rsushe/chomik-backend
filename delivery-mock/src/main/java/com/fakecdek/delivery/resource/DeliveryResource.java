@@ -1,8 +1,8 @@
 package com.fakecdek.delivery.resource;
 
 
-import com.fakecdek.delivery.dto.ApplyForDeliveryRequest;
-import com.fakecdek.delivery.dto.ApplyForDeliveryResponse;
+import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryRequest;
+import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryResponse;
 import com.fakecdek.delivery.exception.InvalidCountryParameterException;
 import com.fakecdek.delivery.service.DeliveryService;
 import jakarta.validation.Valid;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.fakecdek.delivery.dto.ApplyForDeliveryResponse.ResponseStatus.REJECTED;
+import static com.fakecdek.deliverymockclient.dto.ApplyForDeliveryResponse.ResponseStatus.REJECTED;
 
 @RestController
-@RequestMapping("api/fakecdek/")
+@RequestMapping("/api/fakecdek")
 public class DeliveryResource {
 
     @Autowired
