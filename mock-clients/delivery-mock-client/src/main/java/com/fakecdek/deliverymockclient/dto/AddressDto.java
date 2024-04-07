@@ -1,4 +1,4 @@
-package com.fakecdek.delivery.dto;
+package com.fakecdek.deliverymockclient.dto;
 
 import jakarta.validation.constraints.NotNull;
 

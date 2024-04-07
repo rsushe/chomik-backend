@@ -1,7 +1,7 @@
 package com.fakecdek.delivery.service;
 
 
-import com.fakecdek.delivery.dto.TrackLinkDto;
+import com.fakecdek.deliverymockclient.dto.TrackLinkDto;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
