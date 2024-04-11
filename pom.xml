@@ -19,6 +19,7 @@
 
         <module>chomik-clients</module>
         <module>mock-clients</module>
+        <module>event-service</module>
     </modules>
 
     <packaging>pom</packaging>
