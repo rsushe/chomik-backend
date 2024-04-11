@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 public class SpringEventPublisher implements EventPublisher {
 
     @Autowired
-    ApplicationEventPublisher publisher;
+    private ApplicationEventPublisher publisher;
 
     @Override
-    public void publishEvent(final ChomikEvent botEvent) {
+    public void publishEvent(ChomikEvent botEvent) {
         publisher.publishEvent(botEvent);
     }
 }
