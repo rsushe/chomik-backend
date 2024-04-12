@@ -9,7 +9,7 @@ import com.chomik.chomikdelivery.repository.ShipmentRepository;
 import com.chomik.delivery.client.dto.CreateShipmentRequest;
 import com.chomik.delivery.client.dto.ShipmentStatus;
 import com.chomik.delivery.client.dto.UserAddressDto;
-import com.chomik.eventservice.publisher.EventPublisher;
+import com.chomik.event.service.publisher.EventPublisher;
 import com.fakecdek.deliverymockclient.dto.TrackLinkDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

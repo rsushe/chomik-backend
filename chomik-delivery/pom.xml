@@ -99,7 +99,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.chomik</groupId>
+			<groupId>com.chomik.event.service</groupId>
 			<artifactId>event-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>

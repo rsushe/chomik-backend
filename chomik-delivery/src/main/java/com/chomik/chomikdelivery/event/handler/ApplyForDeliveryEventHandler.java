@@ -1,12 +1,9 @@
 package com.chomik.chomikdelivery.event.handler;
 
 import com.chomik.chomikdelivery.event.ApplyForDeliveryEvent;
-import com.chomik.chomikdelivery.exception.ShipmentNotFoundException;
 import com.chomik.chomikdelivery.service.ShipmentService;
 import com.chomik.delivery.client.dto.AddressDto;
-import com.chomik.delivery.client.dto.ShipmentStatus;
-import com.chomik.eventservice.exception.EventHandleException;
-import com.chomik.eventservice.handler.EventHandler;
+import com.chomik.event.service.handler.EventHandler;
 import com.fakecdek.deliverymockclient.DeliveryMockClient;
 import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryRequest;
 import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryResponse;
@@ -15,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 

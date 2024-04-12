@@ -1,6 +1,6 @@
 package com.chomik.chomikdelivery.event;
 
-import com.chomik.eventservice.event.ChomikEvent;
+import com.chomik.event.service.event.ChomikEvent;
 
 public abstract class DeliveryEvent extends ChomikEvent {
     protected final String shipmentId;
