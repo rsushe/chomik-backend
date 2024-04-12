@@ -8,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
+        <module>event-service</module>
         <module>chomik-gateway</module>
         <module>chomik-orders</module>
         <module>chomik-storage</module>
@@ -19,7 +20,7 @@
 
         <module>chomik-clients</module>
         <module>mock-clients</module>
-        <module>event-service</module>
+
     </modules>
 
     <packaging>pom</packaging>
