@@ -44,7 +44,7 @@ public class UserAddressResource {
     }
 
     @PostMapping
-    public ResponseEntity<?> createUserAddress(@Valid @RequestBody CreateUserAddressRequest createUserAddressRequest) {
+    public ResponseEntity<?> createUserAddress(@RequestBody @Valid CreateUserAddressRequest createUserAddressRequest) {
         try {
             UserAddressDto createdUserAddress = userAddressService.createUserAddress(createUserAddressRequest);
             return new ResponseEntity<>(createdUserAddress, HttpStatus.CREATED);

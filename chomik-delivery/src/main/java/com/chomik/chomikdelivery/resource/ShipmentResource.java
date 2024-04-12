@@ -4,6 +4,7 @@ package com.chomik.chomikdelivery.resource;
 import com.chomik.chomikdelivery.exception.UserAddressNotFoundException;
 import com.chomik.chomikdelivery.service.ShipmentService;
 import com.chomik.delivery.client.dto.CreateShipmentRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ShipmentResource {
 
 
     @PostMapping
-    public ResponseEntity<?> createShipment(@RequestBody CreateShipmentRequest request) {
+    public ResponseEntity<?> createShipment(@RequestBody @Valid CreateShipmentRequest request) {
         try {
             shipmentService.createShipment(request);
             return ResponseEntity.status(HttpStatus.CREATED).build();

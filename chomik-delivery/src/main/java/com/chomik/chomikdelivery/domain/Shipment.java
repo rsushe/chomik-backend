@@ -2,28 +2,27 @@ package com.chomik.chomikdelivery.domain;
 
 
 import com.chomik.delivery.client.dto.ShipmentStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "shipment")
 public class Shipment {
     @Id
+    @Column(name = "id")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
+    @Column(name = "order_id")
     private String orderId;
+    @Column(name = "address_from")
     private String userAddressFrom;
+    @Column(name = "address_to")
     private String userAddressTo;
+    @Column(name = "track_link")
     private String trackLink;
-
-
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private ShipmentStatus status;
 
     public Shipment() {}
