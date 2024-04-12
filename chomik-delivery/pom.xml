@@ -117,6 +117,9 @@
 						<compilerArg>
 							-Amapstruct.defaultComponentModel=spring
 						</compilerArg>
+						<compilerArg>
+							-Amapstruct.verbose=true
+						</compilerArg>
 					</compilerArgs>
 				</configuration>
 			</plugin>

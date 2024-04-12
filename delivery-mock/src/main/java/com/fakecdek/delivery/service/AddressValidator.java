@@ -1,7 +1,7 @@
 package com.fakecdek.delivery.service;
 
 
-import com.fakecdek.deliverymockclient.dto.AddressDto;
+import com.fakecdek.deliverymockclient.dto.DeliveryAddressDto;
 import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryRequest;
 import com.fakecdek.delivery.dto.Country;
 import com.fakecdek.delivery.exception.InvalidCountryParameterException;
@@ -31,9 +31,10 @@ public class AddressValidator {
 
     public void validateApplicationRequest(ApplyForDeliveryRequest request) throws InvalidCountryParameterException {
         validateAddress(request.userToAddress(), availableToCountries, "receiver address");
+        validateAddress(request.userFromAddress(), availableFromCountries, "sender address");
     }
 
-    private void validateAddress(AddressDto address, Set<Country> availableCountries, String addressName) throws InvalidCountryParameterException {
+    private void validateAddress(DeliveryAddressDto address, Set<Country> availableCountries, String addressName) throws InvalidCountryParameterException {
 
         Country country = Country.fromCountryName(address.country());
         if (country == null) {

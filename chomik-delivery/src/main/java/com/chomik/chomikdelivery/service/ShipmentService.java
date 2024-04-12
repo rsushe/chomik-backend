@@ -6,8 +6,10 @@ import com.chomik.chomikdelivery.exception.UserAddressNotFoundException;
 import com.chomik.chomikdelivery.repository.ShipmentRepository;
 import com.chomik.delivery.client.dto.CreateShipmentRequest;
 import com.chomik.delivery.client.dto.ShipmentStatus;
+import com.chomik.delivery.client.dto.UserAddressDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -20,17 +22,17 @@ public class ShipmentService {
     private UserAddressService userAddressService;
 
 
-
+    @Transactional
     public void createShipment(CreateShipmentRequest request) throws UserAddressNotFoundException {
-        checkAddressIsCorrect(request.getAddressFrom());
-        checkAddressIsCorrect(request.getAddressTo());
+        UserAddressDto userAddressFrom = validateAndGetAddress(request.getUserAddressFrom());
+        UserAddressDto userAddressTo = validateAndGetAddress(request.getUserAddressTo());
 
-        Shipment newShipment = new Shipment(request.getOrderId(), request.getAddressFrom(), request.getAddressTo(), ShipmentStatus.CREATED);
+        Shipment newShipment = new Shipment(request.getOrderId(), request.getUserAddressFrom(), request.getUserAddressTo(), ShipmentStatus.CREATED);
         shipmentRepository.save(newShipment);
     }
 
-    private void checkAddressIsCorrect(String addressId) throws UserAddressNotFoundException {
-        userAddressService.getUserAddressById(addressId)
+    private UserAddressDto validateAndGetAddress(String addressId) throws UserAddressNotFoundException {
+        return userAddressService.getUserAddressById(addressId)
                 .orElseThrow(() -> new UserAddressNotFoundException("Couldn't find user address with id: " + addressId));
     }
 }

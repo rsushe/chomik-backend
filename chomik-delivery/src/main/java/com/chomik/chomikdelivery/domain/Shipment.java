@@ -18,8 +18,8 @@ public class Shipment {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
     private String orderId;
-    private String addressFrom;
-    private String addressTo;
+    private String userAddressFrom;
+    private String userAddressTo;
     private String trackLink;
 
 
@@ -28,10 +28,10 @@ public class Shipment {
 
     public Shipment() {}
 
-    public Shipment(String orderId, String addressFrom, String addressTo, ShipmentStatus status) {
+    public Shipment(String orderId, String userAddressFrom, String userAddressTo, ShipmentStatus status) {
         this.orderId = orderId;
-        this.addressFrom = addressFrom;
-        this.addressTo = addressTo;
+        this.userAddressFrom = userAddressFrom;
+        this.userAddressTo = userAddressTo;
         this.status = status;
     }
 
@@ -51,20 +51,20 @@ public class Shipment {
         this.orderId = orderId;
     }
 
-    public String getAddressFrom() {
-        return addressFrom;
+    public String getUserAddressFrom() {
+        return userAddressFrom;
     }
 
-    public void setAddressFrom(String addressFrom) {
-        this.addressFrom = addressFrom;
+    public void setUserAddressFrom(String addressFrom) {
+        this.userAddressFrom = addressFrom;
     }
 
-    public String getAddressTo() {
-        return addressTo;
+    public String getUserAddressTo() {
+        return userAddressTo;
     }
 
-    public void setAddressTo(String addressTo) {
-        this.addressTo = addressTo;
+    public void setUserAddressTo(String addressTo) {
+        this.userAddressTo = addressTo;
     }
 
     public String getTrackLink() {
@@ -88,8 +88,8 @@ public class Shipment {
         return "Shipment{" +
                 "id='" + id + '\'' +
                 ", orderId='" + orderId + '\'' +
-                ", addressFrom='" + addressFrom + '\'' +
-                ", addressTo='" + addressTo + '\'' +
+                ", userAddressFrom='" + userAddressFrom + '\'' +
+                ", userAddressTo='" + userAddressTo + '\'' +
                 ", trackLink='" + trackLink + '\'' +
                 ", status='" + status + '\'' +
                 '}';
