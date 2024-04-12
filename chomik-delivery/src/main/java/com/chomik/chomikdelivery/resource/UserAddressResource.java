@@ -2,6 +2,7 @@ package com.chomik.chomikdelivery.resource;
 
 
 import com.chomik.chomikdelivery.service.UserAddressService;
+import com.chomik.chomikdelivery.service.dto.CreateUserAddressRequest;
 import com.chomik.delivery.client.dto.UserAddressDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,22 +44,12 @@ public class UserAddressResource {
     }
 
     @PostMapping
-    public ResponseEntity<?> createUserAddress(@Valid @RequestBody UserAddressDto userAddressDto) {
+    public ResponseEntity<?> createUserAddress(@Valid @RequestBody CreateUserAddressRequest createUserAddressRequest) {
         try {
-            UserAddressDto createdUserAddress = userAddressService.createUserAddress(userAddressDto);
+            UserAddressDto createdUserAddress = userAddressService.createUserAddress(createUserAddressRequest);
             return new ResponseEntity<>(createdUserAddress, HttpStatus.CREATED);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Couldt't create UserAddress. Cause: " + e.getMessage());
-        }
-    }
-
-    @PutMapping
-    public ResponseEntity<?> updateUserAddress(@Valid @RequestBody UserAddressDto userAddressDto) {
-        try {
-            UserAddressDto updatedUserAddress = userAddressService.updateUserAddress(userAddressDto);
-            return new ResponseEntity<>(updatedUserAddress, HttpStatus.OK);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Couldt't update UserAddress. Cause: " + e.getMessage());
         }
     }
 
