@@ -2,6 +2,7 @@ package com.chomik.chomikdelivery.domain;
 
 
 import com.chomik.delivery.client.dto.ShipmentStatus;
+import com.fakecdek.delivery.mock.model.dto.DeliveryStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,11 +24,11 @@ public class Shipment {
     private String trackLink;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private ShipmentStatus status;
+    private DeliveryStatus status;
 
     public Shipment() {}
 
-    public Shipment(String orderId, String userAddressFrom, String userAddressTo, ShipmentStatus status) {
+    public Shipment(String orderId, String userAddressFrom, String userAddressTo, DeliveryStatus status) {
         this.orderId = orderId;
         this.userAddressFrom = userAddressFrom;
         this.userAddressTo = userAddressTo;
@@ -74,11 +75,11 @@ public class Shipment {
         this.trackLink = trackLink;
     }
 
-    public ShipmentStatus getStatus() {
+    public DeliveryStatus getStatus() {
         return status;
     }
 
-    public void setStatus(ShipmentStatus status) {
+    public void setStatus(DeliveryStatus status) {
         this.status = status;
     }
 

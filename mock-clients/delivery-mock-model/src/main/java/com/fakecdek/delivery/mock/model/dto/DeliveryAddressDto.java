@@ -1,4 +1,4 @@
-package com.fakecdek.deliverymockclient.dto;
+package com.fakecdek.delivery.mock.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

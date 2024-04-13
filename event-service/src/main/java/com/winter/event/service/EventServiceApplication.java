@@ -1,4 +1,4 @@
-package com.chomik.event.service;
+package com.winter.event.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

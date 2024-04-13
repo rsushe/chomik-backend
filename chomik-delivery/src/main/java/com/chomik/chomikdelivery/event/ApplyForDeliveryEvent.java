@@ -1,15 +1,16 @@
 package com.chomik.chomikdelivery.event;
 
-import com.chomik.delivery.client.dto.AddressDto;
+
+import com.fakecdek.delivery.mock.model.dto.DeliveryAddressDto;
 
 public class ApplyForDeliveryEvent extends DeliveryEvent {
-    private final AddressDto addressFrom;
-    private final AddressDto addressTo;
+    private final DeliveryAddressDto addressFrom;
+    private final DeliveryAddressDto addressTo;
     private final String userFromMobile;
     private final String userToMobile;
 
 
-    public ApplyForDeliveryEvent(String shipmentId, AddressDto addressFrom, AddressDto addressTo, String userFromMobile, String userToMobile) {
+    public ApplyForDeliveryEvent(String shipmentId, DeliveryAddressDto addressFrom, DeliveryAddressDto addressTo, String userFromMobile, String userToMobile) {
         super(shipmentId);
         this.addressFrom = addressFrom;
         this.addressTo = addressTo;
@@ -17,11 +18,11 @@ public class ApplyForDeliveryEvent extends DeliveryEvent {
         this.userToMobile = userToMobile;
     }
 
-    public AddressDto getAddressFrom() {
+    public DeliveryAddressDto getAddressFrom() {
         return addressFrom;
     }
 
-    public AddressDto getAddressTo() {
+    public DeliveryAddressDto getAddressTo() {
         return addressTo;
     }
 

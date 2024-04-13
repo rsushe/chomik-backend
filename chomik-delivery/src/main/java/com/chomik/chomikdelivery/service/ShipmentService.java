@@ -9,7 +9,9 @@ import com.chomik.chomikdelivery.repository.ShipmentRepository;
 import com.chomik.delivery.client.dto.CreateShipmentRequest;
 import com.chomik.delivery.client.dto.ShipmentStatus;
 import com.chomik.delivery.client.dto.UserAddressDto;
-import com.chomik.event.service.publisher.EventPublisher;
+import com.fakecdek.delivery.mock.model.dto.DeliveryStatus;
+import com.fakecdek.delivery.mock.model.dto.UpdateShipmentStatusRequest;
+import com.winter.event.service.publisher.EventPublisher;
 import com.fakecdek.deliverymockclient.dto.TrackLinkDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,11 +32,11 @@ public class ShipmentService {
 
 
     @Transactional
-    public void createShipment(CreateShipmentRequest request) throws UserAddressNotFoundException {
+    public Shipment createShipment(CreateShipmentRequest request) throws UserAddressNotFoundException {
         UserAddressDto userAddressFrom = validateAndGetAddress(request.getUserAddressFrom());
         UserAddressDto userAddressTo = validateAndGetAddress(request.getUserAddressTo());
 
-        Shipment newShipment = new Shipment(request.getOrderId(), request.getUserAddressFrom(), request.getUserAddressTo(), ShipmentStatus.CREATED);
+        Shipment newShipment = new Shipment(request.getOrderId(), request.getUserAddressFrom(), request.getUserAddressTo(), DeliveryStatus.CREATED);
         newShipment = shipmentRepository.save(newShipment);
 
         publisher.publishEvent(new ApplyForDeliveryEvent(
@@ -42,6 +44,7 @@ public class ShipmentService {
                 userAddressFrom.getAddress(), userAddressTo.getAddress(),
                 request.getUserFromPhone(), request.getUserToPhone())
         );
+        return newShipment;
     }
 
 
@@ -50,9 +53,20 @@ public class ShipmentService {
         Shipment shipment = shipmentRepository.findById(shipmentId)
                 .orElseThrow(() -> new ShipmentNotFoundException("Couldn't find shipment entity with id: " + shipmentId));
 
-        shipment.setStatus(ShipmentStatus.CONFIRMED_BY_DELIVERY_SERVICE);
+        shipment.setStatus(DeliveryStatus.TAKEN_INTO_PROCESS);
         shipment.setTrackLink(trackLink.link());
         shipmentRepository.save(shipment);
+    }
+
+    @Transactional
+    public void updateShipmentStatus(UpdateShipmentStatusRequest request) throws ShipmentNotFoundException {
+        Shipment shipment = shipmentRepository.findById(request.shipmentId())
+                .orElseThrow(() -> new ShipmentNotFoundException("Couldn't find shipment entity with id: " + request.shipmentId()));
+
+        shipment.setStatus(request.status());
+        shipmentRepository.save(shipment);
+
+        // todo send notification to user
     }
 
     private UserAddressDto validateAndGetAddress(String addressId) throws UserAddressNotFoundException {
