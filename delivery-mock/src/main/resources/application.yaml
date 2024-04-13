@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: delivery-mock
+
+server:
+  port: 8087

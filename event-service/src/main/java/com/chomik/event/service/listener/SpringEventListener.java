@@ -1,9 +1,9 @@
-package com.chomik.eventservice.listener;
+package com.chomik.event.service.listener;
 
 
-import com.chomik.eventservice.event.ChomikEvent;
-import com.chomik.eventservice.exception.UnsupportedEventTypeException;
-import com.chomik.eventservice.handler.EventHandler;
+import com.chomik.event.service.event.ChomikEvent;
+import com.chomik.event.service.exception.UnsupportedEventTypeException;
+import com.chomik.event.service.handler.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

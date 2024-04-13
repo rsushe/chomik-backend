@@ -1,4 +1,4 @@
-package com.chomik.eventservice.exception;
+package com.chomik.event.service.exception;
 
 public class UnsupportedEventTypeException extends RuntimeException {
     public UnsupportedEventTypeException(String message) {

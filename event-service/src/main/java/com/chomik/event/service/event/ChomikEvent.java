@@ -1,4 +1,4 @@
-package com.chomik.eventservice.event;
+package com.chomik.event.service.event;
 
 import java.util.UUID;
 
