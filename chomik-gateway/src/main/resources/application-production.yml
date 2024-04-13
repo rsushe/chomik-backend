@@ -1,6 +1,19 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${GATEWAY_DB_URL}
-    username: ${GATEWAY_DB_USERNAME}
-    password: ${GATEWAY_DB_PASSWORD}
+    url: jdbc:postgresql://rc1b-jyoibej2wl1zryew.mdb.yandexcloud.net:6432/chomik?targetServerType=master&ssl=true&sslmode=verify-full
+    username: chomik
+    password: 12345678
+
+server:
+  port: 17000
+
+chomik:
+  storage:
+    url: http://localhost:17005
+  order:
+    url: http://localhost:17003
+  payment:
+    url: http://localhost:17004
+  delivery:
+    url: http://localhost:17002

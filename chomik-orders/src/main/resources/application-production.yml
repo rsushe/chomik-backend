@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${ORDERS_DB_URL}
-    username: ${ORDERS_DB_USERNAME}
-    password: ${ORDERS_DB_PASSWORD}
+    url: jdbc:postgresql://rc1b-jyoibej2wl1zryew.mdb.yandexcloud.net:6432/chomik?targetServerType=master&ssl=true&sslmode=verify-full
+    username: chomik
+    password: 12345678
 
 
 expired:
@@ -12,3 +12,10 @@ expired:
       lock:
         timeout: 900
       cron: 0 0/5 * ? * * *
+
+server:
+  port: 17004
+
+chomik:
+  storage:
+    url: http://localhost:17005

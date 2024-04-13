@@ -1,6 +1,3 @@
-server:
-  port: 8081
-
 spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
@@ -29,7 +26,6 @@ spring:
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool
             threadCount: 2
-
 
 chomik:
   storage:
