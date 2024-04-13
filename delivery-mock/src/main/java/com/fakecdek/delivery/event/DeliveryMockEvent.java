@@ -1,11 +1,11 @@
-package com.chomik.chomikdelivery.event;
+package com.fakecdek.delivery.event;
 
 import com.winter.event.service.event.ChomikEvent;
 
-public abstract class DeliveryEvent extends ChomikEvent {
+public class DeliveryMockEvent extends ChomikEvent {
     protected final String shipmentId;
 
-    public DeliveryEvent(String shipmentId) {
+    public DeliveryMockEvent(String shipmentId) {
         this.shipmentId = shipmentId;
     }
 

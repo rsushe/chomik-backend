@@ -2,12 +2,10 @@ package com.chomik.chomikdelivery.event.handler;
 
 import com.chomik.chomikdelivery.event.ApplyForDeliveryEvent;
 import com.chomik.chomikdelivery.service.ShipmentService;
-import com.chomik.delivery.client.dto.AddressDto;
-import com.chomik.event.service.handler.EventHandler;
+import com.winter.event.service.handler.EventHandler;
 import com.fakecdek.deliverymockclient.DeliveryMockClient;
 import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryRequest;
 import com.fakecdek.deliverymockclient.dto.ApplyForDeliveryResponse;
-import com.fakecdek.deliverymockclient.dto.DeliveryAddressDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +29,9 @@ public class ApplyForDeliveryEventHandler extends DeliveryEventHandler<ApplyForD
     @Override
     public void handle(ApplyForDeliveryEvent event) {
         ApplyForDeliveryRequest request = new ApplyForDeliveryRequest(
-                DeliveryAddressMapper.convertTo(event.getAddressFrom()),
+                event.getAddressFrom(),
                 event.getUserFromMobile(),
-                DeliveryAddressMapper.convertTo(event.getAddressTo()),
+                event.getAddressTo(),
                 event.getUserToMobile()
         );
 
@@ -77,13 +75,4 @@ public class ApplyForDeliveryEventHandler extends DeliveryEventHandler<ApplyForD
     }
 
 
-    private static class DeliveryAddressMapper {
-        public static DeliveryAddressDto convertTo(AddressDto addressDto) {
-            return new DeliveryAddressDto(
-                    addressDto.getCountry(), addressDto.getCity(),
-                    addressDto.getStreet(), addressDto.getHouse(),
-                    addressDto.getFloor(), addressDto.getFlat(),
-                    addressDto.getExtraInfo());
-        }
-    }
 }

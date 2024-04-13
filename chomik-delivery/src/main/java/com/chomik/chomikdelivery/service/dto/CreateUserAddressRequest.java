@@ -1,6 +1,6 @@
 package com.chomik.chomikdelivery.service.dto;
 
-import com.chomik.delivery.client.dto.AddressDto;
+import com.fakecdek.delivery.mock.model.dto.DeliveryAddressDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,5 +10,5 @@ public record CreateUserAddressRequest (
         String userId,
         @NotNull(message = "address must not be null or blank")
         @Valid
-        AddressDto address)
+        DeliveryAddressDto address)
 {}

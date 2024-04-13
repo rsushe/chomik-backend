@@ -1,4 +1,4 @@
-package com.chomik.event.service.event;
+package com.winter.event.service.event;
 
 import java.util.UUID;
 

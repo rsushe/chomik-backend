@@ -1,6 +1,6 @@
 package com.chomik.eventservice;
 
-import com.chomik.event.service.EventServiceApplication;
+import com.winter.event.service.EventServiceApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

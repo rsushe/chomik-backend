@@ -37,6 +37,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.fakecdek.delivery.mock.model</groupId>
+            <artifactId>delivery-mock-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

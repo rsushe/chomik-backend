@@ -1,6 +1,6 @@
-package com.chomik.event.service.publisher;
+package com.winter.event.service.publisher;
 
-import com.chomik.event.service.event.ChomikEvent;
+import com.winter.event.service.event.ChomikEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

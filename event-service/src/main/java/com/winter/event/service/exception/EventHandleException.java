@@ -1,4 +1,4 @@
-package com.chomik.event.service.exception;
+package com.winter.event.service.exception;
 
 public class EventHandleException extends Exception {
     public EventHandleException(String message) {

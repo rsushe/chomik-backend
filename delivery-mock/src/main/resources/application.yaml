@@ -4,3 +4,7 @@ spring:
 
 server:
   port: 8087
+
+chomik:
+  delivery:
+    url: http://localhost:8084
