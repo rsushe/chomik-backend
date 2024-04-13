@@ -15,3 +15,7 @@ expired:
 
 server:
   port: 17004
+
+chomik:
+  storage:
+    url: http://localhost:17005
