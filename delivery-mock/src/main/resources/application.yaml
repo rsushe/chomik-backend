@@ -1,10 +1,5 @@
 spring:
   application:
     name: delivery-mock
-
-server:
-  port: 8087
-
-chomik:
-  delivery:
-    url: http://localhost:8084
+  profiles:
+    active: ${ENVIRONMENT}

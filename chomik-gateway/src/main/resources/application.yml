@@ -1,6 +1,3 @@
-server:
-  port: 8080
-
 spring:
   liquibase:
     change-log: classpath:changelog/changelog.xml
@@ -14,14 +11,3 @@ spring:
 rsa:
   public-key: classpath:certs/public.pem
   private-key: classpath:certs/private.pem
-
-
-chomik:
-  storage:
-    url:
-  order:
-    url:
-  payment:
-    url:
-  delivery:
-    url:
