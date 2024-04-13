@@ -3,3 +3,7 @@ spring:
     name: delivery-mock
   profiles:
     active: ${ENVIRONMENT}
+
+chomik:
+  delivery:
+    url:
