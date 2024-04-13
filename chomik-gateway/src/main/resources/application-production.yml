@@ -7,3 +7,13 @@ spring:
 
 server:
   port: 17000
+
+chomik:
+  storage:
+    url: http://localhost:17005
+  order:
+    url: http://localhost:17003
+  payment:
+    url: http://localhost:17004
+  delivery:
+    url: http://localhost:17002
