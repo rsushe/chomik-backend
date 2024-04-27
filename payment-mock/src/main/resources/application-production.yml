@@ -5,6 +5,5 @@ spring:
     username: chomik
     password: 12345678
 
-
 server:
   port: 17006
