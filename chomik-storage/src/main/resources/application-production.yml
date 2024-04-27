@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://rc1b-jyoibej2wl1zryew.mdb.yandexcloud.net:6432/chomik 
+    url: jdbc:postgresql://rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net:6432/chomik-storage
     username: chomik
     password: 12345678
 
