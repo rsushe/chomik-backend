@@ -7,3 +7,14 @@ spring:
 
 server:
   port: 17004
+
+payment:
+  mock:
+    url: http://localhost:17006
+
+chomik:
+  order:
+    url: http://localhost:17003
+
+balancer:
+  host: http://localhost:17004
