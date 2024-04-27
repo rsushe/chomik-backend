@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://rc1b-jyoibej2wl1zryew.mdb.yandexcloud.net:6432/chomik
+    username: chomik
+    password: 12345678
+
+server:
+  port: 17002
+
+delivery:
+  mock:
+    url: http://localhost:17001

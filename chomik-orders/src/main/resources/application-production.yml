@@ -14,7 +14,7 @@ expired:
       cron: 0 0/5 * ? * * *
 
 server:
-  port: 17004
+  port: 17003
 
 chomik:
   storage:

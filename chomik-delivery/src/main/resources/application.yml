@@ -7,3 +7,7 @@ spring:
     show-sql: true
   profiles:
     active: ${ENVIRONMENT}
+
+delivery:
+  mock:
+    url:
