@@ -9,8 +9,8 @@ expired:
   reservation:
     job:
       lock:
-        timeout: 900
-      cron: 0 0/5 * ? * * *
+        timeout: 60
+      cron: 0 0/1 * ? * * *
 
 server:
   port: 17003
