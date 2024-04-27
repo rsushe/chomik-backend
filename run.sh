@@ -1,5 +1,5 @@
 #!/bin/bash
-export ENVIRONMENT=local
+export ENVIRONMENT=production
 
 mvn clean install
 
