@@ -1,10 +1,12 @@
 package com.chomik.core.gateway.controller.storage
 
+import com.chomik.core.gateway.domain.UserType.Companion.SELLER_AUTHORITY_NAME
 import com.chomik.storage.client.SneakersClient
 import com.chomik.storage.client.dto.SaveSneakersRequest
 import com.chomik.storage.client.dto.SneakersDto
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -24,15 +26,18 @@ class SneakersController(private val sneakersClient: SneakersClient) {
     fun getSneakersById(@PathVariable id: String): ResponseEntity<SneakersDto> = sneakersClient.getSneakersById(id)
 
     @PostMapping
+    @PreAuthorize("hasAuthority(${SELLER_AUTHORITY_NAME})")
     fun createSneakers(@Valid @RequestBody request: SaveSneakersRequest): ResponseEntity<SneakersDto> =
         sneakersClient.createSneakers(request)
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority(${SELLER_AUTHORITY_NAME})")
     fun updateSneakers(
         @PathVariable id: String,
         @Valid @RequestBody updatedSneakers: SaveSneakersRequest
     ): ResponseEntity<SneakersDto> = sneakersClient.updateSneakers(id, updatedSneakers)
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority(${SELLER_AUTHORITY_NAME})")
     fun deleteSneakers(@PathVariable id: String): ResponseEntity<Void> = sneakersClient.deleteSneakers(id)
 }
