@@ -37,6 +37,11 @@ public class UserAddressService {
         return userAddressOptional.map(userAddressMapper::convertTo);
     }
 
+    public Optional<UserAddressDto> getUserAddressByIdAndUserId(String id, String userId) {
+        Optional<UserAddress> userAddressOptional = userAddressRepository.findByIdAndUserId(id, userId);
+        return userAddressOptional.map(userAddressMapper::convertTo);
+    }
+
     public UserAddressDto createUserAddress(CreateUserAddressRequest createUserAddressRequest) {
         Address addressEntity = addressService.saveAddress(createUserAddressRequest.getAddress());
 
@@ -45,8 +50,7 @@ public class UserAddressService {
         return userAddressMapper.convertTo(savedUserAddress);
     }
 
-    public void deleteUserAddress(String id) {
-        userAddressRepository.deleteById(id);
+    public void deleteUserAddress(String id, String userId) {
+        userAddressRepository.deleteByIdAndUserId(id, userId);
     }
-
 }

@@ -18,8 +18,8 @@ class DeliveryClient(
     private val restTemplate: RestTemplate = RestTemplate(),
 ) {
 
-    fun getUserAddress(userAddressId: String): ResponseEntity<UserAddressDto> {
-        val uri = createBuilder("api/v1/delivery/address/${userAddressId}")
+    fun getUserAddress(addressId: String, userId: String): ResponseEntity<UserAddressDto> {
+        val uri = createBuilder("api/v1/delivery/address/$addressId/user/$userId")
 
         return restTemplate.getForEntity(uri.toUriString(), UserAddressDto::class.java)
     }
@@ -40,8 +40,8 @@ class DeliveryClient(
         return restTemplate.postForEntity(uri.toUriString(), createUserAddressRequest, UserAddressDto::class.java)
     }
 
-    fun deleteUserAddress(addressId: String) {
-        val uri = createBuilder("api/v1/delivery/address/$addressId")
+    fun deleteUserAddress(addressId: String, userId: String) {
+        val uri = createBuilder("api/v1/delivery/address/$addressId/user/$userId")
 
         restTemplate.delete(uri.toUriString())
     }

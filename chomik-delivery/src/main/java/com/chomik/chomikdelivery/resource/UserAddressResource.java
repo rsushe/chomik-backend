@@ -29,10 +29,10 @@ public class UserAddressResource {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUserAddressById(@PathVariable String id) {
+    @GetMapping("/{id}/user/{userId}")
+    public ResponseEntity<?> getUserAddressById(@PathVariable String id, @PathVariable String userId) {
         try {
-            Optional<UserAddressDto> userAddress = userAddressService.getUserAddressById(id);
+            Optional<UserAddressDto> userAddress = userAddressService.getUserAddressByIdAndUserId(id, userId);
             return userAddress.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception e) {
@@ -50,10 +50,10 @@ public class UserAddressResource {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUserAddress(@PathVariable String id) {
+    @DeleteMapping("/{id}/user/{userId}")
+    public ResponseEntity<?> deleteUserAddress(@PathVariable String id, @PathVariable String userId) {
         try {
-            userAddressService.deleteUserAddress(id);
+            userAddressService.deleteUserAddress(id, userId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Couldn't delete address with id " + id + ". Cause: " + e.getMessage());
