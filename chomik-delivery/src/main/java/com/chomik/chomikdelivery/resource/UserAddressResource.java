@@ -1,8 +1,7 @@
 package com.chomik.chomikdelivery.resource;
 
-
 import com.chomik.chomikdelivery.service.UserAddressService;
-import com.chomik.chomikdelivery.service.dto.CreateUserAddressRequest;
+import com.chomik.delivery.client.dto.CreateUserAddressRequest;
 import com.chomik.delivery.client.dto.UserAddressDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +19,14 @@ public class UserAddressResource {
     @Autowired
     private UserAddressService userAddressService;
 
-
-    @GetMapping
-    public ResponseEntity<?> getUsersAddresses(@RequestParam String userId) {
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getUsersAddresses(@PathVariable String userId) {
         try {
             List<UserAddressDto> usersAddresses = userAddressService.getAllUsersAddresses(userId);
             return ResponseEntity.ok(usersAddresses);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Couldt't get user's addresses. Cause: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Couldn't get user's addresses. Cause: " + e.getMessage());
         }
-
     }
 
     @GetMapping("/{id}")
@@ -39,7 +36,7 @@ public class UserAddressResource {
             return userAddress.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Couldt't get address with id " + id + ". Cause: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Couldn't get address with id " + id + ". Cause: " + e.getMessage());
         }
     }
 
@@ -49,7 +46,7 @@ public class UserAddressResource {
             UserAddressDto createdUserAddress = userAddressService.createUserAddress(createUserAddressRequest);
             return new ResponseEntity<>(createdUserAddress, HttpStatus.CREATED);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Couldt't create UserAddress. Cause: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Couldn't create UserAddress. Cause: " + e.getMessage());
         }
     }
 
@@ -59,7 +56,7 @@ public class UserAddressResource {
             userAddressService.deleteUserAddress(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Couldt't delete address with id " + id + ". Cause: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Couldn't delete address with id " + id + ". Cause: " + e.getMessage());
         }
     }
 }
