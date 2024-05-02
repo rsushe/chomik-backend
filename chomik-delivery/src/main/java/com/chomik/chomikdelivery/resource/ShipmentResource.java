@@ -1,6 +1,5 @@
 package com.chomik.chomikdelivery.resource;
 
-
 import com.chomik.chomikdelivery.domain.Shipment;
 import com.chomik.chomikdelivery.exception.UserAddressNotFoundException;
 import com.chomik.chomikdelivery.service.ShipmentService;
@@ -17,13 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/delivery/shipment")
 public class ShipmentResource {
-
+    private static final Logger log = LoggerFactory.getLogger(ShipmentResource.class);
 
     @Autowired
     private ShipmentService shipmentService;
-
-    private static final Logger log = LoggerFactory.getLogger(ShipmentResource.class);
-
 
     @PostMapping
     public ResponseEntity<?> createShipment(@RequestBody @Valid CreateShipmentRequest request) {
