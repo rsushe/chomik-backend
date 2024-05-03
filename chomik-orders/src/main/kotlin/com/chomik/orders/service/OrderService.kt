@@ -2,6 +2,7 @@ package com.chomik.orders.service
 
 import com.chomik.orders.client.dto.CreateOrderRequest
 import com.chomik.orders.client.dto.OrderStatus
+import com.chomik.orders.client.dto.UpdateUserAddressToRequest
 import com.chomik.orders.domain.Order
 import com.chomik.orders.extension.toOrder
 import com.chomik.orders.repository.OrderRepository
@@ -28,6 +29,9 @@ class OrderService(private val orderRepository: OrderRepository) {
     fun findById(orderId: String): Order = orderRepository.findById(orderId)
         .orElseThrow { IllegalArgumentException("Order with id $orderId doesn't exists") }
 
-    fun updateOrder(order: Order, orderStatus: OrderStatus): Order =
+    fun updateOrderStatus(order: Order, orderStatus: OrderStatus): Order =
         orderRepository.save(order.copy(status = orderStatus))
+
+    fun updateOrderUserAddressTo(order: Order, addressTo: String): Order =
+        orderRepository.save(order.copy(userAddressTo = addressTo))
 }
