@@ -6,4 +6,5 @@ data class OrderDto (
     var advertId: String,
     var status: OrderStatus,
     val sneakerCount: Int,
+    val userAddressTo: String? = null
 )

@@ -34,3 +34,6 @@ ALTER TABLE "order" ADD COLUMN creation_time TIMESTAMP WITH TIME ZONE NOT NULL;
 
 --chaangeset rsushe:drop_table_advert_lock:8
 DROP TABLE advert_lock;
+
+--changeset maksgir:add_address_to_column:7
+ALTER TABLE "order" ADD COLUMN user_address_to VARCHAR NULL ;
