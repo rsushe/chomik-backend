@@ -8,7 +8,7 @@ import com.chomik.payment.domain.PaymentStatus
 import com.chomik.payment.repository.PaymentRepository
 import com.payment.mock.client.PaymentMockClient
 import com.payment.mock.client.dto.CreateTransactionRequest
-import com.payment.mock.client.dto.ProcessedTransactionResponse
+import com.payment.mock.model.ProcessedTransactionResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

@@ -5,6 +5,7 @@ import com.chomik.orders.client.OrderClient
 import com.chomik.payment.client.PaymentClient
 import com.chomik.payment.client.dto.CreatePaymentRequest
 import com.chomik.payment.client.dto.CreatePaymentResponse
+import com.payment.mock.model.ProcessedTransactionResponse
 
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
@@ -26,5 +27,10 @@ class PaymentController(
         orderClient.updateOrderUserAddressTo(createPaymentRequest.orderId, createPaymentRequest.addressId)
         orderClient.updateOrderPaymentCreate(createPaymentRequest.orderId)
         return paymentClient.createPayment(createPaymentRequest)
+    }
+
+    @PostMapping("/callback")
+    fun processBankCallback(@RequestBody processedTransactionResponse: ProcessedTransactionResponse) {
+        paymentClient.processBankCallback(processedTransactionResponse)
     }
 }
