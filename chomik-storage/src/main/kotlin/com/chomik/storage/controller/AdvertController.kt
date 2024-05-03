@@ -1,6 +1,7 @@
 package com.chomik.storage.controller
 
 import com.chomik.storage.client.dto.AdvertDto
+import com.chomik.storage.client.dto.UpdateSneakersCountRequest
 import com.chomik.storage.client.dto.SaveAdvertRequest
 import com.chomik.storage.extension.toDto
 import com.chomik.storage.service.AdvertService
@@ -42,6 +43,12 @@ class AdvertController(private val advertService: AdvertService) {
     fun getAdvertsBySellerId(@PathVariable sellerId: String): ResponseEntity<List<AdvertDto>> {
         val adverts = advertService.getAdvertsBySellerId(sellerId).map { it.toDto() }
         return ResponseEntity.ok(adverts)
+    }
+
+    @PutMapping("/{id}/sneakers")
+    fun updateSneakersCountInAdvert(@PathVariable id: String, @RequestBody updateSneakersCount: UpdateSneakersCountRequest): ResponseEntity<AdvertDto> {
+        val advertDto : AdvertDto = advertService.updateSneakersCount(id, updateSneakersCount)
+        return ResponseEntity.ok(advertDto)
     }
 
     @PostMapping

@@ -8,5 +8,6 @@ data class AdvertDto(
     val price: Double,
     val active: Boolean,
     val sneakerCount: Int,
+    val sellerAddressId: String,
     val description: String? = null
 )

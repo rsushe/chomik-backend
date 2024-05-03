@@ -2,9 +2,9 @@ package com.chomik.storage.client
 
 import com.chomik.storage.client.dto.AdvertDto
 import com.chomik.storage.client.dto.SaveAdvertRequest
+import com.chomik.storage.client.dto.UpdateSneakersCountRequest
 import org.springframework.core.ParameterizedTypeReference
-import org.springframework.http.HttpMethod
-import org.springframework.http.ResponseEntity
+import org.springframework.http.*
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
 
@@ -47,6 +47,16 @@ class AdvertClient(
         val uri = createBuilder(ADVERT_URL_PREFIX)
 
         return restTemplate.postForEntity(uri.toUriString(), request, AdvertDto::class.java)
+    }
+
+    fun updateSneakersCountInAdvert(advertId: String, updateSneakersCountRequest: UpdateSneakersCountRequest): ResponseEntity<AdvertDto> {
+        val uri = createBuilder("${ADVERT_URL_PREFIX}/${advertId}/sneakers")
+
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.APPLICATION_JSON
+        val entity = HttpEntity(updateSneakersCountRequest, headers)
+
+        return restTemplate.exchange(uri.toUriString(), HttpMethod.PUT, entity, AdvertDto::class.java)
     }
 
     fun updateAdvert(id: String, updateRequest: SaveAdvertRequest): ResponseEntity<AdvertDto> {
