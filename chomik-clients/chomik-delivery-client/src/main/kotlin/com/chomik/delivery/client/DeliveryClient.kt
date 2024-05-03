@@ -1,7 +1,9 @@
 package com.chomik.delivery.client
 
+import com.chomik.delivery.client.dto.CreateShipmentRequest
 import com.chomik.delivery.client.dto.CreateUserAddressRequest
 import com.chomik.delivery.client.dto.UserAddressDto
+import com.fakecdek.delivery.mock.model.dto.ShipmentDto
 import com.fakecdek.delivery.mock.model.dto.UpdateShipmentStatusRequest
 
 import org.springframework.core.ParameterizedTypeReference
@@ -44,6 +46,12 @@ class DeliveryClient(
         val uri = createBuilder("api/v1/delivery/address/$addressId/user/$userId")
 
         restTemplate.delete(uri.toUriString())
+    }
+
+    fun createShipment(createShipmentRequest: CreateShipmentRequest): ResponseEntity<ShipmentDto> {
+        val uri = createBuilder("api/v1/delivery/shipment")
+
+        return restTemplate.postForEntity(uri.toUriString(), createShipmentRequest, ShipmentDto::class.java)
     }
 
     fun updateShipmentStatus(updateShipmentStatusRequest: UpdateShipmentStatusRequest): ResponseEntity<Any> {
