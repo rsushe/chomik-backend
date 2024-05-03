@@ -18,12 +18,12 @@ class PaymentService(
     private val paymentRepository: PaymentRepository,
     private val paymentMockClient: PaymentMockClient,
     private val orderClient: OrderClient,
-    @Value("\${balancer.host}") private val balancerHost: String,
+    @Value("\${gateway.host}") private val gatewayHost: String,
 ) {
     @Transactional
     fun createPayment(createPaymentRequest: CreatePaymentRequest): CreatePaymentResponse {
         val request = CreateTransactionRequest(
-            callbackUrl = "$balancerHost/api/v1/payment/callback",
+            callbackUrl = "$gatewayHost/api/v1/payment/callback",
             charge = createPaymentRequest.charge
         )
 

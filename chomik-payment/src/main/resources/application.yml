@@ -16,5 +16,5 @@ chomik:
   order:
     url:
 
-balancer:
+gateway:
   host:
