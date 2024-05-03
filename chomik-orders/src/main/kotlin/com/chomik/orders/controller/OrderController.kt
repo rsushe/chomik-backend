@@ -2,6 +2,7 @@ package com.chomik.orders.controller
 
 import com.chomik.orders.client.dto.CreateOrderRequest
 import com.chomik.orders.client.dto.OrderDto
+import com.chomik.orders.client.dto.UpdateUserAddressToRequest
 import com.chomik.orders.extension.toDto
 import com.chomik.orders.facade.OrderFacade
 import jakarta.validation.Valid
@@ -37,4 +38,10 @@ class OrderController(private val orderFacade: OrderFacade) {
     fun updateOrderPaymentFinish(@PathVariable orderId: String): ResponseEntity<OrderDto> {
         return ResponseEntity.ok(orderFacade.updateOrderPaymentFinish(orderId).toDto())
     }
+
+    @PutMapping("{orderId}/address/to")
+    fun updateOrderUserAddressTo(@PathVariable orderId: String, @Valid @RequestBody updateUserAddressToRequest: UpdateUserAddressToRequest): ResponseEntity<OrderDto> {
+        return ResponseEntity.ok(orderFacade.updateOrderUserAddressTo(orderId, updateUserAddressToRequest).toDto())
+    }
+
 }

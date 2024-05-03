@@ -2,6 +2,7 @@ package com.chomik.orders.facade
 
 import com.chomik.orders.client.dto.CreateOrderRequest
 import com.chomik.orders.client.dto.OrderStatus
+import com.chomik.orders.client.dto.UpdateUserAddressToRequest
 import com.chomik.orders.domain.Order
 import com.chomik.orders.exception.InabilityLockingOrderException
 import com.chomik.orders.service.OrderService
@@ -42,7 +43,7 @@ class OrderFacade(
             throw IllegalArgumentException("Order status is invalid: ${order.status}")
         }
 
-        return orderService.updateOrder(order, OrderStatus.PAYMENT_IN_PROGRESS)
+        return orderService.updateOrderStatus(order, OrderStatus.PAYMENT_IN_PROGRESS)
     }
 
     @Transactional
@@ -53,6 +54,17 @@ class OrderFacade(
             throw IllegalArgumentException("Bank sent payment callback, but order not in PAYMENT_IN_PROGRESS state. Something very strange...")
         }
 
-        return orderService.updateOrder(order, OrderStatus.IN_DELIVERY)
+        return orderService.updateOrderStatus(order, OrderStatus.IN_DELIVERY)
+    }
+
+    @Transactional
+    fun updateOrderUserAddressTo(orderId: String, updateUserAddressToRequest: UpdateUserAddressToRequest) : Order {
+        val order = orderService.findById(orderId)
+
+        if (order.status !in listOf(OrderStatus.WAIT_PAYMENT, OrderStatus.PAYMENT_IN_PROGRESS)) {
+            throw IllegalArgumentException("Couldn't set user address cause order already payed or expired")
+        }
+
+        return orderService.updateOrderUserAddressTo(order, updateUserAddressToRequest.userAddressTo)
     }
 }
