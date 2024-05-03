@@ -30,4 +30,7 @@ data class Order(
     val sneakerCount: Int,
 
     val creationTime: Instant = Instant.now(),
+
+    @Column(name = "user_address_to", nullable = true)
+    val userAddressTo: String? = null,
 )

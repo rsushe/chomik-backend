@@ -11,6 +11,7 @@ fun Order.toDto(): OrderDto = OrderDto(
     advertId = this.advertId,
     status = this.status,
     sneakerCount = this.sneakerCount,
+    userAddressTo = this.userAddressTo
 )
 
 fun CreateOrderRequest.toOrder(orderStatus: OrderStatus = OrderStatus.WAIT_PAYMENT) = Order(
