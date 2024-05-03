@@ -1,4 +1,4 @@
-package com.chomik.payment.domain
+package com.chomik.payment.client.dto
 
 enum class PaymentStatus {
     WAIT_BANK_CALLBACK,

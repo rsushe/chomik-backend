@@ -2,6 +2,7 @@ package com.chomik.payment.client
 
 import com.chomik.payment.client.dto.CreatePaymentRequest
 import com.chomik.payment.client.dto.CreatePaymentResponse
+import com.chomik.payment.client.dto.PaymentDto
 import com.payment.mock.model.ProcessedTransactionResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
@@ -17,10 +18,10 @@ class PaymentClient(
         return restTemplate.postForEntity(uri.toUriString(), createPaymentRequest, CreatePaymentResponse::class.java)
     }
 
-    fun processBankCallback(processedTransactionResponse: ProcessedTransactionResponse): ResponseEntity<Any> {
+    fun processBankCallback(processedTransactionResponse: ProcessedTransactionResponse): ResponseEntity<PaymentDto> {
         val uri = createBuilder("/api/v1/payment/callback")
 
-        return restTemplate.postForEntity(uri.toUriString(), processedTransactionResponse, Any::class.java)
+        return restTemplate.postForEntity(uri.toUriString(), processedTransactionResponse, PaymentDto::class.java)
     }
 
     private fun createBuilder(method: String): UriComponentsBuilder {

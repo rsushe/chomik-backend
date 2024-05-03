@@ -31,6 +31,8 @@ class PaymentController(
 
     @PostMapping("/callback")
     fun processBankCallback(@RequestBody processedTransactionResponse: ProcessedTransactionResponse) {
-        paymentClient.processBankCallback(processedTransactionResponse)
+        val paymentDto = paymentClient.processBankCallback(processedTransactionResponse).body
+        var orderId = paymentDto?.orderId
+
     }
 }
