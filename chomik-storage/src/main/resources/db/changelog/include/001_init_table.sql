@@ -29,3 +29,7 @@ ALTER TABLE advert ADD COLUMN sneaker_count INTEGER NOT NULL DEFAULT 1;
 
 --changeset maksgirya:advert_description_field:3
 ALTER TABLE advert ADD COLUMN description TEXT;
+
+--changeset maksgirya:advert_seller_address_field:4
+ALTER TABLE advert ADD COLUMN seller_address_id VARCHAR NOT NULL;
+

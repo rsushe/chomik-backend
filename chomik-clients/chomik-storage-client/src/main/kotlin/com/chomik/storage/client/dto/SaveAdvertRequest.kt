@@ -35,5 +35,12 @@ data class SaveAdvertRequest(
     @field:Min(value = 1, message = "sneakerCount must be more than 0")
     val sneakerCount: Int,
 
-    val description: String?
+    @JsonProperty
+    @field:NotBlank(message = "Seller address id must not be null")
+    val sellerAddressId: String,
+
+    val description: String?,
+
+
+
 )
