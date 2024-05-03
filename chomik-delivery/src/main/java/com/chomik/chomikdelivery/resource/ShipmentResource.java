@@ -4,6 +4,7 @@ import com.chomik.chomikdelivery.domain.Shipment;
 import com.chomik.chomikdelivery.exception.UserAddressNotFoundException;
 import com.chomik.chomikdelivery.service.ShipmentService;
 import com.chomik.delivery.client.dto.CreateShipmentRequest;
+import com.fakecdek.delivery.mock.model.dto.ShipmentDto;
 import com.fakecdek.delivery.mock.model.dto.UpdateShipmentStatusRequest;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class ShipmentResource {
     @PostMapping
     public ResponseEntity<?> createShipment(@RequestBody @Valid CreateShipmentRequest request) {
         try {
-            Shipment shipment = shipmentService.createShipment(request);
+            ShipmentDto shipment = shipmentService.createShipment(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(shipment);
         } catch (UserAddressNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
