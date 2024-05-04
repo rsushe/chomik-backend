@@ -4,5 +4,5 @@ data class CreatePaymentRequest(
     val orderId: String,
     val addressId: String,
     val charge: Int,
-    var bankToken: String,
+    var bankToken: String? = null,
 )
