@@ -1,6 +1,5 @@
 package com.chomik.payment.service
 
-import com.chomik.orders.client.OrderClient
 import com.chomik.payment.client.dto.CreatePaymentRequest
 import com.chomik.payment.client.dto.CreatePaymentResponse
 import com.chomik.payment.client.dto.PaymentDto
@@ -19,14 +18,14 @@ import org.springframework.transaction.annotation.Transactional
 class PaymentService(
     private val paymentRepository: PaymentRepository,
     private val paymentMockClient: PaymentMockClient,
-    private val orderClient: OrderClient,
     @Value("\${gateway.host}") private val gatewayHost: String,
 ) {
     @Transactional
     fun createPayment(createPaymentRequest: CreatePaymentRequest): CreatePaymentResponse {
         val request = CreateTransactionRequest(
             callbackUrl = "$gatewayHost/api/v1/payment/callback",
-            charge = createPaymentRequest.charge
+            charge = createPaymentRequest.charge,
+            token = createPaymentRequest.bankToken!!
         )
 
         val createTransactionResponse = paymentMockClient.createTransaction(request).body

@@ -18,6 +18,7 @@ data class Transaction(
     val id: String? = null,
     val charge: Int,
     val callbackUrl: String,
+    val token: String,
     @Enumerated(EnumType.STRING)
     val status: TransactionStatus,
 )

@@ -17,3 +17,7 @@ chomik:
     url: http://localhost:17004
   delivery:
     url: http://localhost:17002
+
+bank:
+  user:
+    id: {BANK_USER_ID}

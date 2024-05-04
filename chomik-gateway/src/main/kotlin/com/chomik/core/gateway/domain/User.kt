@@ -2,6 +2,8 @@ package com.chomik.core.gateway.domain
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.Table
@@ -31,5 +33,6 @@ data class User(
     @Column(name = "registration_date")
     val registrationDate: Instant = Instant.now(),
     @Column(name = "user_type")
+    @Enumerated(EnumType.STRING)
     val userType: UserType,
 )
