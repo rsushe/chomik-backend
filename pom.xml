@@ -20,7 +20,6 @@
 
         <module>chomik-clients</module>
         <module>mock-clients</module>
-        <module>mock-clients/payment-mock-model</module>
 
     </modules>
 
