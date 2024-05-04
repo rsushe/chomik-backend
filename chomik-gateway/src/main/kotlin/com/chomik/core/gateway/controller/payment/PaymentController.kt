@@ -31,7 +31,7 @@ class PaymentController(
     private val deliveryClient: DeliveryClient,
     private val orderClient: OrderClient,
     private val paymentClient: PaymentClient,
-    private val advertClient: AdvertClient,
+    private val bankCallbackHandler: BankCallbackHandler,
     private val userService: AuthorizationUserDetailsService,
     private val jwtService: JwtService,
     @Value("\${bank.user.id}")
@@ -51,32 +51,6 @@ class PaymentController(
 
     @PostMapping("/callback")
     fun processBankCallback(@RequestBody processedTransactionResponse: ProcessedTransactionResponse) {
-        //меняем статус оплаты
-        val paymentDto = paymentClient.processBankCallback(processedTransactionResponse).body!!
-
-        if (processedTransactionResponse.status.equals(TransactionStatus.SUCCESS)) {
-            // меняем статус заказа
-            val orderDto: OrderDto = orderClient.updateOrderPaymentFinish(paymentDto.orderId).body!!
-            // уменьшаем количество кросовки в объявлении
-            val advertDto: AdvertDto = advertClient.updateSneakersCountInAdvert(orderDto.advertId, UpdateSneakersCountRequest(orderDto.sneakerCount)).body!!
-
-            val buyerId: String = orderDto.buyerId
-            val sellerId: String = advertDto.sellerId
-
-            val addressFrom : String = advertDto.sellerAddressId
-            val addressTo: String = orderDto.userAddressTo!!
-
-            val buyer: User = userService.findById(buyerId)
-            val seller: User = userService.findById(sellerId)
-
-            // отправляем запрос на доставку
-            deliveryClient.createShipment(CreateShipmentRequest(
-                orderId = orderDto.id,
-                userAddressFrom = addressFrom,
-                userAddressTo = addressTo,
-                seller.phoneNumber!!,
-                buyer.phoneNumber!!))
-        }
-
+        bankCallbackHandler.handle(processedTransactionResponse)
     }
 }
