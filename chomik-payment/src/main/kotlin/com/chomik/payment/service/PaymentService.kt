@@ -25,7 +25,7 @@ class PaymentService(
         val request = CreateTransactionRequest(
             callbackUrl = "$gatewayHost/api/v1/payment/callback",
             charge = createPaymentRequest.charge,
-            token = createPaymentRequest.bankToken
+            token = createPaymentRequest.bankToken!!
         )
 
         val createTransactionResponse = paymentMockClient.createTransaction(request).body
