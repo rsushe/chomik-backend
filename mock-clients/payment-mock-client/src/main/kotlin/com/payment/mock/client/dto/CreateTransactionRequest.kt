@@ -2,5 +2,6 @@ package com.payment.mock.client.dto
 
 data class CreateTransactionRequest(
     val charge: Int,
-    val callbackUrl: String
+    val callbackUrl: String,
+    val token: String
 )
