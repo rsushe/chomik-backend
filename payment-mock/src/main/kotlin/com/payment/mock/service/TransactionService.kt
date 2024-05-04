@@ -1,9 +1,9 @@
 package com.payment.mock.service
 
 import com.payment.mock.client.dto.CreateTransactionRequest
-import com.payment.mock.client.dto.ProcessedTransactionResponse
-import com.payment.mock.client.dto.TransactionStatus
 import com.payment.mock.domain.Transaction
+import com.payment.mock.model.ProcessedTransactionResponse
+import com.payment.mock.model.TransactionStatus
 import com.payment.mock.repository.TransactionRepository
 import jakarta.persistence.EntityManager
 import org.springframework.stereotype.Service
@@ -42,8 +42,8 @@ class TransactionService(
         restTemplate.postForLocation(
             transaction.callbackUrl,
             ProcessedTransactionResponse(
-                transactionId = transactionId,
-                status = transaction.status
+                transactionId,
+                transaction.status
             )
         )
 

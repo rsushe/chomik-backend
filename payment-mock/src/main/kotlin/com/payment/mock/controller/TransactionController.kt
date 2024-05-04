@@ -2,7 +2,7 @@ package com.payment.mock.controller
 
 import com.payment.mock.client.dto.CreateTransactionRequest
 import com.payment.mock.client.dto.CreateTransactionResponse
-import com.payment.mock.client.dto.TransactionStatus
+import com.payment.mock.model.TransactionStatus
 import com.payment.mock.service.TransactionService
 
 import org.springframework.beans.factory.annotation.Value

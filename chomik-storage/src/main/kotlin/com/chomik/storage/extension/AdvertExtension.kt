@@ -11,5 +11,6 @@ fun Advert.toDto(): AdvertDto = AdvertDto(
     price = this.price,
     active = this.active,
     sneakerCount = this.sneakerCount,
+    sellerAddressId = this.sellerAddressId,
     description = this.description
 )

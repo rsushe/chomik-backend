@@ -1,6 +1,6 @@
 package com.payment.mock.domain
 
-import com.payment.mock.client.dto.TransactionStatus
+import com.payment.mock.model.TransactionStatus
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated

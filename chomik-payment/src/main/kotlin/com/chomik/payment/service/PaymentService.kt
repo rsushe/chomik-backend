@@ -3,12 +3,14 @@ package com.chomik.payment.service
 import com.chomik.orders.client.OrderClient
 import com.chomik.payment.client.dto.CreatePaymentRequest
 import com.chomik.payment.client.dto.CreatePaymentResponse
+import com.chomik.payment.client.dto.PaymentDto
 import com.chomik.payment.domain.Payment
-import com.chomik.payment.domain.PaymentStatus
+import com.chomik.payment.client.dto.PaymentStatus
 import com.chomik.payment.repository.PaymentRepository
+import com.chomik.payment.service.extention.toDto
 import com.payment.mock.client.PaymentMockClient
 import com.payment.mock.client.dto.CreateTransactionRequest
-import com.payment.mock.client.dto.ProcessedTransactionResponse
+import com.payment.mock.model.ProcessedTransactionResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -18,12 +20,12 @@ class PaymentService(
     private val paymentRepository: PaymentRepository,
     private val paymentMockClient: PaymentMockClient,
     private val orderClient: OrderClient,
-    @Value("\${balancer.host}") private val balancerHost: String,
+    @Value("\${gateway.host}") private val gatewayHost: String,
 ) {
     @Transactional
     fun createPayment(createPaymentRequest: CreatePaymentRequest): CreatePaymentResponse {
         val request = CreateTransactionRequest(
-            callbackUrl = "$balancerHost/api/v1/payment/callback",
+            callbackUrl = "$gatewayHost/api/v1/payment/callback",
             charge = createPaymentRequest.charge
         )
 
@@ -42,15 +44,11 @@ class PaymentService(
     }
 
     @Transactional
-    fun processBankCallback(processedTransactionResponse: ProcessedTransactionResponse) {
+    fun processBankCallback(processedTransactionResponse: ProcessedTransactionResponse) : PaymentDto {
         val paymentStatus = PaymentStatus.valueOf(processedTransactionResponse.status.name)
 
         val payment =
             paymentRepository.updatePaymentStatus(processedTransactionResponse.transactionId, paymentStatus.name)[0]
-
-        if (paymentStatus == PaymentStatus.SUCCESS) {
-            //TODO decrement sneaker count in storage
-            orderClient.updateOrderPaymentFinish(payment.orderId)
-        }
+        return payment.toDto()
     }
 }

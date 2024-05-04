@@ -13,4 +13,7 @@ class AuthorizationUserDetailsService(private val userRepository: UserRepository
         userRepository.findByName(name)
             ?.let { AuthorizationUserDetails(it) }
             ?: throw IllegalArgumentException("User with id $name doesn't exists")
+
+    fun findById(userId: String) = userRepository.findById(userId)
+        .orElseThrow{IllegalArgumentException("No user found with id $userId")}
 }

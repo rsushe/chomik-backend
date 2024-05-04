@@ -1,5 +1,6 @@
 package com.chomik.payment.domain
 
+import com.chomik.payment.client.dto.PaymentStatus
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated

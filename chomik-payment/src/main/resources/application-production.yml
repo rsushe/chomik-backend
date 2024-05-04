@@ -16,5 +16,5 @@ chomik:
   order:
     url: http://localhost:17003
 
-balancer:
-  host: http://localhost:17004
+gateway:
+  host: http://localhost:17000

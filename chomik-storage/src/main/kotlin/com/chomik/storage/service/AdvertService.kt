@@ -1,10 +1,15 @@
 package com.chomik.storage.service
 
+import com.chomik.storage.client.dto.AdvertDto
 import com.chomik.storage.client.dto.SaveAdvertRequest
+import com.chomik.storage.client.dto.UpdateSneakersCountRequest
 import com.chomik.storage.domain.Advert
+import com.chomik.storage.extension.toDto
 import com.chomik.storage.repository.AdvertRepository
 import com.chomik.storage.service.mapper.AdvertMapper
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.lang.IllegalArgumentException
 
 @Service
 class AdvertService(private val advertRepository: AdvertRepository, private val advertMapper: AdvertMapper)  {
@@ -32,6 +37,13 @@ class AdvertService(private val advertRepository: AdvertRepository, private val 
         if (existingAdvert.isEmpty) return null
         val updatedAdvert = advertMapper.toAdvert(updateRequest)
         return advertRepository.save(updatedAdvert)
+    }
+
+    @Transactional
+    fun updateSneakersCount(advertId: String, updateSneakersCount: UpdateSneakersCountRequest): AdvertDto {
+        val advert: Advert = advertRepository.findById(advertId).orElseThrow{IllegalArgumentException("No advert found with id $advertId")}
+        advert.sneakerCount.minus(updateSneakersCount.sneakersCount)
+        return advertRepository.save(advert).toDto()
     }
 
     fun deleteAdvert(id: String) {

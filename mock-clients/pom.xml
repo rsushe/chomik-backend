@@ -12,6 +12,7 @@
         <module>payment-mock-client</module>
         <module>delivery-mock-client</module>
         <module>delivery-mock-model</module>
+        <module>payment-mock-model</module>
     </modules>
 
     <packaging>pom</packaging>

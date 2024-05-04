@@ -6,10 +6,12 @@ import com.chomik.chomikdelivery.event.ApplyForDeliveryEvent;
 import com.chomik.chomikdelivery.exception.ShipmentNotFoundException;
 import com.chomik.chomikdelivery.exception.UserAddressNotFoundException;
 import com.chomik.chomikdelivery.repository.ShipmentRepository;
+import com.chomik.chomikdelivery.service.mapper.ShipmentMapper;
 import com.chomik.delivery.client.dto.CreateShipmentRequest;
 import com.chomik.delivery.client.dto.ShipmentStatus;
 import com.chomik.delivery.client.dto.UserAddressDto;
 import com.fakecdek.delivery.mock.model.dto.DeliveryStatus;
+import com.fakecdek.delivery.mock.model.dto.ShipmentDto;
 import com.fakecdek.delivery.mock.model.dto.UpdateShipmentStatusRequest;
 import com.winter.event.service.publisher.EventPublisher;
 import com.fakecdek.deliverymockclient.dto.TrackLinkDto;
@@ -30,9 +32,12 @@ public class ShipmentService {
     @Autowired
     private EventPublisher publisher;
 
+    @Autowired
+    private ShipmentMapper shipmentMapper;
+
 
     @Transactional
-    public Shipment createShipment(CreateShipmentRequest request) throws UserAddressNotFoundException {
+    public ShipmentDto createShipment(CreateShipmentRequest request) throws UserAddressNotFoundException {
         UserAddressDto userAddressFrom = validateAndGetAddress(request.getUserAddressFrom());
         UserAddressDto userAddressTo = validateAndGetAddress(request.getUserAddressTo());
 
@@ -44,7 +49,7 @@ public class ShipmentService {
                 userAddressFrom.getAddress(), userAddressTo.getAddress(),
                 request.getUserFromPhone(), request.getUserToPhone())
         );
-        return newShipment;
+        return shipmentMapper.toDto(newShipment);
     }
 
 
