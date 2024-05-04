@@ -1,7 +1,9 @@
 package com.chomik.core.gateway.controller.payment
 
+import com.chomik.core.gateway.domain.AuthorizationUserDetails
 import com.chomik.core.gateway.domain.User
 import com.chomik.core.gateway.service.AuthorizationUserDetailsService
+import com.chomik.core.gateway.service.JwtService
 import com.chomik.delivery.client.DeliveryClient
 import com.chomik.delivery.client.dto.CreateShipmentRequest
 import com.chomik.orders.client.OrderClient
@@ -14,6 +16,7 @@ import com.chomik.storage.client.dto.AdvertDto
 import com.chomik.storage.client.dto.UpdateSneakersCountRequest
 import com.payment.mock.model.ProcessedTransactionResponse
 import com.payment.mock.model.TransactionStatus
+import org.springframework.beans.factory.annotation.Value
 
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
@@ -29,10 +32,17 @@ class PaymentController(
     private val orderClient: OrderClient,
     private val paymentClient: PaymentClient,
     private val advertClient: AdvertClient,
-    private val userService: AuthorizationUserDetailsService
+    private val userService: AuthorizationUserDetailsService,
+    private val jwtService: JwtService,
+    @Value("\${bank.user.id}")
+    private val bankUserId: String
 ) {
     @PostMapping
     fun createPayment(@RequestBody createPaymentRequest: CreatePaymentRequest, authentication: Authentication): ResponseEntity<CreatePaymentResponse> {
+        createPaymentRequest.bankToken = jwtService.generateToken(
+            AuthorizationUserDetails(userService.findById(bankUserId))
+        )
+
         deliveryClient.getUserAddress(createPaymentRequest.addressId, authentication.name)
         orderClient.updateOrderUserAddressTo(createPaymentRequest.orderId, createPaymentRequest.addressId)
         orderClient.updateOrderPaymentCreate(createPaymentRequest.orderId)

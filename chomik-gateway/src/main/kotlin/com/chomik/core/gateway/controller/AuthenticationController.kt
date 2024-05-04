@@ -2,6 +2,7 @@ package com.chomik.core.gateway.controller
 
 import com.chomik.core.gateway.domain.AuthorizationUserDetails
 import com.chomik.core.gateway.controller.dto.UserRegisterRequest
+import com.chomik.core.gateway.domain.User
 import com.chomik.core.gateway.service.JwtService
 import com.chomik.core.gateway.service.RegistrationService
 
@@ -19,8 +20,12 @@ class AuthenticationController(
 ) {
 
     @PostMapping("/register")
-    fun registerUser(@RequestBody userRegisterRequest: UserRegisterRequest) =
-        registrationService.registerUser(userRegisterRequest)
+    fun registerUser(@RequestBody userRegisterRequest: UserRegisterRequest): User {
+        if (!userRegisterRequest.userType.canRegistrate) {
+            throw IllegalArgumentException("User type ${userRegisterRequest.userType} can't be registered")
+        }
+        return registrationService.registerUser(userRegisterRequest)
+    }
 
     @PostMapping("/login")
     fun login(authentication: Authentication): String {
