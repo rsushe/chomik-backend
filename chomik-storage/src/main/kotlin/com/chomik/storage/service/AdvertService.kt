@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.lang.IllegalArgumentException
 
 @Service
-class AdvertService(private val advertRepository: AdvertRepository, private val advertMapper: AdvertMapper)  {
+class AdvertService(private val advertRepository: AdvertRepository, private val advertMapper: AdvertMapper) {
 
     fun getAllAdverts(): List<Advert> {
         return advertRepository.findAll()
@@ -27,7 +27,7 @@ class AdvertService(private val advertRepository: AdvertRepository, private val 
     }
 
     fun createAdvert(request: SaveAdvertRequest): Advert {
-        val advert = advertMapper.toAdvert(request);
+        val advert = advertMapper.toAdvert(request)
 
         return advertRepository.save(advert)
     }
@@ -41,9 +41,11 @@ class AdvertService(private val advertRepository: AdvertRepository, private val 
 
     @Transactional
     fun updateSneakersCount(advertId: String, updateSneakersCount: UpdateSneakersCountRequest): AdvertDto {
-        val advert: Advert = advertRepository.findById(advertId).orElseThrow{IllegalArgumentException("No advert found with id $advertId")}
-        advert.sneakerCount.minus(updateSneakersCount.sneakersCount)
-        return advertRepository.save(advert).toDto()
+        val advert: Advert = advertRepository.findById(advertId)
+            .orElseThrow { IllegalArgumentException("No advert found with id $advertId") }
+
+        val updatedAdvert = advert.copy(sneakerCount = advert.sneakerCount.minus(updateSneakersCount.sneakersCount))
+        return advertRepository.save(updatedAdvert).toDto()
     }
 
     fun deleteAdvert(id: String) {
