@@ -4,6 +4,9 @@ public class ProcessedTransactionResponse {
     private String transactionId;
     private TransactionStatus status;
 
+    public ProcessedTransactionResponse() {
+    }
+
     public ProcessedTransactionResponse(String transactionId, TransactionStatus status) {
         this.transactionId = transactionId;
         this.status = status;

@@ -46,7 +46,7 @@ class TransactionService(
 
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
-        headers.set(HttpHeaders.AUTHORIZATION, transaction.token)
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer ${transaction.token}")
 
         val entity = HttpEntity(ProcessedTransactionResponse(transactionId, transaction.status), headers)
 
