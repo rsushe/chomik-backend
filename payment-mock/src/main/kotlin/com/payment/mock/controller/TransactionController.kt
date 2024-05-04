@@ -2,12 +2,12 @@ package com.payment.mock.controller
 
 import com.payment.mock.client.dto.CreateTransactionRequest
 import com.payment.mock.client.dto.CreateTransactionResponse
+import com.payment.mock.model.ProcessTransactionRequest
 import com.payment.mock.model.TransactionStatus
 import com.payment.mock.service.TransactionService
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -32,7 +32,10 @@ class TransactionController(
         )
     }
 
-    @GetMapping("/{transactionId}")
-    fun processTransaction(@PathVariable transactionId: String): ResponseEntity<TransactionStatus> =
-        ResponseEntity.ok(transactionService.process(transactionId))
+    @PostMapping("/{transactionId}")
+    fun processTransaction(
+        @PathVariable transactionId: String,
+        @RequestBody processTransactionRequest: ProcessTransactionRequest
+    ): ResponseEntity<TransactionStatus> =
+        ResponseEntity.ok(transactionService.process(transactionId, processTransactionRequest))
 }

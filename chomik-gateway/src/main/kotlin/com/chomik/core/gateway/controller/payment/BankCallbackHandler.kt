@@ -10,7 +10,7 @@ import com.chomik.payment.client.PaymentClient
 import com.chomik.storage.client.AdvertClient
 import com.chomik.storage.client.dto.AdvertDto
 import com.chomik.storage.client.dto.UpdateSneakersCountRequest
-import com.payment.mock.model.ProcessedTransactionResponse
+import com.payment.mock.model.ProcessTransactionResponse
 import com.payment.mock.model.TransactionStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RequestBody
@@ -25,11 +25,11 @@ class BankCallbackHandler(
     private val userService: AuthorizationUserDetailsService
 ) {
 
-    fun handle(@RequestBody processedTransactionResponse: ProcessedTransactionResponse) {
+    fun handle(@RequestBody processTransactionResponse: ProcessTransactionResponse) {
         //меняем статус оплаты
-        val paymentDto = paymentClient.processBankCallback(processedTransactionResponse).body!!
+        val paymentDto = paymentClient.processBankCallback(processTransactionResponse).body!!
 
-        if (processedTransactionResponse.status.equals(TransactionStatus.SUCCESS)) {
+        if (processTransactionResponse.status.equals(TransactionStatus.SUCCESS)) {
             // меняем статус заказа
             val orderDto: OrderDto = orderClient.updateOrderPaymentFinish(paymentDto.orderId).body!!
             // уменьшаем количество кросовки в объявлении

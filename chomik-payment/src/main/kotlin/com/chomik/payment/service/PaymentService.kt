@@ -9,7 +9,7 @@ import com.chomik.payment.repository.PaymentRepository
 import com.chomik.payment.service.extention.toDto
 import com.payment.mock.client.PaymentMockClient
 import com.payment.mock.client.dto.CreateTransactionRequest
-import com.payment.mock.model.ProcessedTransactionResponse
+import com.payment.mock.model.ProcessTransactionResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -19,12 +19,14 @@ class PaymentService(
     private val paymentRepository: PaymentRepository,
     private val paymentMockClient: PaymentMockClient,
     @Value("\${gateway.host}") private val gatewayHost: String,
+    @Value("chomik.bank.account.id") private val bankAccountId: String,
 ) {
     @Transactional
     fun createPayment(createPaymentRequest: CreatePaymentRequest): CreatePaymentResponse {
         val request = CreateTransactionRequest(
             callbackUrl = "$gatewayHost/api/v1/payment/callback",
             charge = createPaymentRequest.charge,
+            accountTo = bankAccountId,
             token = createPaymentRequest.bankToken!!
         )
 
@@ -43,11 +45,11 @@ class PaymentService(
     }
 
     @Transactional
-    fun processBankCallback(processedTransactionResponse: ProcessedTransactionResponse) : PaymentDto {
-        val paymentStatus = PaymentStatus.valueOf(processedTransactionResponse.status.name)
+    fun processBankCallback(processTransactionResponse: ProcessTransactionResponse) : PaymentDto {
+        val paymentStatus = PaymentStatus.valueOf(processTransactionResponse.status.name)
 
         val payment =
-            paymentRepository.updatePaymentStatus(processedTransactionResponse.transactionId, paymentStatus.name)[0]
+            paymentRepository.updatePaymentStatus(processTransactionResponse.transactionId, paymentStatus.name)[0]
         return payment.toDto()
     }
 }

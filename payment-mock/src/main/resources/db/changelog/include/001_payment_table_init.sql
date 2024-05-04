@@ -13,3 +13,5 @@ ALTER TABLE transaction ADD COLUMN callback_url VARCHAR NOT NULL;
 
 --changeset rsushe:add_column_token_to_transaction_table:3
 ALTER TABLE transaction ADD COLUMN token VARCHAR NOT NULL;
+
+ALTER TABLE transaction ADD COLUMN account_to VARCHAR NOT NULL REFERENCES account(id);
