@@ -32,7 +32,7 @@ data class Advert(
     @Column(name = "sneaker_count", nullable = false)
     val sneakerCount: Int,
 
-    @Column(name = "user_address_from", nullable = false)
+    @Column(name = "seller_address_id", nullable = false)
     val sellerAddressId: String,
 
     @Column(name = "description", nullable = true)
