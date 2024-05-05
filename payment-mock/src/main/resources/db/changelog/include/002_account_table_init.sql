@@ -10,3 +10,6 @@ CREATE TABLE account
     expire_at   DATE    NOT NULL,
     balance     BIGINT  NOT NULL
 );
+
+--changeset rsushe:add_column_account_to_transaction:2
+ALTER TABLE transaction ADD COLUMN account_to VARCHAR NOT NULL REFERENCES account(id);
