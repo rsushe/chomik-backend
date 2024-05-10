@@ -5,7 +5,7 @@ import com.payment.mock.domain.Transaction
 import com.payment.mock.model.ProcessTransactionRequest
 import com.payment.mock.model.ProcessTransactionResponse
 import com.payment.mock.model.TransactionStatus
-import com.payment.mock.model.UpdateBalanceRequest
+import com.payment.mock.model.TransferMoneyRequest
 import com.payment.mock.repository.TransactionRepository
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -39,19 +39,12 @@ class TransactionService(
             IllegalArgumentException("There is no transaction with id $transactionId")
         }
 
-        val account = accountService.findAccountByCardNumberAndCvv(
+        val accountFrom = accountService.findAccountByCardNumberAndCvv(
             processTransactionRequest.cardNumber,
             processTransactionRequest.cvv
         ) ?: throw IllegalArgumentException("Account with input data doesn't exists")
 
-        if (account.balance < transaction.charge) {
-            //TODO maybe change status to NEDOSTATOCHO_DENEG
-            val updatedTransaction = transaction.copy(status = TransactionStatus.FAIL)
-            return transactionRepository.save(updatedTransaction).status
-        }
-
-        accountService.updateBalance(UpdateBalanceRequest(account.id, -transaction.charge))
-        accountService.updateBalance(UpdateBalanceRequest(transaction.accountTo, transaction.charge))
+        accountService.transferMoney(TransferMoneyRequest(accountFrom.id, transaction.accountTo, transaction.charge))
 
         val updatedTransaction = transaction.copy(status = TransactionStatus.SUCCESS)
 

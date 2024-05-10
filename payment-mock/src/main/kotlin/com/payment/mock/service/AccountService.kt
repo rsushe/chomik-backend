@@ -2,7 +2,7 @@ package com.payment.mock.service
 
 import com.payment.mock.domain.Account
 import com.payment.mock.model.CreateAccountRequest
-import com.payment.mock.model.UpdateBalanceRequest
+import com.payment.mock.model.TransferMoneyRequest
 import com.payment.mock.repository.AccountRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -28,13 +28,23 @@ class AccountService(private val accountRepository: AccountRepository) {
     )
 
     @Transactional
-    fun updateBalance(updateBalanceRequest: UpdateBalanceRequest): Account {
-        val account = accountRepository.findById(updateBalanceRequest.accountId).orElseThrow {
-            IllegalArgumentException("Account with id ${updateBalanceRequest.accountId} doesn't exists")
+    fun transferMoney(transferMoneyRequest: TransferMoneyRequest) {
+        val accountFrom = accountRepository.findById(transferMoneyRequest.accountFromId).orElseThrow {
+            IllegalArgumentException("Account with id ${transferMoneyRequest.accountFromId} doesn't exists")
+        }
+        val accountTo = accountRepository.findById(transferMoneyRequest.accountToId).orElseThrow {
+            IllegalArgumentException("Account with id ${transferMoneyRequest.accountToId} doesn't exists")
         }
 
-        val updatedAccount = account.copy(balance = account.balance + updateBalanceRequest.amountToAdd)
-        return accountRepository.save(updatedAccount)
+        if (accountFrom.balance < transferMoneyRequest.amount) {
+            throw IllegalStateException("Account ${transferMoneyRequest.accountFromId} hasn't enough money to transfer")
+        }
+
+        val updatedAccountFrom = accountFrom.copy(balance = accountFrom.balance - transferMoneyRequest.amount)
+        val updatedAccountTo = accountTo.copy(balance = accountTo.balance + transferMoneyRequest.amount)
+
+        accountRepository.save(updatedAccountFrom)
+        accountRepository.save(updatedAccountTo)
     }
 
     private fun generateCardNumber(): String {
