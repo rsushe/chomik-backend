@@ -69,6 +69,7 @@ public class ShipmentService {
                 .orElseThrow(() -> new ShipmentNotFoundException("Couldn't find shipment entity with id: " + request.shipmentId()));
 
         shipment.setStatus(request.status());
+        if (request.status() == DeliveryStatus.REJECTED_BY_RECIPIENT) shipment.setInReturn(true);
         shipmentRepository.save(shipment);
 
         // todo send notification to user
