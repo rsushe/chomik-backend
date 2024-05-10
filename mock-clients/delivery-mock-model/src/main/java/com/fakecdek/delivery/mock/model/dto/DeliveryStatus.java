@@ -10,7 +10,7 @@ public enum DeliveryStatus {
     IN_COURIER_DELIVERY("Принята курьером для доставки получателю"),
     RECEIVED_BY_RECIPIENT("Принята получателем"),
     REJECTED_BY_RECIPIENT("Отказ от получения"),
-    RECEIVED_BY_SENDER("Принята отправителем");
+    RETURNED_TO_SENDER("Принята отправителем");
 
     private final String description;
 
