@@ -33,3 +33,6 @@ ALTER TABLE advert ADD COLUMN description TEXT;
 --changeset maksgirya:advert_seller_address_field:4
 ALTER TABLE advert ADD COLUMN seller_address_id VARCHAR NOT NULL;
 
+--changeset maksgirya:advert_sneaker_count_min_limit:5
+ALTER TABLE advert ALTER COLUMN sneaker_count SET MINVALUE 1;
+
