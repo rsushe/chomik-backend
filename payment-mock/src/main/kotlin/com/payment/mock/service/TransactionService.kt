@@ -2,10 +2,11 @@ package com.payment.mock.service
 
 import com.payment.mock.client.dto.CreateTransactionRequest
 import com.payment.mock.domain.Transaction
-import com.payment.mock.model.ProcessedTransactionResponse
+import com.payment.mock.model.ProcessTransactionRequest
+import com.payment.mock.model.ProcessTransactionResponse
 import com.payment.mock.model.TransactionStatus
+import com.payment.mock.model.TransferMoneyRequest
 import com.payment.mock.repository.TransactionRepository
-import jakarta.persistence.EntityManager
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
@@ -14,11 +15,9 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.client.RestTemplate
 
-private const val SLEEP_TIME = 5000L
-
 @Service
 class TransactionService(
-    private val entityManager: EntityManager,
+    private val accountService: AccountService,
     private val transactionRepository: TransactionRepository,
 ) {
     private val restTemplate: RestTemplate = RestTemplate()
@@ -27,6 +26,7 @@ class TransactionService(
         transactionRepository.save(
             Transaction(
                 charge = createTransactionRequest.charge,
+                accountTo = createTransactionRequest.accountTo,
                 callbackUrl = createTransactionRequest.callbackUrl,
                 token = createTransactionRequest.token,
                 status = TransactionStatus.CREATED
@@ -34,24 +34,33 @@ class TransactionService(
         )
 
     @Transactional
-    fun process(transactionId: String): TransactionStatus {
+    fun process(transactionId: String, processTransactionRequest: ProcessTransactionRequest): TransactionStatus {
         val transaction = transactionRepository.findById(transactionId).orElseThrow {
             IllegalArgumentException("There is no transaction with id $transactionId")
         }
 
-        while (transaction.status == TransactionStatus.CREATED) {
-            Thread.sleep(SLEEP_TIME)
-            entityManager.refresh(transaction)
-        }
+        val accountFrom = accountService.findAccountByCardNumberAndCvv(
+            processTransactionRequest.cardNumber,
+            processTransactionRequest.cvv
+        ) ?: throw IllegalArgumentException("Account with input data doesn't exists")
+
+        accountService.transferMoney(TransferMoneyRequest(accountFrom.id, transaction.accountTo, transaction.charge))
+
+        val updatedTransaction = transaction.copy(status = TransactionStatus.SUCCESS)
 
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         headers.set(HttpHeaders.AUTHORIZATION, "Bearer ${transaction.token}")
 
-        val entity = HttpEntity(ProcessedTransactionResponse(transactionId, transaction.status), headers)
+        val entity = HttpEntity(
+            ProcessTransactionResponse(
+                transactionId,
+                transaction.status
+            ), headers
+        )
 
         restTemplate.exchange(transaction.callbackUrl, HttpMethod.POST, entity, Any::class.java)
 
-        return transaction.status
+        return transactionRepository.save(updatedTransaction).status
     }
 }

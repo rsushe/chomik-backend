@@ -1,13 +1,13 @@
 package com.payment.mock.model;
 
-public class ProcessedTransactionResponse {
+public class ProcessTransactionResponse {
     private String transactionId;
     private TransactionStatus status;
 
-    public ProcessedTransactionResponse() {
+    public ProcessTransactionResponse() {
     }
 
-    public ProcessedTransactionResponse(String transactionId, TransactionStatus status) {
+    public ProcessTransactionResponse(String transactionId, TransactionStatus status) {
         this.transactionId = transactionId;
         this.status = status;
     }

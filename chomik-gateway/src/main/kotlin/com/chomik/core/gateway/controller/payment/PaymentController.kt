@@ -1,21 +1,14 @@
 package com.chomik.core.gateway.controller.payment
 
 import com.chomik.core.gateway.domain.AuthorizationUserDetails
-import com.chomik.core.gateway.domain.User
 import com.chomik.core.gateway.service.AuthorizationUserDetailsService
 import com.chomik.core.gateway.service.JwtService
 import com.chomik.delivery.client.DeliveryClient
-import com.chomik.delivery.client.dto.CreateShipmentRequest
 import com.chomik.orders.client.OrderClient
-import com.chomik.orders.client.dto.OrderDto
 import com.chomik.payment.client.PaymentClient
 import com.chomik.payment.client.dto.CreatePaymentRequest
 import com.chomik.payment.client.dto.CreatePaymentResponse
-import com.chomik.storage.client.AdvertClient
-import com.chomik.storage.client.dto.AdvertDto
-import com.chomik.storage.client.dto.UpdateSneakersCountRequest
-import com.payment.mock.model.ProcessedTransactionResponse
-import com.payment.mock.model.TransactionStatus
+import com.payment.mock.model.ProcessTransactionResponse
 import org.springframework.beans.factory.annotation.Value
 
 import org.springframework.http.ResponseEntity
@@ -50,7 +43,7 @@ class PaymentController(
     }
 
     @PostMapping("/callback")
-    fun processBankCallback(@RequestBody processedTransactionResponse: ProcessedTransactionResponse) {
-        bankCallbackHandler.handle(processedTransactionResponse)
+    fun processBankCallback(@RequestBody processTransactionResponse: ProcessTransactionResponse) {
+        bankCallbackHandler.handle(processTransactionResponse)
     }
 }

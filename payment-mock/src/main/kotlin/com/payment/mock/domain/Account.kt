@@ -1,27 +1,24 @@
 package com.payment.mock.domain
 
-import com.payment.mock.model.TransactionStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.GenericGenerator
+import java.util.Date
 
 @Entity
-@Table(name = "transaction")
-data class Transaction(
+@Table(name = "account")
+data class Account(
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     val id: String? = null,
-    val charge: Long,
-    @Column(name = "account_to")
-    val accountTo: String,
-    val callbackUrl: String,
-    val token: String,
-    @Enumerated(EnumType.STRING)
-    val status: TransactionStatus,
+    val name: String,
+    @Column(name = "card_number")
+    val cardNumber: String,
+    val cvv: Int,
+    val expireAt: Date,
+    val balance: Long,
 )
