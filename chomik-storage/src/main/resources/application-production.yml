@@ -1,9 +1,30 @@
-spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net:6432/chomik-storage
+#    username: chomik
+#    password: ${DB_PASSWORD}
+
+
+datasource:
+  storage:
     url: jdbc:postgresql://rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net:6432/chomik-storage
+    database: chomik-storage
     username: chomik
     password: ${DB_PASSWORD}
+    server: rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net
+    port: 6432
+    liquibase:
+      change-log: classpath:changelog/storage/changelog.xml
+  sales:
+    url: jdbc:postgresql://rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net:6432/chomik-sales
+    database: chomik-sales
+    username: chomik
+    password: ${DB_PASSWORD}
+    server: rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net
+    port: 6432
+    liquibase:
+      change-log: classpath:changelog/sales/changelog.xml
 
 server:
   port: 17005

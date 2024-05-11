@@ -1,4 +1,4 @@
-package com.chomik.storage.repository
+package com.chomik.storage.repository.storage
 
 import com.chomik.storage.domain.Advert
 import org.springframework.data.jpa.repository.JpaRepository

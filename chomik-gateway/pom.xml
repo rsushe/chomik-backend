@@ -71,6 +71,8 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Clients -->
+
         <dependency>
             <groupId>com.chomik.storage.client</groupId>
             <artifactId>chomik-storage-client</artifactId>
