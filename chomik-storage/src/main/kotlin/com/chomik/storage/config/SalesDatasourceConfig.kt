@@ -1,7 +1,7 @@
 package com.chomik.storage.config
 
 import com.atomikos.jdbc.AtomikosDataSourceBean
-import com.chomik.storage.repository.SalesRepository
+import com.chomik.storage.repository.sales.SalesRepository
 import jakarta.persistence.EntityManagerFactory
 import liquibase.integration.spring.SpringLiquibase
 import org.springframework.beans.factory.annotation.Value

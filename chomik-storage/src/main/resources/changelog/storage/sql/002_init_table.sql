@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS advert (
                                       sneaker_id VARCHAR NOT NULL,
                                       seller_id VARCHAR NOT NULL,
                                       status VARCHAR NOT NULL,
-                                      price DOUBLE PRECISION NOT NULL,
+                                      price DOUBLE PRECISION NOT NULL CHECK (price >= 1),
                                       active BOOLEAN NOT NULL
 );
 
@@ -32,6 +32,3 @@ ALTER TABLE advert ADD COLUMN description TEXT;
 
 --changeset maksgirya:advert_seller_address_field:4
 ALTER TABLE advert ADD COLUMN seller_address_id VARCHAR NOT NULL;
-
---changeset maksgirya:advert_sneaker_count_min_limit:5
-ALTER TABLE advert ALTER COLUMN sneaker_count SET MINVALUE 1;

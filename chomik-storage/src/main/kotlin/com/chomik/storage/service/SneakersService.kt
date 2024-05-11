@@ -2,7 +2,7 @@ package com.chomik.storage.service
 
 import com.chomik.storage.client.dto.SaveSneakersRequest
 import com.chomik.storage.domain.Sneakers
-import com.chomik.storage.repository.SneakersRepository
+import com.chomik.storage.repository.storage.SneakersRepository
 import com.chomik.storage.service.mapper.SneakersMapper
 import org.springframework.stereotype.Service
 

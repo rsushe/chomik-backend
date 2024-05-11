@@ -5,7 +5,7 @@ import com.chomik.storage.client.dto.SaveAdvertRequest
 import com.chomik.storage.client.dto.UpdateSneakersCountRequest
 import com.chomik.storage.domain.Advert
 import com.chomik.storage.extension.toDto
-import com.chomik.storage.repository.AdvertRepository
+import com.chomik.storage.repository.storage.AdvertRepository
 import com.chomik.storage.service.mapper.AdvertMapper
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
