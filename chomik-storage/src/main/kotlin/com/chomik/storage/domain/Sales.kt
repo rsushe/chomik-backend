@@ -1,10 +1,8 @@
 package com.chomik.storage.domain
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
+import org.hibernate.annotations.GenericGenerator
 
 
 @Entity
@@ -12,7 +10,9 @@ import jakarta.validation.constraints.NotNull
 data class Sales(
     @Id
     @Column(name = "id")
-    val id: String,
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    val id: String? = null,
 
     @Column(name = "advert_id")
     @get:NotNull
