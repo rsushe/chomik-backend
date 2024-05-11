@@ -16,12 +16,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import java.util.*
 import javax.sql.DataSource
 
-
 @Configuration
 @EnableJpaRepositories(basePackageClasses = [AdvertRepository::class, SneakersRepository::class], entityManagerFactoryRef = "storageEntityManager", transactionManagerRef = "transactionManager")
 class StorageDatasourceConfig {
-
-
     @Bean
     @ConfigurationProperties(prefix = "datasource.storage.liquibase")
     fun storageLiquibaseProperties(): LiquibaseProperties {
@@ -93,6 +90,4 @@ class StorageDatasourceConfig {
         liquibase.setRollbackFile(properties.rollbackFile)
         return liquibase
     }
-
-
 }

@@ -26,12 +26,14 @@ class AdvertService(private val advertRepository: AdvertRepository, private val 
         return advertRepository.findBySellerId(sellerId)
     }
 
+    @Transactional
     fun createAdvert(request: SaveAdvertRequest): Advert {
         val advert = advertMapper.toAdvert(request)
 
         return advertRepository.save(advert)
     }
 
+    @Transactional
     fun updateAdvert(id: String, updateRequest: SaveAdvertRequest): Advert? {
         val existingAdvert = advertRepository.findById(id)
         if (existingAdvert.isEmpty) return null
@@ -48,6 +50,7 @@ class AdvertService(private val advertRepository: AdvertRepository, private val 
         return advertRepository.save(updatedAdvert).toDto()
     }
 
+    @Transactional
     fun deleteAdvert(id: String) {
         advertRepository.deleteById(id)
     }

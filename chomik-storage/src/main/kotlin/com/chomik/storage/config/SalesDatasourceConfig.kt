@@ -18,8 +18,6 @@ import javax.sql.DataSource
 @Configuration
 @EnableJpaRepositories(basePackageClasses = [SalesRepository::class], entityManagerFactoryRef = "salesEntityManager", transactionManagerRef = "transactionManager")
 class SalesDatasourceConfig {
-
-
     @Bean
     @ConfigurationProperties(prefix = "datasource.sales.liquibase")
     fun salesLiquibaseProperties(): LiquibaseProperties {
