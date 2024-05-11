@@ -71,20 +71,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Atomikos -->
-
-        <dependency>
-            <groupId>com.atomikos</groupId>
-            <artifactId>transactions-jdbc</artifactId>
-            <version>6.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atomikos</groupId>
-            <artifactId>transactions-jms</artifactId>
-            <version>6.0.0</version>
-        </dependency>
-
         <!-- Clients -->
 
         <dependency>
