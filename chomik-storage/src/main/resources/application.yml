@@ -1,8 +1,24 @@
-
+datasource:
+  storage:
+    url:
+    database:
+    username:
+    password:
+    server:
+    port:
+    liquibase:
+      change-log:
+  sales:
+    url:
+    database:
+    username:
+    password:
+    server:
+    port:
+    liquibase:
+      change-log:
 
 spring:
-  liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.yaml
   jpa:
     hibernate:
       ddl-auto: none
