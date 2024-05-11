@@ -9,9 +9,9 @@
 datasource:
   storage:
     url: jdbc:postgresql://rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net:6432/chomik-storage
+    database: chomik-storage
     username: chomik
     password: ${DB_PASSWORD}
-    database: chomik-storage
     server: rc1d-u65z2n58k5x48jw0.mdb.yandexcloud.net
     port: 6432
     liquibase:
