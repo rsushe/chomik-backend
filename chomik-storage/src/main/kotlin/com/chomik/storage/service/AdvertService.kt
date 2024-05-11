@@ -13,7 +13,7 @@ import java.lang.IllegalArgumentException
 
 @Service
 class AdvertService(private val advertRepository: AdvertRepository, private val advertMapper: AdvertMapper) {
-
+    @Transactional
     fun save(advert: Advert) : Advert {
         return advertRepository.save(advert)
     }
