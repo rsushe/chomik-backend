@@ -11,9 +11,7 @@ import java.time.temporal.ChronoUnit
 import java.util.stream.Collectors
 
 @Service
-class JwtService(
-    private val jwtEncoder: JwtEncoder,
-) {
+class JwtService(private val jwtEncoder: JwtEncoder) {
 
     fun generateToken(authorizationUserDetails: AuthorizationUserDetails): String {
         val now = Instant.now()

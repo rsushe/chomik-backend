@@ -6,12 +6,14 @@ import com.chomik.payment.client.PaymentClient
 import com.chomik.storage.client.AdvertClient
 import com.chomik.storage.client.SneakersClient
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.EnableScheduling
 
 @Configuration
 @EnableScheduling
+@EnableConfigurationProperties(UserAuthorities::class)
 class ApplicationConfiguration {
     @Bean
     fun advertClient(@Value("\${chomik.storage.url}") storageUrl: String) = AdvertClient(storageUrl)

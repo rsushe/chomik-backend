@@ -15,7 +15,6 @@ import com.payment.mock.model.TransactionStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RequestBody
 
-
 @Service
 class BankCallbackHandler(
     private val deliveryClient: DeliveryClient,
@@ -41,8 +40,8 @@ class BankCallbackHandler(
             val addressFrom : String = advertDto.sellerAddressId
             val addressTo: String = orderDto.userAddressTo!!
 
-            val buyer: User = userService.findById(buyerId)
-            val seller: User = userService.findById(sellerId)
+            val buyer: User = userService.findById(buyerId).user
+            val seller: User = userService.findById(sellerId).user
 
             // отправляем запрос на доставку
             deliveryClient.createShipment(CreateShipmentRequest(
@@ -50,8 +49,8 @@ class BankCallbackHandler(
                 userAddressFrom = addressFrom,
                 userAddressTo = addressTo,
                 seller.phoneNumber!!,
-                buyer.phoneNumber!!))
+                buyer.phoneNumber!!)
+            )
         }
-
     }
 }
