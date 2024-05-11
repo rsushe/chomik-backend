@@ -1,6 +1,6 @@
 package com.chomik.core.gateway.controller.payment
 
-import com.chomik.core.gateway.domain.AuthorizationUserDetails
+import com.chomik.core.gateway.domain.UserAuthority.Companion.PROCESS_BANK_CALLBACK_AUTHORITY_NAME
 import com.chomik.core.gateway.service.AuthorizationUserDetailsService
 import com.chomik.core.gateway.service.JwtService
 import com.chomik.delivery.client.DeliveryClient
@@ -12,6 +12,7 @@ import com.payment.mock.model.ProcessTransactionResponse
 import org.springframework.beans.factory.annotation.Value
 
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -25,16 +26,14 @@ class PaymentController(
     private val orderClient: OrderClient,
     private val paymentClient: PaymentClient,
     private val bankCallbackHandler: BankCallbackHandler,
-    private val userService: AuthorizationUserDetailsService,
+    private val userDetailsService: AuthorizationUserDetailsService,
     private val jwtService: JwtService,
     @Value("\${bank.user.id}")
     private val bankUserId: String
 ) {
     @PostMapping
     fun createPayment(@RequestBody createPaymentRequest: CreatePaymentRequest, authentication: Authentication): ResponseEntity<CreatePaymentResponse> {
-        createPaymentRequest.bankToken = jwtService.generateToken(
-            AuthorizationUserDetails(userService.findById(bankUserId))
-        )
+        createPaymentRequest.bankToken = jwtService.generateToken(userDetailsService.findById(bankUserId))
 
         deliveryClient.getUserAddress(createPaymentRequest.addressId, authentication.name)
         orderClient.updateOrderUserAddressTo(createPaymentRequest.orderId, createPaymentRequest.addressId)
@@ -43,6 +42,7 @@ class PaymentController(
     }
 
     @PostMapping("/callback")
+    @PreAuthorize("hasAuthority('$PROCESS_BANK_CALLBACK_AUTHORITY_NAME')")
     fun processBankCallback(@RequestBody processTransactionResponse: ProcessTransactionResponse) {
         bankCallbackHandler.handle(processTransactionResponse)
     }

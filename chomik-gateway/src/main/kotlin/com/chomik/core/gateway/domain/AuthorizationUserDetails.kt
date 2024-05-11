@@ -1,11 +1,13 @@
 package com.chomik.core.gateway.domain
 
+import com.chomik.core.gateway.config.UserAuthorities
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-data class AuthorizationUserDetails(val user: User): UserDetails {
-    override fun getAuthorities(): List<GrantedAuthority> = listOf(SimpleGrantedAuthority(user.userType.typeName))
+data class AuthorizationUserDetails(val user: User, val userAuthorities: UserAuthorities) : UserDetails {
+    override fun getAuthorities(): List<GrantedAuthority> =
+        userAuthorities.authorities[user.userType].orEmpty().map { SimpleGrantedAuthority(it.name) }
 
     override fun getPassword(): String = user.password
 

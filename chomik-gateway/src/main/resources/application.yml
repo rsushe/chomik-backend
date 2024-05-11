@@ -25,3 +25,12 @@ chomik:
 bank:
   user:
     id:
+
+security:
+  authorities:
+    client:
+    seller:
+      - ADVERT
+      - SNEAKERS
+    bank:
+      - PROCESS_BANK_CALLBACK

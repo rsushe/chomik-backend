@@ -1,6 +1,6 @@
 package com.chomik.core.gateway.controller.storage
 
-import com.chomik.core.gateway.domain.UserType.Companion.SELLER_AUTHORITY_NAME
+import com.chomik.core.gateway.domain.UserAuthority.Companion.ADVERT_AUTHORITY_NAME
 import com.chomik.delivery.client.DeliveryClient
 import com.chomik.storage.client.dto.SaveAdvertRequest
 import com.chomik.storage.client.AdvertClient
@@ -35,7 +35,7 @@ class AdvertController(
         advertClient.getAdvertsBySellerId(sellerId)
 
     @PostMapping
-    @PreAuthorize("hasAuthority('$SELLER_AUTHORITY_NAME')")
+    @PreAuthorize("hasAuthority('$ADVERT_AUTHORITY_NAME')")
     fun createAdvert(@Valid @RequestBody request: SaveAdvertRequest, authentication: Authentication): ResponseEntity<AdvertDto> {
         deliveryClient.getUserAddress(request.sellerAddressId, authentication.name)
         return advertClient.createAdvert(request)
@@ -43,7 +43,7 @@ class AdvertController(
 
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('$SELLER_AUTHORITY_NAME')")
+    @PreAuthorize("hasAuthority('$ADVERT_AUTHORITY_NAME')")
     fun updateAdvert(
         @PathVariable id: String,
         @Valid @RequestBody updateRequest: SaveAdvertRequest

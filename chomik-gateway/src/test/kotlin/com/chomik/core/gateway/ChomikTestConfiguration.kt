@@ -1,5 +1,6 @@
 package com.chomik.core.gateway
 
+import com.chomik.core.gateway.config.UserAuthorities
 import com.chomik.core.gateway.domain.AuthorizationUserDetails
 import com.chomik.core.gateway.domain.User
 import com.chomik.core.gateway.domain.UserType
@@ -15,7 +16,9 @@ import java.time.Instant
 import java.time.temporal.ChronoUnit
 
 @Configuration
-class ChomikTestConfiguration {
+class ChomikTestConfiguration(
+    private val userAuthorities: UserAuthorities
+) {
 
     @Bean
     @Primary
@@ -26,7 +29,7 @@ class ChomikTestConfiguration {
             password = "password",
             userType = UserType.CLIENT
         )
-        val userDetails = AuthorizationUserDetails(user)
+        val userDetails = AuthorizationUserDetails(user, userAuthorities)
 
         val seller = User(
             name = "seller",
@@ -34,7 +37,7 @@ class ChomikTestConfiguration {
             password = "password",
             userType = UserType.SELLER
         )
-        val sellerDetails = AuthorizationUserDetails(seller)
+        val sellerDetails = AuthorizationUserDetails(seller, userAuthorities)
 
         return InMemoryUserDetailsManager(listOf(userDetails, sellerDetails))
     }
