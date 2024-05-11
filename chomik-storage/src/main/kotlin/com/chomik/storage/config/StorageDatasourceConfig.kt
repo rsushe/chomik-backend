@@ -76,7 +76,7 @@ class StorageDatasourceConfig {
         jpaProperties["javax.persistence.transactionType"] = "jta"
         jpaProperties["hibernate.transaction.manager_lookup_class"] =
             "com.atomikos.icatch.jta.hibernate3.TransactionManagerLookup"
-        jpaProperties["hibernate.hbm2ddl.auto"] = "create-drop"
+        jpaProperties["hibernate.hbm2ddl.auto"] = "none"
         factory.setJpaProperties(jpaProperties)
         factory.afterPropertiesSet()
         return factory.getObject() as EntityManagerFactory

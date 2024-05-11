@@ -2,9 +2,7 @@ package com.chomik.storage.service
 
 import com.chomik.storage.client.dto.CreateSaleRequest
 import com.chomik.storage.domain.Sales
-import com.chomik.storage.domain.Sneakers
 import com.chomik.storage.repository.sales.SalesRepository
-import com.chomik.storage.repository.storage.AdvertRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -14,7 +12,6 @@ class SalesService(
     private val salesRepository: SalesRepository,
     private val advertService: AdvertService
 ) {
-
 
     @Transactional(rollbackFor = [Exception::class])
     fun createSaleOnAdvert(createSaleRequest: CreateSaleRequest) {
@@ -30,6 +27,6 @@ class SalesService(
         salesRepository.save(sale)
 
         val updatedPriceAdvert = advert.copy(price = newPrice)
-        advertService.save(advert)
+        advertService.save(updatedPriceAdvert)
     }
 }
