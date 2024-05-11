@@ -71,6 +71,22 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Atomikos -->
+
+        <dependency>
+            <groupId>com.atomikos</groupId>
+            <artifactId>transactions-jdbc</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atomikos</groupId>
+            <artifactId>transactions-jms</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+
+        <!-- Clients -->
+
         <dependency>
             <groupId>com.chomik.storage.client</groupId>
             <artifactId>chomik-storage-client</artifactId>
