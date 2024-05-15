@@ -1,3 +1,6 @@
+server:
+  port: 17005
+
 spring:
   application:
     name: delivery-mock

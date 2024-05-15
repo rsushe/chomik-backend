@@ -1,6 +1,3 @@
-server:
-  port: 17001
-
 chomik:
   delivery:
     url: http://localhost:17002

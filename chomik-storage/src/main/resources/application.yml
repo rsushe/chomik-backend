@@ -1,3 +1,14 @@
+server:
+  port: 17001
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  profiles:
+    active: ${ENVIRONMENT}
+
 datasource:
   storage:
     url:
@@ -17,11 +28,3 @@ datasource:
     port:
     liquibase:
       change-log:
-
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: none
-    show-sql: true
-  profiles:
-    active: ${ENVIRONMENT}

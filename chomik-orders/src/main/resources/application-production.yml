@@ -12,9 +12,6 @@ expired:
         timeout: 60
       cron: 0 0/1 * ? * * *
 
-server:
-  port: 17003
-
 chomik:
   storage:
-    url: http://localhost:17005
+    url: http://localhost:17001
