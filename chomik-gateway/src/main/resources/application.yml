@@ -1,3 +1,6 @@
+server:
+  port: 17000
+
 spring:
   liquibase:
     change-log: classpath:changelog/changelog.xml

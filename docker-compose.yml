@@ -1,0 +1,107 @@
+services:
+  chomik-gateway:
+    container_name: chomik-gateway
+    image: openjdk:17-oracle
+    ports:
+      - 17000:17000
+    volumes:
+      - ./chomik-gateway/target/chomik-gateway-0.0.1-SNAPSHOT.jar:/chomik-gateway.jar
+    command: ['java', '-jar', '/chomik-gateway.jar']
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  chomik-storage-1:
+    container_name: chomik-storage-1
+    image: openjdk:17-oracle
+    ports:
+      - 17001:17001
+    volumes:
+      - ./chomik-storage/target/chomik-storage-0.0.1-SNAPSHOT.jar:/chomik-storage.jar
+    command: [ 'java', '-jar', '/chomik-storage.jar' ]
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  chomik-storage-2:
+    container_name: chomik-storage-2
+    image: openjdk:17-oracle
+    ports:
+      - 17011:17001
+    volumes:
+      - ./chomik-storage/target/chomik-storage-0.0.1-SNAPSHOT.jar:/chomik-storage.jar
+    command: [ 'java', '-jar', '/chomik-storage.jar' ]
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  chomik-delivery:
+    container_name: chomik-delivery
+    image: openjdk:17-oracle
+    ports:
+      - 17002:17002
+    volumes:
+      - ./chomik-delivery/target/chomik-delivery-0.0.1-SNAPSHOT.jar:/chomik-delivery.jar
+    command: [ 'java', '-jar', '/chomik-delivery.jar' ]
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  chomik-orders:
+    container_name: chomik-orders
+    image: openjdk:17-oracle
+    ports:
+      - 17003:17003
+    volumes:
+      - ./chomik-orders/target/chomik-orders-0.0.1-SNAPSHOT.jar:/chomik-orders.jar
+    command: [ 'java', '-jar', '/chomik-orders.jar' ]
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  chomik-payment:
+    container_name: chomik-payment
+    image: openjdk:17-oracle
+    ports:
+      - 17004:17004
+    volumes:
+      - ./chomik-payment/target/chomik-payment-0.0.1-SNAPSHOT.jar:/chomik-payment.jar
+    command: [ 'java', '-jar', '/chomik-payment.jar' ]
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  delivery-mock:
+    container_name: delivery-mock
+    image: openjdk:17-oracle
+    ports:
+      - 17005:17005
+    volumes:
+      - ./delivery-mock/target/delivery-mock-0.0.1-SNAPSHOT.jar:/delivery-mock.jar
+    command: [ 'java', '-jar', '/delivery-mock.jar' ]
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  payment-mock:
+    container_name: payment-mock
+    image: openjdk:17-oracle
+    ports:
+      - 17006:17006
+    volumes:
+      - ./payment-mock/target/payment-mock-0.0.1-SNAPSHOT.jar:/payment-mock.jar
+    command: [ 'java', '-jar', '/payment-mock.jar' ]
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+networks:
+  chomik:

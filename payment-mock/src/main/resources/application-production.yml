@@ -5,8 +5,5 @@ spring:
     username: chomik
     password: ${DB_PASSWORD}
 
-server:
-  port: 17006
-
 balancer:
   url: http://158.160.140.66:17006
