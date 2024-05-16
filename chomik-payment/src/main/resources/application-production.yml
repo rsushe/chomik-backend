@@ -7,11 +7,11 @@ spring:
 
 payment:
   mock:
-    url: http://localhost:17006
+    url: http://payment-mock:17006
 
 chomik:
   order:
-    url: http://localhost:17003
+    url: http://chomik-order:17003
 
 gateway:
-  host: http://localhost:17000
+  host: http://chomik-gateway:17000

@@ -14,4 +14,4 @@ expired:
 
 chomik:
   storage:
-    url: http://localhost:17001
+    url: http://chomik-storage-balancer:80
