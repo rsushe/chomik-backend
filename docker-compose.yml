@@ -16,6 +16,8 @@ services:
   chomik-storage-balancer:
     container_name: chomik-storage-balancer
     image: nginx:1.13
+    ports:
+      - 17001:80
     restart: always
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d/default.conf
@@ -50,6 +52,8 @@ services:
   chomik-delivery:
     container_name: chomik-delivery
     image: openjdk:17-oracle
+    ports:
+      - 17002:17002
     volumes:
       - ./chomik-delivery/target/chomik-delivery-0.0.1-SNAPSHOT.jar:/chomik-delivery.jar
     command: [ 'java', '-jar', '/chomik-delivery.jar' ]
@@ -61,6 +65,8 @@ services:
   chomik-orders:
     container_name: chomik-orders
     image: openjdk:17-oracle
+    ports:
+      - 17003:17003
     volumes:
       - ./chomik-orders/target/chomik-orders-0.0.1-SNAPSHOT.jar:/chomik-orders.jar
     command: [ 'java', '-jar', '/chomik-orders.jar' ]
@@ -72,6 +78,8 @@ services:
   chomik-payment:
     container_name: chomik-payment
     image: openjdk:17-oracle
+    ports:
+      - 17004:17004
     volumes:
       - ./chomik-payment/target/chomik-payment-0.0.1-SNAPSHOT.jar:/chomik-payment.jar
     command: [ 'java', '-jar', '/chomik-payment.jar' ]
@@ -83,6 +91,8 @@ services:
   delivery-mock:
     container_name: delivery-mock
     image: openjdk:17-oracle
+    ports:
+      - 17005:17005
     volumes:
       - ./delivery-mock/target/delivery-mock-0.0.1-SNAPSHOT.jar:/delivery-mock.jar
     command: [ 'java', '-jar', '/delivery-mock.jar' ]
@@ -94,6 +104,8 @@ services:
   payment-mock:
     container_name: payment-mock
     image: openjdk:17-oracle
+    ports:
+      - 17006:17006
     volumes:
       - ./payment-mock/target/payment-mock-0.0.1-SNAPSHOT.jar:/payment-mock.jar
     command: [ 'java', '-jar', '/payment-mock.jar' ]
