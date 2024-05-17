@@ -33,6 +33,7 @@ services:
     volumes:
       - ./chomik-storage/target/chomik-storage-0.0.1-SNAPSHOT.jar:/chomik-storage.jar
     command: [ 'java', '-jar', '/chomik-storage.jar' ]
+    restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
     networks:
@@ -44,6 +45,7 @@ services:
     volumes:
       - ./chomik-storage/target/chomik-storage-0.0.1-SNAPSHOT.jar:/chomik-storage.jar
     command: [ 'java', '-jar', '/chomik-storage.jar' ]
+    restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
     networks:
@@ -57,6 +59,7 @@ services:
     volumes:
       - ./chomik-delivery/target/chomik-delivery-0.0.1-SNAPSHOT.jar:/chomik-delivery.jar
     command: [ 'java', '-jar', '/chomik-delivery.jar' ]
+    restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
     networks:
@@ -70,6 +73,7 @@ services:
     volumes:
       - ./chomik-orders/target/chomik-orders-0.0.1-SNAPSHOT.jar:/chomik-orders.jar
     command: [ 'java', '-jar', '/chomik-orders.jar' ]
+    restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
     networks:
@@ -83,6 +87,7 @@ services:
     volumes:
       - ./chomik-payment/target/chomik-payment-0.0.1-SNAPSHOT.jar:/chomik-payment.jar
     command: [ 'java', '-jar', '/chomik-payment.jar' ]
+    restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
     networks:
@@ -96,6 +101,7 @@ services:
     volumes:
       - ./delivery-mock/target/delivery-mock-0.0.1-SNAPSHOT.jar:/delivery-mock.jar
     command: [ 'java', '-jar', '/delivery-mock.jar' ]
+    restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
     networks:
@@ -109,6 +115,7 @@ services:
     volumes:
       - ./payment-mock/target/payment-mock-0.0.1-SNAPSHOT.jar:/payment-mock.jar
     command: [ 'java', '-jar', '/payment-mock.jar' ]
+    restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
     networks:
