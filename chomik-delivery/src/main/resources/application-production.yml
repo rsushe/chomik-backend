@@ -7,4 +7,4 @@ spring:
 
 delivery:
   mock:
-    url: http://localhost:17005
+    url: http://delivery-mock:17005

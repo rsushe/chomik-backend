@@ -7,13 +7,13 @@ spring:
 
 chomik:
   storage:
-    url: http://localhost:17001
+    url: http://chomik-storage-balancer:80
   order:
-    url: http://localhost:17003
+    url: http://chomik-order:17003
   payment:
-    url: http://localhost:17004
+    url: http://chomik-payment:17004
   delivery:
-    url: http://localhost:17002
+    url: http://chomik-delivery:17002
 
 bank:
   user:
