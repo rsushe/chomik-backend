@@ -8,13 +8,14 @@ import com.chomik.chomikdelivery.exception.UserAddressNotFoundException;
 import com.chomik.chomikdelivery.repository.ShipmentRepository;
 import com.chomik.chomikdelivery.service.mapper.ShipmentMapper;
 import com.chomik.delivery.client.dto.CreateShipmentRequest;
-import com.chomik.delivery.client.dto.ShipmentStatus;
 import com.chomik.delivery.client.dto.UserAddressDto;
 import com.fakecdek.delivery.mock.model.dto.DeliveryStatus;
 import com.fakecdek.delivery.mock.model.dto.ShipmentDto;
 import com.fakecdek.delivery.mock.model.dto.UpdateShipmentStatusRequest;
 import com.winter.event.service.publisher.EventPublisher;
 import com.fakecdek.deliverymockclient.dto.TrackLinkDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ShipmentService {
+    private static final Logger log = LoggerFactory.getLogger(ShipmentService.class);
 
     @Autowired
     private ShipmentRepository shipmentRepository;
@@ -40,18 +42,21 @@ public class ShipmentService {
     public ShipmentDto createShipment(CreateShipmentRequest request) throws UserAddressNotFoundException {
         UserAddressDto userAddressFrom = validateAndGetAddress(request.getUserAddressFrom());
         UserAddressDto userAddressTo = validateAndGetAddress(request.getUserAddressTo());
+        log.info("find user addresses");
 
         Shipment newShipment = new Shipment(request.getOrderId(), request.getUserAddressFrom(), request.getUserAddressTo(), DeliveryStatus.CREATED);
         newShipment = shipmentRepository.save(newShipment);
+
+        log.info("successfully create, id {}", newShipment.getId());
 
         publisher.publishEvent(new ApplyForDeliveryEvent(
                 newShipment.getId(),
                 userAddressFrom.getAddress(), userAddressTo.getAddress(),
                 request.getUserFromPhone(), request.getUserToPhone())
         );
+        log.info("successfully publish event");
         return shipmentMapper.toDto(newShipment);
     }
-
 
     @Transactional
     public void updateStatusAndTrackLink(String shipmentId, TrackLinkDto trackLink) throws ShipmentNotFoundException {

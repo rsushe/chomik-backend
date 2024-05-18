@@ -25,6 +25,7 @@ public class ShipmentResource {
     @PostMapping
     public ResponseEntity<?> createShipment(@RequestBody @Valid CreateShipmentRequest request) {
         try {
+            log.info("start create shipment");
             ShipmentDto shipment = shipmentService.createShipment(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(shipment);
         } catch (UserAddressNotFoundException e) {
