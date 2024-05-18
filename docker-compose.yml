@@ -10,6 +10,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
       - BANK_USER_ID=${BANK_USER_ID}
     networks:
       - chomik
@@ -25,6 +26,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - chomik
 
@@ -39,6 +41,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - chomik
 
@@ -65,6 +68,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - chomik
 
@@ -77,6 +81,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - chomik
 
@@ -91,6 +96,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
       - BANK_ACCOUNT_ID=${BANK_ACCOUNT_ID}
     networks:
       - chomik
@@ -106,6 +112,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - chomik
 
@@ -120,6 +127,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       - chomik
 
