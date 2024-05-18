@@ -7,9 +7,9 @@ spring:
 
 chomik:
   storage:
-    url: http://chomik-storage-balancer:80
+    url: http://chomik-storage:17001
   order:
-    url: http://chomik-order:17003
+    url: http://chomik-orders-balancer:80
   payment:
     url: http://chomik-payment:17004
   delivery:

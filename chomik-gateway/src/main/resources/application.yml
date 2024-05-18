@@ -11,6 +11,29 @@ spring:
   profiles:
     active: ${ENVIRONMENT}
 
+  kafka:
+    bootstrap-servers: chomik-kafka:9092
+
+    producer:
+      topic: chomik_bank_callback_request
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      bootstrap-servers: chomik-kafka:9092
+
+    consumer:
+      group-id: group
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      bootstrap-servers: chomik-kafka:9092
+      properties:
+        spring.json.trusted.packages: com.chomik.payment.client.dto
+
+    retry:
+      topic:
+        attempts: 3
+        enabled: true
+
+    admin:
+      auto-create: false
+
 rsa:
   public-key: classpath:certs/public.pem
   private-key: classpath:certs/private.pem

@@ -10,38 +10,15 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - BANK_USER_ID=${BANK_USER_ID}
     networks:
       - chomik
 
-  chomik-storage-balancer:
-    container_name: chomik-storage-balancer
-    image: nginx:1.13
+  chomik-storage:
+    container_name: chomik-storage
+    image: openjdk:17-oracle
     ports:
-      - 17001:80
-    restart: always
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - chomik-storage-1
-      - chomik-storage-2
-    networks:
-      - chomik
-
-  chomik-storage-1:
-    container_name: chomik-storage-1
-    image: openjdk:17-oracle
-    volumes:
-      - ./chomik-storage/target/chomik-storage-0.0.1-SNAPSHOT.jar:/chomik-storage.jar
-    command: [ 'java', '-jar', '/chomik-storage.jar' ]
-    restart: always
-    environment:
-      - ENVIRONMENT=${ENVIRONMENT}
-    networks:
-      - chomik
-
-  chomik-storage-2:
-    container_name: chomik-storage-2
-    image: openjdk:17-oracle
+      - 17001:17001
     volumes:
       - ./chomik-storage/target/chomik-storage-0.0.1-SNAPSHOT.jar:/chomik-storage.jar
     command: [ 'java', '-jar', '/chomik-storage.jar' ]
@@ -65,11 +42,35 @@ services:
     networks:
       - chomik
 
-  chomik-orders:
-    container_name: chomik-orders
-    image: openjdk:17-oracle
+  chomik-orders-balancer:
+    container_name: chomik-orders-balancer
+    image: nginx:1.13
     ports:
-      - 17003:17003
+      - 17003:80
+    restart: always
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - chomik-orders-1
+      - chomik-orders-2
+    networks:
+      - chomik
+
+  chomik-orders-1:
+    container_name: chomik-orders-1
+    image: openjdk:17-oracle
+    volumes:
+      - ./chomik-orders/target/chomik-orders-0.0.1-SNAPSHOT.jar:/chomik-orders.jar
+    command: [ 'java', '-jar', '/chomik-orders.jar' ]
+    restart: always
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+    networks:
+      - chomik
+
+  chomik-orders-2:
+    container_name: chomik-orders-2
+    image: openjdk:17-oracle
     volumes:
       - ./chomik-orders/target/chomik-orders-0.0.1-SNAPSHOT.jar:/chomik-orders.jar
     command: [ 'java', '-jar', '/chomik-orders.jar' ]
@@ -90,6 +91,7 @@ services:
     restart: always
     environment:
       - ENVIRONMENT=${ENVIRONMENT}
+      - BANK_ACCOUNT_ID=${BANK_ACCOUNT_ID}
     networks:
       - chomik
 
@@ -129,6 +131,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - 22181:2181
+    networks:
+      - chomik
 
   chomik-kafka:
     container_name: chomik-kafka
@@ -136,6 +140,7 @@ services:
     ports:
       - 29092:29092
       - 9997:9997
+    hostname: chomik-kafka
     depends_on:
       - chomik-zookeeper
     environment:
@@ -151,7 +156,9 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_JMX_PORT: 9997
-      KAFKA_JMX_HOSTNAME: kafka
+      KAFKA_JMX_HOSTNAME: chomik-kafka
+    networks:
+      - chomik
 
   kafka-ui:
     container_name: kafka-ui
@@ -162,6 +169,8 @@ services:
       - chomik-kafka
     environment:
       DYNAMIC_CONFIG_ENABLED: true
+    networks:
+      - chomik
 
 networks:
   chomik:

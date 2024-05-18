@@ -55,7 +55,7 @@ class TransactionService(
         val entity = HttpEntity(
             ProcessTransactionResponse(
                 transactionId,
-                transaction.status
+                updatedTransaction.status
             ), headers
         )
 

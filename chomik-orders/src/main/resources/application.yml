@@ -13,7 +13,7 @@ spring:
         jdbc:
           batch_size: 5
         order_updates: true
-        generate_statistics: true
+        generate_statistics: false
   profiles:
     active: ${ENVIRONMENT}
 
@@ -24,7 +24,10 @@ spring:
     properties:
       org:
         quartz:
+          scheduler:
+            instanceId: AUTO
           jobStore:
+            isClustered: true
             driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool

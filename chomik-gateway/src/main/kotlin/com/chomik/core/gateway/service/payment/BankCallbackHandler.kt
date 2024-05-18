@@ -1,4 +1,4 @@
-package com.chomik.core.gateway.controller.payment
+package com.chomik.core.gateway.service.payment
 
 import com.chomik.core.gateway.domain.User
 import com.chomik.core.gateway.service.AuthorizationUserDetailsService
@@ -6,33 +6,35 @@ import com.chomik.delivery.client.DeliveryClient
 import com.chomik.delivery.client.dto.CreateShipmentRequest
 import com.chomik.orders.client.OrderClient
 import com.chomik.orders.client.dto.OrderDto
-import com.chomik.payment.client.PaymentClient
+import com.chomik.payment.client.dto.PaymentDto
+import com.chomik.payment.client.dto.PaymentStatus
 import com.chomik.storage.client.AdvertClient
 import com.chomik.storage.client.dto.AdvertDto
 import com.chomik.storage.client.dto.UpdateSneakersCountRequest
 import com.payment.mock.model.ProcessTransactionResponse
-import com.payment.mock.model.TransactionStatus
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.RequestBody
 
 @Service
 class BankCallbackHandler(
     private val deliveryClient: DeliveryClient,
     private val orderClient: OrderClient,
-    private val paymentClient: PaymentClient,
     private val advertClient: AdvertClient,
-    private val userService: AuthorizationUserDetailsService
+    private val userService: AuthorizationUserDetailsService,
+    private val bankCallbackMessageProducer: BankCallbackMessageProducer
 ) {
 
-    fun handle(@RequestBody processTransactionResponse: ProcessTransactionResponse) {
-        //меняем статус оплаты
-        val paymentDto = paymentClient.processBankCallback(processTransactionResponse).body!!
+    fun handleTransactionResponse(processTransactionResponse: ProcessTransactionResponse) =
+        bankCallbackMessageProducer.produceTransactionResponse(processTransactionResponse)
 
-        if (processTransactionResponse.status.equals(TransactionStatus.SUCCESS)) {
+    fun handlePaymentResponse(paymentDto: PaymentDto) {
+        if (paymentDto.status == PaymentStatus.SUCCESS) {
             // меняем статус заказа
             val orderDto: OrderDto = orderClient.updateOrderPaymentFinish(paymentDto.orderId).body!!
             // уменьшаем количество кросовки в объявлении
-            val advertDto: AdvertDto = advertClient.updateSneakersCountInAdvert(orderDto.advertId, UpdateSneakersCountRequest(orderDto.sneakerCount)).body!!
+            val advertDto: AdvertDto = advertClient.updateSneakersCountInAdvert(
+                orderDto.advertId,
+                UpdateSneakersCountRequest(orderDto.sneakerCount)
+            ).body!!
 
             val buyerId: String = orderDto.buyerId
             val sellerId: String = advertDto.sellerId
