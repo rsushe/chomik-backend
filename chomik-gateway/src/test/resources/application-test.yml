@@ -9,6 +9,20 @@ spring:
   datasource:
     url: jdbc:h2:mem:test
 
+  kafka:
+    bootstrap-servers: localhost:12
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      bootstrap-servers: localhost:12
+    template:
+      default-topic: chomik_topic
+    consumer:
+      group-id: group
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      bootstrap-servers: localhost:12
+    admin:
+      auto-create: false
+
 chomik:
   storage:
     url: http://localhost:52

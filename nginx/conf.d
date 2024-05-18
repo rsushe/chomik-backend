@@ -1,12 +1,12 @@
-upstream storage {
-    server chomik-storage-1:17001;
-    server chomik-storage-2:17001;
+upstream orders {
+    server chomik-orders-1:17003;
+    server chomik-orders-2:17003;
 }
 
 server {
     listen 80;
 
     location / {
-        proxy_pass http://storage;
+        proxy_pass http://orders;
     }
 }

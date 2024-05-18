@@ -14,4 +14,4 @@ expired:
 
 chomik:
   storage:
-    url: http://chomik-storage-balancer:80
+    url: http://chomik-storage:17001

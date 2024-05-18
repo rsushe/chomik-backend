@@ -3,6 +3,7 @@ package com.chomik.core.gateway.controller.payment
 import com.chomik.core.gateway.domain.UserAuthority.Companion.PROCESS_BANK_CALLBACK_AUTHORITY_NAME
 import com.chomik.core.gateway.service.AuthorizationUserDetailsService
 import com.chomik.core.gateway.service.JwtService
+import com.chomik.core.gateway.service.payment.BankCallbackHandler
 import com.chomik.delivery.client.DeliveryClient
 import com.chomik.orders.client.OrderClient
 import com.chomik.payment.client.PaymentClient
@@ -44,6 +45,6 @@ class PaymentController(
     @PostMapping("/callback")
     @PreAuthorize("hasAuthority('$PROCESS_BANK_CALLBACK_AUTHORITY_NAME')")
     fun processBankCallback(@RequestBody processTransactionResponse: ProcessTransactionResponse) {
-        bankCallbackHandler.handle(processTransactionResponse)
+        bankCallbackHandler.handleTransactionResponse(processTransactionResponse)
     }
 }

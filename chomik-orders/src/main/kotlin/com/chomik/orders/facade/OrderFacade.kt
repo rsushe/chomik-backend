@@ -28,7 +28,7 @@ class OrderFacade(
 
         val lockedSneakersOfAdvert = orderService.countWaitingPaymentOrders(createOrderRequest.advertId)
 
-        if (createOrderRequest.sneakerCount + lockedSneakersOfAdvert >= availableSneakerCount) {
+        if (createOrderRequest.sneakerCount + lockedSneakersOfAdvert > availableSneakerCount) {
             throw InabilityLockingOrderException("There are only ${availableSneakerCount - lockedSneakersOfAdvert} number of sneakers available right now")
         }
 

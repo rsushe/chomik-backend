@@ -7,6 +7,7 @@ import com.chomik.payment.domain.Payment
 import com.chomik.payment.client.dto.PaymentStatus
 import com.chomik.payment.repository.PaymentRepository
 import com.chomik.payment.service.extention.toDto
+import com.chomik.payment.service.kafka.PaymentResultMessageProducer
 import com.payment.mock.client.PaymentMockClient
 import com.payment.mock.client.dto.CreateTransactionRequest
 import com.payment.mock.model.ProcessTransactionResponse
@@ -18,8 +19,9 @@ import org.springframework.transaction.annotation.Transactional
 class PaymentService(
     private val paymentRepository: PaymentRepository,
     private val paymentMockClient: PaymentMockClient,
+    private val paymentResultMessageProducer: PaymentResultMessageProducer,
     @Value("\${gateway.host}") private val gatewayHost: String,
-    @Value("chomik.bank.account.id") private val bankAccountId: String,
+    @Value("\${chomik.bank.account.id}") private val bankAccountId: String,
 ) {
     @Transactional
     fun createPayment(createPaymentRequest: CreatePaymentRequest): CreatePaymentResponse {
@@ -50,6 +52,8 @@ class PaymentService(
 
         val payment =
             paymentRepository.updatePaymentStatus(processTransactionResponse.transactionId, paymentStatus.name)[0]
+
+        paymentResultMessageProducer.producePaymentResultMessage(payment.toDto())
         return payment.toDto()
     }
 }

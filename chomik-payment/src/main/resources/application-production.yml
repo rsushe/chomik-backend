@@ -11,7 +11,10 @@ payment:
 
 chomik:
   order:
-    url: http://chomik-order:17003
+    url: http://chomik-orders-balancer:80
+  bank:
+    account:
+      id: {BANK_ACCOUNT_ID}
 
 gateway:
   host: http://chomik-gateway:17000

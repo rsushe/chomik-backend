@@ -22,7 +22,7 @@ class AccountService(private val accountRepository: AccountRepository) {
             name = createAccountRequest.accountName,
             cardNumber = generateCardNumber(),
             cvv = (100..999).random(),
-            expireAt = Date.from(Instant.now().plus(2, ChronoUnit.YEARS)),
+            expireAt = Date.from(Instant.now().plus(365, ChronoUnit.DAYS)),
             balance = 0
         )
     )
