@@ -13,7 +13,6 @@ import com.chomik.storage.client.dto.AdvertDto
 import com.chomik.storage.client.dto.UpdateSneakersCountRequest
 import com.payment.mock.model.ProcessTransactionResponse
 import org.slf4j.LoggerFactory
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
@@ -51,7 +50,7 @@ class BankCallbackHandler(
             val buyer: User = userService.findById(buyerId).user
             val seller: User = userService.findById(sellerId).user
 
-            log.info("successfully get user ids")
+            log.info("successfully get user ids from db")
 
             // отправляем запрос на доставку
             val shipment = deliveryClient.createShipment(CreateShipmentRequest(
