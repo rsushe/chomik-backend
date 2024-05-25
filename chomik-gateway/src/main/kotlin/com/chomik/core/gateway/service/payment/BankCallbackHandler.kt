@@ -51,7 +51,7 @@ class BankCallbackHandler(
             val buyer: User = userService.findById(buyerId).user
             val seller: User = userService.findById(sellerId).user
 
-            log.info("successfully get user ids")
+            log.info("successfully get user ids from db")
 
             // отправляем запрос на доставку
             val shipment = deliveryClient.createShipment(CreateShipmentRequest(
