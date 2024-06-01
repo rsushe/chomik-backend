@@ -21,10 +21,12 @@ spring:
 
     consumer:
       group-id: group
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       bootstrap-servers: chomik-kafka:9092
       properties:
         spring.json.trusted.packages: com.payment.mock.model
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.deserializer.value.function: com.chomik.payment.configuration.DeserializationFailedFunction
 
     retry:
       topic:
