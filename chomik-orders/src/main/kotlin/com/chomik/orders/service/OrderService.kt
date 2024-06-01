@@ -2,7 +2,6 @@ package com.chomik.orders.service
 
 import com.chomik.orders.client.dto.CreateOrderRequest
 import com.chomik.orders.client.dto.OrderStatus
-import com.chomik.orders.client.dto.UpdateUserAddressToRequest
 import com.chomik.orders.domain.Order
 import com.chomik.orders.extension.toOrder
 import com.chomik.orders.repository.OrderRepository

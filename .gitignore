@@ -37,3 +37,8 @@ build/
 **/.mvn
 **/.DS_Store
 **/certs/
+
+/docker/prometheus/
+/prometheus/
+/grafana/
+.env

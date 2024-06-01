@@ -8,6 +8,19 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
   datasource:
     url: jdbc:h2:mem:test
+    username: sa
+    password: password
+  quartz:
+    properties:
+      org:
+        quartz:
+          dataSource:
+            quartz:
+              driver: org.h2.Driver
+              URL: jdbc:h2:mem:test
+              provider: hikaricp
+              user: sa
+              password: password
 
 expired:
   reservation:

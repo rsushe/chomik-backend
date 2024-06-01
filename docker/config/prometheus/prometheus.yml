@@ -1,0 +1,14 @@
+scrape_configs:
+  - job_name: 'chomik-gateway'
+    scrape_interval: 5s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'chomik-gateway:17000'
+  - job_name: 'chomik-orders'
+    scrape_interval: 5s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+          - 'chomik-orders-1:17003'
+          - 'chomik-orders-2:17003'

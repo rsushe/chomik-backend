@@ -20,7 +20,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <atomikos-version>6.0.0</atomikos-version>
-        <spring-version>6.1.2</spring-version>
+        <spring-version>6.1.5</spring-version>
         <hibernate.version>6.4.2.Final</hibernate.version>
         <spring-data-jpa.version>3.2.2</spring-data-jpa.version>
         <activemq-core.version>5.7.0</activemq-core.version>

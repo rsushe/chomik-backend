@@ -27,12 +27,35 @@ spring:
           scheduler:
             instanceId: AUTO
           jobStore:
+            dataSource: quartz
             isClustered: true
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
             driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool
             threadCount: 2
+        dataSource:
+          quartz:
+            driver:
+            provider:
+            URL:
+            user:
+            password:
 
 chomik:
   storage:
     url:
+
+management:
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,metric
