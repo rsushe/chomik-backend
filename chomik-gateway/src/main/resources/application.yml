@@ -62,3 +62,17 @@ security:
       - SNEAKERS
     bank:
       - PROCESS_BANK_CALLBACK
+
+management:
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus

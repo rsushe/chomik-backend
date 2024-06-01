@@ -46,6 +46,7 @@ class WebSecurityConfig(
             authorizeRequests {
                 authorize("/api/v1/authentication/register", permitAll)
                 authorize("/error", permitAll)
+                authorize("/actuator/**", permitAll)
                 authorize(anyRequest, authenticated)
             }
             headers { frameOptions { sameOrigin } }
