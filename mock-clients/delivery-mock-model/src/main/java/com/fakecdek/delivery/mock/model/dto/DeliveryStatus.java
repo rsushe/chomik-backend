@@ -8,7 +8,9 @@ public enum DeliveryStatus {
     IN_TRANSIT("В пути"),
     SORTING_IN_RECEIVER_CITY("В центре сортировки города получателя"),
     IN_COURIER_DELIVERY("Принята курьером для доставки получателю"),
-    RECEIVED_BY_RECIPIENT("Принята получателем");
+    RECEIVED_BY_RECIPIENT("Принята получателем"),
+    REJECTED_BY_RECIPIENT("Отказ от получения"),
+    RETURNED_TO_SENDER("Принята отправителем");
 
     private final String description;
 

@@ -1,7 +1,6 @@
 package com.chomik.chomikdelivery.domain;
 
 
-import com.chomik.delivery.client.dto.ShipmentStatus;
 import com.fakecdek.delivery.mock.model.dto.DeliveryStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -25,6 +24,8 @@ public class Shipment {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private DeliveryStatus status;
+    @Column(name = "in_return")
+    private Boolean inReturn;
 
     public Shipment() {}
 
@@ -83,6 +84,14 @@ public class Shipment {
         this.status = status;
     }
 
+    public Boolean getInReturn() {
+        return inReturn;
+    }
+
+    public void setInReturn(Boolean inReturn) {
+        this.inReturn = inReturn;
+    }
+
     @Override
     public String toString() {
         return "Shipment{" +
@@ -91,7 +100,8 @@ public class Shipment {
                 ", userAddressFrom='" + userAddressFrom + '\'' +
                 ", userAddressTo='" + userAddressTo + '\'' +
                 ", trackLink='" + trackLink + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
+                ", inReturn=" + inReturn +
                 '}';
     }
 }

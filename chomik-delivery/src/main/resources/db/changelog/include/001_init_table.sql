@@ -29,3 +29,8 @@ CREATE TABLE IF NOT EXISTS shipment (
        track_link VARCHAR,
        status VARCHAR NOT NULL
 );
+
+--changeset maksgirya:shipment_in-return_column:4
+ALTER TABLE shipment ADD COLUMN in_return BOOLEAN;
+UPDATE shipment SET in_return = FALSE WHERE shipment.in_return IS NULL ;
+ALTER TABLE shipment ALTER COLUMN in_return SET NOT NULL ;
